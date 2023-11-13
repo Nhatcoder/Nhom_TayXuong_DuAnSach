@@ -1,19 +1,23 @@
 <?php
 session_start();
-include("view/header.php");
+include("header.php");
 
-// if (isset($_GET["act"]) && $_GET["act"]) {
-//     $act = $_GET["act"];
-//     switch ($act) {
-//         case 'themdanhmuc':
-//             include('danhmuc/them.php');
-//             break;
+if (isset($_GET["act"]) && $_GET["act"]) {
+    $act = $_GET["act"];
+    switch ($act) {
+        case 'themdanhmuc':
 
 
-//     }
-// } else {
-// }
 
-include("view/main.php");
-include("view/footer.php");
+
+            include('danhmuc/them.php');
+            break;
+
+
+    }
+} else {
+}
+include("main.php");
+
+include("footer.php");
 ?>

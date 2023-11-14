@@ -38,7 +38,7 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            Bảng điều khiển
                         </p>
                     </a>
                 </li>
@@ -52,15 +52,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="index.php?act=listdanhmuc" class="nav-link">
+                                <p>Liệt kê danh mục</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="index.php?act=themdanhmuc" class="nav-link">
                                 <p>Thêm danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                <p>Liệt kê danh mục</p>
+                            <a href="index.php?act=suadanhmuc" class="nav-link">
+                                <p>Sửa danh mục</p>
                             </a>
-                        </li>
+                        </li>        
                     </ul>
                 </li>
                 <li class="nav-item">

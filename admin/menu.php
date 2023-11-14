@@ -79,13 +79,18 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="index.php?act=listsanpham" class="nav-link">
+                                <p>Danh sách sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?act=themsanpham" class="nav-link">
                                 <p>Thêm sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <p>Liệt kê</p>
+                            <a href="index.php?act=suasanpham" class="nav-link">
+                                <p>Sửa sản phẩm</p>
                             </a>
                         </li>
                     </ul>

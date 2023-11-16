@@ -53,7 +53,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="index.php?act=listdanhmuc" class="nav-link">
-                                <p>Liệt kê danh mục</p>
+                                <p>Danh sách danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">

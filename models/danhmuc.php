@@ -21,8 +21,9 @@ function update_danhmuc($ma_danh_muc,$ten_danh_muc,$trang_thai){
     $sql ="UPDATE danhmuc SET ten_danhmuc=? , trang_thai=? WHERE ma_danhmuc = ?";
     pdo_execute($sql,$ten_danh_muc,$trang_thai,$ma_danh_muc);
 }
-function delete_danhmuc ($ma_danh_muc){
-    $sql = "DELETE FROM danhmuc WHERE ma_danh_muc= ?";
+
+function delete_danhmuc($ma_danh_muc){
+    $sql = "DELETE FROM danhmuc WHERE ma_danhmuc= ?";
     pdo_execute($sql,$ma_danh_muc);
 }
 

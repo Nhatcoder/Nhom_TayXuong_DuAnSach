@@ -30,8 +30,8 @@
                                     <td><?= $danhmuc['ten_danhmuc'] ?></td>
                                     <td><?= $danhmuc['trang_thai'] ? "Hiển thị" : "Ẩn" ?></td>
                                     <td>
-                                        <a href="?act=suadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-success">Sửa</a>
-                                        <a href="?act=xoadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-danger">Sửa</a>
+                                        <a href="index.php?act=suadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-success">Sửa</a>
+                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             <?php

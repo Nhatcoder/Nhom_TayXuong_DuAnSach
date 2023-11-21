@@ -28,6 +28,7 @@
 
                 include('danhmuc/listdanhmuc.php');
                 break;  
+
             case 'themdanhmuc':
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $ten_danh_muc = $_POST['ten_danh_muc'];
@@ -41,6 +42,7 @@
                 }
                 include('danhmuc/them.php');
                 break;
+
             case 'suadanhmuc':
                 if($_SERVER['REQUEST_METHOD']=== "POST"){
                     $ma_danhmuc =$_POST['ma_danhmuc'];
@@ -50,7 +52,6 @@
                     update_danhmuc($ma_danhmuc, $ten_danh_muc, $trang_thai);
                     $thongbao = "Cập nhật dữ liệu thành công";
                     header("location: index.php?act=listdanhmuc");
-                    die;
                 }
                 
                 // lấy thông tin danh mục cần sửa
@@ -62,12 +63,23 @@
                 }
             
                 break;
+            case "xoadanhmuc";
+                // lấy thông tin danh mục cần sửa
+                if (isset($_GET['id_danhmuc']) && ($_GET['id_danhmuc'] > 0)){
+                    $ma_danh_muc = $_GET['id_danhmuc'];   
+                } else {
+                    $ma_danh_muc = "";   
+                }
 
+                delete_danhmuc($ma_danh_muc);
+                header('Location: index.php?act=listdanhmuc');
+                break;
             // Sản phẩm
             case 'listsanpham':
                 $listsanpham = load_all_sach();
                 include('sanpham/listsanpham.php');
                 break;
+
             case 'themsanpham':
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     extract($_POST);
@@ -81,14 +93,43 @@
                     insert_sach($ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, 1);
 
                     header("location: ?act=listsanpham");
-                    die;
                 }
 
                 $listDanhmuc = load_all_danhmuc();
                 include('sanpham/themsanpham.php');
                 break;
             case 'suasanpham':
+                if(isset($_GET['id_sach']) && ($_GET['id_sach'] > 0)){
+                    $id_sach = $_GET['id_sach'];
+                    $sanpham = load_one_sach($id_sach);
+                    extract($sanpham);
+                } else {
+                    $id_sach = "";
+                }
+
+                if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+                    $oldhinh = $_POST['oldhinh'];
+
+                    $file = $_FILES['hinh'];
+                    $hinh = $file['name'];
+                    move_uploaded_file($file['tmp_name'], "../public/upload/" . $hinh);
+
+                    update_sach($_POST['ma_sach'], $_POST['ten_sach'], $hinh ? $hinh : $oldhinh, $_POST['nha_xuat_ban'], $_POST['so_luong'], $_POST['gia'], $_POST['mo_ta'], $_POST['ngay_xuat_ban'], $_POST['ma_danh_muc']);
+                    header("location: index.php?act=listsanpham");
+                }
+
                 include('sanpham/suasanpham.php');
+                break;
+            case 'xoasanpham':
+                if(isset($_GET['id_sach']) && ($_GET['id_sach'] > 0)){
+                    $id_sach = $_GET['id_sach'];
+                } else {
+                    $id_sach = "";
+                }
+
+                delete_sach($id_sach);
+                header("location: index.php?act=listsanpham");
                 break;
                 
         }

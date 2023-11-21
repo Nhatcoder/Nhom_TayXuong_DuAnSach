@@ -29,19 +29,19 @@
                             extract($sanpham);
                             ?>
                                 <td><input type="checkbox" name="ma_sach[]" value="<?php echo $ma_sach ?>" class="checkbox"></td>
-                                <td><?php echo $ma_sach ?></td>
+                                <td><?php echo $key + 1 ?></td>
                                 <td><?php echo $ten_sach ?></td>
                                 <td><?php echo $gia ?></td>
                                 <td><?php echo $so_luong ?></td>
                                 <td>
                                     <img src="../public/upload/<?= $hinh ?>" width="90" alt="">
                                 </td>
-                                <td><?php echo $ma_danh_muc ?></td>
+                                <td><?php echo $ten_danhmuc ?></td>
 
                                 <td>
-                                    <a href="?act=suasach&ma_sach=<?= $ma_sach ?>">
+                                    <a href="?act=suasanpham&id_sach=<?= $ma_sach ?>">
                                         <input type="button" value="Sửa"></a>
-                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="?act=list-sach&ma_sach=<?= $ma_sach ?>"><input type="button" value="Xóa"></a>
+                                    <a onclick="return confirm('Bạn có muốn xóa không?')" href="index.php?act=xoasanpham&id_sach=<?= $ma_sach ?>"><input type="button" value="Xóa"></a>
 
                                 </td>
                             <?php

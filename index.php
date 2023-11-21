@@ -2,7 +2,11 @@
 ob_start();
 session_start();
 
+include("./models/pdo.php");
+include("./models/list_sach_home.php");
 include("views/header/header.php");
+
+$list_sach_all_home = list_sach_all_home();
 
 
 if (isset($_GET["act"]) && $_GET["act"]) {

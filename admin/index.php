@@ -52,6 +52,7 @@
                     update_danhmuc($ma_danhmuc, $ten_danh_muc, $trang_thai);
                     $thongbao = "Cập nhật dữ liệu thành công";
                     header("location: index.php?act=listdanhmuc");
+                    die;
                 }
                 
                 // lấy thông tin danh mục cần sửa
@@ -93,6 +94,7 @@
                     insert_sach($ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, 1);
 
                     header("location: ?act=listsanpham");
+                    die;
                 }
 
                 $listDanhmuc = load_all_danhmuc();

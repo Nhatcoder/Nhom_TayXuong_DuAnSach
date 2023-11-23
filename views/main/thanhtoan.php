@@ -452,6 +452,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php foreach ($variable as $key => $value) : ?>
                                                         <tr class="cart_item">
                                                             <td class="product-name">
                                                                 Touchscreen MP3 Player&nbsp; <strong
@@ -462,6 +463,7 @@
                                                                         class="woocommerce-Price-currencySymbol">£</span>79.99</span>
                                                             </td>
                                                         </tr>
+                                                        <?php endforeach ?>
                                                         <tr class="cart_item">
                                                             <td class="product-name">
                                                                 Happy Ninja&nbsp; <strong class="product-quantity">×

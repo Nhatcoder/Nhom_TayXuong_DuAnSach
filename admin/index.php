@@ -4,7 +4,7 @@
 
     include "../models/danhmuc.php";
     include "../models/sach.php";
-
+    include "../models/user_login.php";
     include("header.php");
 
 
@@ -132,6 +132,10 @@
 
                 delete_sach($id_sach);
                 header("location: index.php?act=listsanpham");
+                break;
+            case 'nguoidung':
+                $listnguoidung = load_all_user();
+                include ('nguoidung/danhsach.php');
                 break;
                 
         }

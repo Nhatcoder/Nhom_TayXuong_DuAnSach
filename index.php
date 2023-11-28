@@ -17,6 +17,7 @@ $list_sach_all_home = list_sach_all_home();
 // print_r($_SESSION["cart"]);
 // echo "<pre>";
 
+
 if (isset($_GET["act"]) && $_GET["act"]) {
     $act = $_GET["act"];
 
@@ -91,6 +92,10 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
                 }
             }
+            // echo "<pre>";
+            // print_r($_SESSION['cart']);
+            // die;
+
             echo '<script>alert("Thêm thành công")</script>';
             echo '<script>window.location.href="index.php"</script>';
             break;
@@ -117,8 +122,6 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             break;
 
         case 'thanhtoan':
-
-
 
             include("views/main/thanhtoan.php");
             break;

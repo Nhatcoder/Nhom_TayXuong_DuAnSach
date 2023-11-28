@@ -4,7 +4,9 @@ session_start();
 
 include("./models/pdo.php");
 include("./models/list_sach_home.php");
+include("./models/danhmuc.php");
 include("views/header/header.php");
+
 
 $list_sach_all_home = list_sach_all_home();
 
@@ -44,6 +46,15 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             include("views/main/giohang.php");
             break;
 
+        case "sanpham":
+            $onesach = list_sach_one_id($_GET['idsp']);
+            extract($onesach);
+            $onedm =load_one_danhmuc($ma_danh_muc);
+            extract($onedm);
+            $load_all_sp=list_sach_all_home();
+            
+            include("views/main/chitietsanpham.php");
+            break;
         case 'themgiohang':
             if (isset($_GET["ma_sach"])) {
                 $id = $_GET["ma_sach"];

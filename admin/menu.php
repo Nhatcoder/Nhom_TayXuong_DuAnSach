@@ -95,6 +95,33 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                        <i class="fa-brands fa-product-hunt"></i>
+                        <p>
+                            Tài khoản
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?act=nguoidung" class="nav-link">
+                                <p>Danh sách tài khoản</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?act=themsanpham" class="nav-link">
+                                <p>Thêm tài khoản</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?act=suasanpham" class="nav-link">
+                                <p>Sửa tài khoản</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

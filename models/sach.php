@@ -24,6 +24,7 @@ function load_all_sach()
     return pdo_query($sql);
 }
 
+
 function load_one_sach($ma_sach)
 {
     $sql = "SELECT * FROM sach WHERE ma_sach=?";
@@ -40,17 +41,17 @@ function update_sach($ma_sach, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia,
     pdo_execute($sql, $ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, $ma_sach);
 }
 //Xóa cứng
-function delete_sach($ma_sach)
+function delete_sach($ma_nguoi_dung)
 {
-    $sql = "DELETE FROM sach WHERE ma_sach=?";
-    pdo_execute($sql, $ma_sach);
+    $sql = "DELETE FROM nguoidung WHERE ma_nguoi_dung=?";
+    pdo_execute($sql, $ma_nguoi_dung);
 }
 
 //Xóa mềm
-function delete_sach_mem($ma_sach)
+function delete_sach_mem($ma_nguoi_dung)
 {
-    $sql = "UPDATE sach SET trang_thai=0 WHERE ma_sach=?";
-    pdo_execute($sql, $ma_sach);
+    $sql = "UPDATE nguoidung SET trang_thai = 0 WHERE ma_nguoi_dung=?";
+    pdo_execute($sql, $ma_nguoi_dung);
 }
 
 ?>

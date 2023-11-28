@@ -15,11 +15,35 @@ $list_sach_all_home = list_sach_all_home();
 // print_r($_SESSION["cart"]);
 // echo "<pre>";
 
-
 if (isset($_GET["act"]) && $_GET["act"]) {
     $act = $_GET["act"];
 
     switch ($act) {
+        case 'tangsoluong':
+            if (isset($_GET["ma_sach"])) {
+                $ma_sach = $_GET["ma_sach"];
+
+                if (!isset($_SESSION['cart'])) {
+                    $_SESSION['cart'] = [];
+                }
+
+                $productExit = false;
+
+                foreach ($_SESSION['cart'] as $key => $value) {
+                    if ($value['ma_sach'] == $ma_sach) {
+                        if ($value['soluongmua'] < 999) {
+                            $tangsoluong = $value['soluongmua'] + 1;
+                            $_SESSION['cart'][$key]['soluongmua'] = $tangsoluong;
+                        }
+                        $productExit = true;
+                        break;
+                    }
+                }
+            }
+
+            include("views/main/giohang.php");
+            break;
+
         case 'themgiohang':
             if (isset($_GET["ma_sach"])) {
                 $id = $_GET["ma_sach"];
@@ -83,6 +107,8 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
         case 'thanhtoan':
 
+
+
             include("views/main/thanhtoan.php");
             break;
 
@@ -93,5 +119,5 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 }
 include("views/footer/footer.php");
 
-// ob_end_flush();
+ob_end_flush();
 ?>

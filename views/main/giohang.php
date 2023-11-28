@@ -74,7 +74,8 @@
                                                                     <div class="d-flex align-items-center">
                                                                         <label class="screen-reader-text sr-only">Số
                                                                             lượng</label>
-                                                                        <a class="js-minus text-dark" href="javascript:;">
+                                                                        <a class="js-minus text-dark"
+                                                                            href="index.php?act=giamsoluong&ma_sach=<?= $ma_sach ?>">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
                                                                                 width="10px" height="1px">
@@ -88,7 +89,8 @@
                                                                             class="input-text qty text js-result form-control text-center border-0"
                                                                             step="1" min="1" max="100" name="quantity"
                                                                             value="<?= $soluongmua ?>" title="Qty">
-                                                                        <a class="js-plus text-dark" href="javascript:;">
+                                                                        <a class="js-plus text-dark"
+                                                                            href="index.php?act=tangsoluong&ma_sach=<?= $ma_sach ?>">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
                                                                                 width="10px" height="10px">
@@ -123,162 +125,6 @@
                                                 </tr>
                                             <?php } ?>
 
-                                            <!-- <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                <td class="product-name" data-title="Product">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#">
-                                                            <img src="views/assets/img/90x138/img2.jpg"
-                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="ml-3 m-w-200-lg-down">
-                                                            <a href="#">All You Can Ever Know: A Memoir</a>
-                                                            <a href="#" class="text-gray-700 font-size-2 d-block"
-                                                                tabindex="0">Kelly Harms</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">£</span>79.99</span>
-                                                </td>
-                                                <td class="product-quantity" data-title="Quantity">
-                                                    <div class="quantity d-flex align-items-center">
-
-                                                        <div class="border px-3 width-120">
-                                                            <div class="js-quantity">
-                                                                <div class="d-flex align-items-center">
-                                                                    <label
-                                                                        class="screen-reader-text sr-only">Quantity</label>
-                                                                    <a class="js-minus text-dark" href="javascript:;">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="10px" height="1px">
-                                                                            <path fill-rule="evenodd"
-                                                                                fill="rgb(22, 22, 25)"
-                                                                                d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                    <input type="number"
-                                                                        class="input-text qty text js-result form-control text-center border-0"
-                                                                        step="1" min="1" max="100" name="quantity"
-                                                                        value="1" title="Qty">
-                                                                    <a class="js-plus text-dark" href="javascript:;">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="10px" height="10px">
-                                                                            <path fill-rule="evenodd"
-                                                                                fill="rgb(22, 22, 25)"
-                                                                                d="M10.000,5.000 L6.000,5.000 L6.000,10.000 L5.000,10.000 L5.000,5.000 L-0.000,5.000 L-0.000,4.000 L5.000,4.000 L5.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,5.000 Z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal" data-title="Total">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">£</span>79.99</span>
-                                                </td>
-                                                <td class="product-remove">
-                                                    <a href="#" class="remove" aria-label="Remove this item">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
-                                                            height="15px">
-                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
-                                                                d="M15.011,13.899 L13.899,15.012 L7.500,8.613 L1.101,15.012 L-0.012,13.899 L6.387,7.500 L-0.012,1.101 L1.101,-0.012 L7.500,6.387 L13.899,-0.012 L15.011,1.101 L8.613,7.500 L15.011,13.899 Z">
-                                                            </path>
-                                                        </svg>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                <td class="product-name" data-title="Product">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#">
-                                                            <img src="views/assets/img/90x138/img3.jpg"
-                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="ml-3 m-w-200-lg-down">
-                                                            <a href="#">Winter Garden</a>
-                                                            <a href="#" class="text-gray-700 font-size-2 d-block"
-                                                                tabindex="0">Kelly Harms</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">£</span>79.99</span>
-                                                </td>
-                                                <td class="product-quantity" data-title="Quantity">
-                                                    <div class="quantity d-flex align-items-center">
-
-                                                        <div class="border px-3 width-120">
-                                                            <div class="js-quantity">
-                                                                <div class="d-flex align-items-center">
-                                                                    <label
-                                                                        class="screen-reader-text sr-only">Quantity</label>
-                                                                    <a class="js-minus text-dark" href="javascript:;">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="10px" height="1px">
-                                                                            <path fill-rule="evenodd"
-                                                                                fill="rgb(22, 22, 25)"
-                                                                                d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                    <input type="number"
-                                                                        class="input-text qty text js-result form-control text-center border-0"
-                                                                        step="1" min="1" max="100" name="quantity"
-                                                                        value="1" title="Qty">
-                                                                    <a class="js-plus text-dark" href="javascript:;">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="10px" height="10px">
-                                                                            <path fill-rule="evenodd"
-                                                                                fill="rgb(22, 22, 25)"
-                                                                                d="M10.000,5.000 L6.000,5.000 L6.000,10.000 L5.000,10.000 L5.000,5.000 L-0.000,5.000 L-0.000,4.000 L5.000,4.000 L5.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,5.000 Z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal" data-title="Total">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">£</span>79.99</span>
-                                                </td>
-                                                <td class="product-remove">
-                                                    <a href="#" class="remove" aria-label="Remove this item">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="15px"
-                                                            height="15px">
-                                                            <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
-                                                                d="M15.011,13.899 L13.899,15.012 L7.500,8.613 L1.101,15.012 L-0.012,13.899 L6.387,7.500 L-0.012,1.101 L1.101,-0.012 L7.500,6.387 L13.899,-0.012 L15.011,1.101 L8.613,7.500 L15.011,13.899 Z">
-                                                            </path>
-                                                        </svg>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5" class="actions">
-
-                                                    <input type="submit" class="button" name="update_cart"
-                                                        value="Update cart">
-                                                    <input type="hidden" id="_wpnonce" name="_wpnonce"
-                                                        value="db025d7a70"><input type="hidden" name="_wp_http_referer"
-                                                        value="/storefront/cart/">
-                                                </td>
-                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </form>

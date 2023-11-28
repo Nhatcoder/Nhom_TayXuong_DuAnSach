@@ -24,6 +24,7 @@ function load_all_sach()
     return pdo_query($sql);
 }
 
+
 function load_one_sach($ma_sach)
 {
     $sql = "SELECT * FROM sach WHERE ma_sach=?";

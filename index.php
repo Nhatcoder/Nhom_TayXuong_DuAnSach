@@ -5,6 +5,7 @@ session_start();
 include("./models/pdo.php");
 include("./models/list_sach_home.php");
 include("./models/danhmuc.php");
+include("./models/user_login.php");
 include("views/header/header.php");
 
 
@@ -22,6 +23,9 @@ if (isset($_GET["act"]) && $_GET["act"]) {
     $act = $_GET["act"];
 
     switch ($act) {
+        case 'home':
+            include("./views/main/main.php");
+            break;
         case 'tangsoluong':
             if (isset($_GET["ma_sach"])) {
                 $ma_sach = $_GET["ma_sach"];
@@ -125,7 +129,62 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
             include("views/main/thanhtoan.php");
             break;
-
+        case 'dangnhap' : 
+           $VIEW = "";
+                if ($_SERVER['REQUEST_METHOD']=='POST') {
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    $checkuser = checkuser($username, $password);
+                    if (is_array($checkuser)) {
+                        $_SESSION['username'] = $checkuser;
+                        if ($_SESSION['username']['trangthai'] == 'false') {
+                            $thongbao = "Tài khoản đã bị khóa.";
+                            unset($_SESSION['username']);
+                        } else {
+                            $VIEW = "views/main/main.php";
+                        }
+                    } else {
+                        $thongbao = "tài khoản không tồn tại.";
+                    }
+                }
+            
+            
+            include($VIEW?$VIEW:"views/main/login.php");
+            break;
+            case 'dangxuat';
+            session_unset();
+            include("views/main/main.php");
+            break;
+            case 'dangky':
+                $VIEW="";
+                $list_user = load_all_user();
+                if ($_SERVER['REQUEST_METHOD']=='POST') {
+                    $ho_ten = $_POST['username'];
+                    $mat_khau = $_POST['new-password'];
+                    $email = $_POST['email'];
+                    $nhap_lai_mk = $_POST['confirmPassword'];
+                    $so_dien_thoai = $_POST['so_dien_thoai'];
+                    $dia_chi = $_POST['dia_chi'];
+                    $avatar = $_FILES['img']['name'];
+                    $target_dir = "../img/";
+                    $gioitinh = $_POST['gioitinh'];
+                    $target_file = $target_dir . $_FILES['img']['name'];
+    
+                    if (move_uploaded_file($_FILES["img"]["tmp_name"], substr($target_file, 1))) {
+                        // echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                    } else {
+                        //echo "Sorry, there was an error uploading your file.";
+                    }
+                    insert_nguoidung1($ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi,$avatar,$gioitinh);
+                    $thongbao = "Đăng ký thành công";
+                    $VIEW = "views/main/main.php";
+                }
+        
+                include($VIEW?$VIEW:"views/main/login.php");
+            break;
+                case 'dangnhapadmin';
+               
+                break;
 
     }
 } else {

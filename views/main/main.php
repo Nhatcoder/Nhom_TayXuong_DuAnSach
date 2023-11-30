@@ -1,4 +1,4 @@
-<aside id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
+<!-- <aside id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
     <div class="u-sidebar__scroller">
         <div class="u-sidebar__container">
             <div class="u-header-sidebar__footer-offset">
@@ -12,7 +12,7 @@
 
                 <div class="js-scrollbar u-sidebar__body">
                     <div class="u-sidebar__content u-header-sidebar__content">
-                        <form class>
+                        <form method="post" class>
 
                             <div id="login" data-target-group="idForm">
 
@@ -144,7 +144,8 @@
             </div>
         </div>
     </div>
-</aside>
+</aside> -->
+<!-- dang nhap dang ky -->
 
 
 <!-- Cái menu giỏ hàng -->

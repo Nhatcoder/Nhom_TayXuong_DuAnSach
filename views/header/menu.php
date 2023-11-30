@@ -44,9 +44,9 @@
                             Trang chủ
                         </a>
                     </li>
-                    <li class="nav-item"><a href="#"
+                    <!-- <li class="nav-item"><a href="#"
                             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium border-bottom border-primary border-width-2">Categories</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
                         <a id="shopDropdownInvoker" href="#"
                             class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"

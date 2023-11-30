@@ -33,6 +33,14 @@ if (isset($_GET["act"]) && $_GET["act"]) {
     $act = $_GET["act"];
 
     switch ($act) {
+
+        case 'cuahang':
+            
+
+            include("views/main/cuahang.php");
+            break;
+
+
         case 'tangsoluong':
             if (isset($_GET["ma_sach"])) {
                 $ma_sach = $_GET["ma_sach"];
@@ -61,10 +69,10 @@ if (isset($_GET["act"]) && $_GET["act"]) {
         case "sanpham":
             $onesach = list_sach_one_id($_GET['idsp']);
             extract($onesach);
-            $onedm =load_one_danhmuc($ma_danh_muc);
+            $onedm = load_one_danhmuc($ma_danh_muc);
             extract($onedm);
-            $load_all_sp=list_sach_all_home();
-            
+            $load_all_sp = list_sach_all_home();
+
             include("views/main/chitietsanpham.php");
             break;
         case 'themgiohang':
@@ -100,7 +108,6 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                     }
                 } else {
                     $_SESSION["cart"] = array($new_sach);
-
                 }
             }
 
@@ -121,7 +128,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                     if ($item["ma_sach"] != $ma_sach) {
                         $updatedCart[] = $item;
                     }
-                }  
+                }
                 $_SESSION["cart"] = $updatedCart;
             }
             include("views/main/giohang.php");
@@ -129,21 +136,21 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
         case 'thanhtoan':
 
-            if(isset($_POST['quantity'])) {
-                foreach($_POST['quantity'] as $key => $soluong) {
+            if (isset($_POST['quantity'])) {
+                foreach ($_POST['quantity'] as $key => $soluong) {
                     $_SESSION['cart'][$key]['quantity'] = $soluong;
                 }
             }
 
-            if(isset($_POST['xacnhan'])) {
+            if (isset($_POST['xacnhan'])) {
 
                 $_SESSION['payment_session'] = $_POST['payment'];
                 $_SESSION['ma_don_hang'] = generateRandomOrderCode();
 
                 $_SESSION['thongtin'] = $_POST;
 
-                if(isset($_POST['payment']) && ($_POST['payment']) == "vnpay") {
-                        
+                if (isset($_POST['payment']) && ($_POST['payment']) == "vnpay") {
+
                     $_SESSION['thongtin'] = $_POST;
                     $_SESSION['ma_don_hang'] = generateRandomOrderCode();
 
@@ -154,9 +161,9 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         $tongtien = $cartItem['gia'] * $cartItem['soluongmua'];
                         $thanhtien += $tongtien; // Update the total
                     }
-                    
+
                     $vnp_TxnRef = $_SESSION['ma_don_hang']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-    
+
                     $vnp_OrderInfo = "Thanh toán đơn hàng";
                     $vnp_OrderType = "Billpayment";
                     $vnp_Amount = $thanhtien * 100; //Giá tiền
@@ -179,12 +186,12 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         "vnp_TxnRef" => $vnp_TxnRef,
                         "vnp_ExpireDate" => $vnp_ExpireDate
                     );
-    
+
                     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
                         $inputData['vnp_BankCode'] = $vnp_BankCode;
                     }
-    
-    
+
+
                     ksort($inputData);
                     $query = "";
                     $i = 0;
@@ -198,7 +205,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         }
                         $query .= urlencode($key) . "=" . urlencode($value) . '&';
                     }
-    
+
                     $vnp_Url = $vnp_Url . "?" . $query;
                     if (isset($vnp_HashSecret)) {
                         $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
@@ -209,49 +216,47 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         'message' => 'success',
                         'data' => $vnp_Url
                     );
-    
+
                     if (isset($_POST['xacnhan']) && isset($_POST['payment']) == "vnpay") {
                         echo '<script>window.location.href = "' . $vnp_Url . '";</script>';
                         die();
                     } else {
                         echo json_encode($returnData);
                     }
-
-                } else {                  
+                } else {
                     $_SESSION['ma_don_hang'] = generateRandomOrderCode();
                     $i = 0;
                     $tongtien = 0;
-                    foreach ($_SESSION['cart'] as $cartItem) {         
+                    foreach ($_SESSION['cart'] as $cartItem) {
                         $tongtien = $cartItem['gia'] * $cartItem['soluongmua'];
                         $thanhtien = $tongtien + $thanhtien;
                     }
 
                     header('Location: index.php?act=camon');
                 }
-
             }
 
             include("views/main/thanhtoan.php");
             break;
         case 'camon':
-            if($_SESSION['payment_session'] == "vnpay") {
+            if ($_SESSION['payment_session'] == "vnpay") {
 
                 if (isset($_GET["vnp_Amount"]) && $_GET['vnp_ResponseCode'] == '00') {
-    
+
                     $ma_donhang = $_SESSION["ma_don_hang"];
 
                     $loai_thanhtoan = "VNPAY";
-                    
-                    $id_bill = insert_bill(1,$ma_donhang,$_SESSION['thongtin']['tonggia'],$_SESSION['thongtin']['ghichu'],$loai_thanhtoan);
+
+                    $id_bill = insert_bill(1, $ma_donhang, $_SESSION['thongtin']['tonggia'], $_SESSION['thongtin']['ghichu'], $loai_thanhtoan);
 
                     $i = 0;
                     $tongtien = 0;
-    
+
                     foreach ($_SESSION['cart'] as $cartItem) {
                         $thanhtien = $cartItem['soluongmua'] * $cartItem['gia'];
-                        insert_bill_detail($id_bill,$cartItem['ma_sach'],$cartItem['soluongmua'],$cartItem['gia'],$thanhtien);
+                        insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['soluongmua'], $cartItem['gia'], $thanhtien);
                     }
-    
+
                     $vnp_BankCode = $_GET["vnp_BankCode"];
                     $vnp_BankTranNo = $_GET["vnp_BankTranNo"];
                     $vnp_CardType = $_GET["vnp_CardType"];
@@ -259,31 +264,29 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                     $vnp_PayDate = $_GET["vnp_PayDate"];
                     $vnp_TmnCode = $_GET["vnp_TmnCode"];
                     $vnp_TransactionNo = $_GET["vnp_TransactionNo"];
-            
-                    
-                    unset($_SESSION['cart']);
-                    unset($_SESSION['ma_don_hang']);
-                    unset($_SESSION['payment_session']);
-                    unset($_SESSION['thongtin']);
-                    include("./views/main/camon.php");
+
+                    // unset($_SESSION['cart']);
+                    // unset($_SESSION['ma_don_hang']);
+                    // unset($_SESSION['payment_session']);
+                    // unset($_SESSION['thongtin']);
+                    // include("./views/main/camon.php");
                 } else {
                     echo "<script>alert('Đã hủy thanh toán');</script>";
                     echo '<script>window.location.href = "index.php?act=thanhtoan";</script>';
-    
                 }
             } else {
                 $loai_thanhtoan = "tienmat";
-                
+
                 $ma_donhang = $_SESSION["ma_don_hang"];
 
-                $id_bill = insert_bill(1,$ma_donhang,$_SESSION['thongtin']['tonggia'],$_SESSION['thongtin']['ghichu'],$loai_thanhtoan);
+                $id_bill = insert_bill(1, $ma_donhang, $_SESSION['thongtin']['tonggia'], $_SESSION['thongtin']['ghichu'], $loai_thanhtoan);
 
                 $i = 0;
                 $tongtien = 0;
 
                 foreach ($_SESSION['cart'] as $cartItem) {
                     $thanhtien = $cartItem['soluongmua'] * $cartItem['gia'];
-                    insert_bill_detail($id_bill,$cartItem['ma_sach'],$cartItem['soluongmua'],$cartItem['gia'],$thanhtien);
+                    insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['soluongmua'], $cartItem['gia'], $thanhtien);
                 }
 
                 unset($_SESSION['cart']);
@@ -292,9 +295,8 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                 unset($_SESSION['thongtin']);
                 include("views/main/camon.php");
             }
-    
-            break;
 
+            break;
     }
 } else {
     include("views/main/main.php");
@@ -302,4 +304,3 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 include("views/footer/footer.php");
 
 ob_end_flush();
-?>

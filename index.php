@@ -312,7 +312,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         unset($_SESSION['username']);
                     }else{
                         if ($_SESSION['username']['cap_bac']==0) {
-                            echo "ok";
+                            header('location: index.php');
                         }else{
                             header('location: ./admin/index.php');
                         }
@@ -325,10 +325,34 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             include("../xuong1_nhom1/views/main/login.php");
             break;
 
-        case 'dki_user':
-
-            break;
-
+            
+                 case 'dangky':
+                     $VIEW="";
+                     $list_user = load_all_user();
+                     if ($_SERVER['REQUEST_METHOD']=='POST') {
+                         $ho_ten = $_POST['username'];
+                         $mat_khau = $_POST['new-password'];
+                         $email = $_POST['email'];
+                         $nhap_lai_mk = $_POST['confirmPassword'];
+                         $so_dien_thoai = $_POST['so_dien_thoai'];
+                         $dia_chi = $_POST['dia_chi'];
+                         $avatar = $_FILES['img']['name'];
+                         $target_dir = "../img/";
+                         $gioitinh = $_POST['gioitinh'];
+                         $target_file = $target_dir . $_FILES['img']['name'];
+         
+                         if (move_uploaded_file($_FILES["img"]["tmp_name"], substr($target_file, 1))) {
+                             // echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                         } else {
+                             //echo "Sorry, there was an error uploading your file.";
+                         }
+                         insert_nguoidung1($ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi,$avatar,$gioitinh);
+                         $thongbao = "Đăng ký thành công";
+                         $VIEW = "views/main/main.php";
+                     }
+             
+                     include($VIEW?$VIEW:"views/main/login.php");
+                 break;
         case 'logout':
             session_unset();
             header('location: index.php');

@@ -18,7 +18,7 @@ function update_nguoidung($ma_nguoi_dung,$ho_ten,$email,$mat_khau,$so_dien_thoai
 }
 function checkuser($email, $password)
 {
-  $sql = "SELECT * FROM nguoidung WHERE email='" . $email . "' AND password='" . $password . "'";
+  $sql = "SELECT * FROM nguoidung WHERE email='" . $email . "' AND mat_khau='" . $password . "'";
   $user = pdo_query_one($sql);
   return $user;
 }

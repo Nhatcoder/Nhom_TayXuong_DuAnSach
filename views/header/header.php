@@ -41,12 +41,17 @@
                                                 <li class="nav-item"><a href="#" class="nav-link link-black-100"><i class="glph-icon flaticon-heart"></i></a></li>
                                                 <li class="nav-item">
 
-                                                        <a id="sidebarNavToggler" href="javascript:;" role="button" class="nav-link link-black-100" aria-controls="sidebarContent" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent" data-unfold-type="css-animation" data-unfold-overlay="{
-                                    &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
-                                    &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
-                                    &quot;animationSpeed&quot;: 500
-                                }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                                        <a id="sidebarNavToggler" href="index.php?act=login" role="button" class="nav-link link-black-100"  data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
                                                                 <i class="glph-icon flaticon-user"></i>
+                                                                <?php
+                                                                if (isset($_SESSION['username'])) {
+                                                                        echo $_SESSION['username']?$_SESSION['username']['ho_ten']:"";
+                                                                        echo '<a href="index.php?act=logout">Đăng xuất</a>';
+                                                                        if ($_SESSION['username']['trangthai'] == 1) {
+                                                                                echo '<a href="../xuong1_nhom1/admin/index.php">Admin</a>';
+                                                                        }
+                                                                }
+                                                                ?>
                                                         </a>
 
                                                 </li>

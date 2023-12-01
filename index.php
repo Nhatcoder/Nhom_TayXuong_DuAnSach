@@ -9,7 +9,9 @@ include("./models/config_vnpay.php");
 include("./models/orderModel.php");
 include("./models/danhmuc.php");
 include("./models/accountModel.php");
+include("./models/user_login.php");
 include("views/header/header.php");
+
 
 $userID = $_SESSION['user_id'] ?? 0;
 $user = load_account(1);
@@ -296,6 +298,40 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                 include("views/main/camon.php");
             }
 
+            break;
+        case 'login':
+            $thongbao = "";
+            if ($_SERVER['REQUEST_METHOD']=='POST') {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $checkuser =checkuser($username,$password);
+                if (is_array($checkuser)) {
+                    $_SESSION['username'] = $checkuser;
+                    if($_SESSION['username']['trangthai']==0){
+                        $thongbao = "tk da bi khoa";
+                        unset($_SESSION['username']);
+                    }else{
+                        if ($_SESSION['username']['cap_bac']==0) {
+                            echo "ok";
+                        }else{
+                            header('location: ./admin/index.php');
+                        }
+                    }
+                }else{
+                    $thongbao = "tai khoan khong ton tai";
+                }
+
+            }
+            include("../xuong1_nhom1/views/main/login.php");
+            break;
+
+        case 'dki_user':
+
+            break;
+
+        case 'logout':
+            session_unset();
+            header('location: index.php');
             break;
     }
 } else {

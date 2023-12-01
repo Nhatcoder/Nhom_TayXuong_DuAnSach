@@ -16,7 +16,10 @@ function update_nguoidung($ma_nguoi_dung,$ho_ten,$email,$mat_khau,$so_dien_thoai
     $sql = "UPDATE nguoidung SET ho_ten=?,email=?,mat_khau=?,so_dien_thoai=?,dia_chi=?,hinh=?,gioitinh=?,cap_bac=?,trang_thai=? WHERE ma_nguoi_dung=?";
     pdo_execute($sql,$ho_ten,$email,$mat_khau,$so_dien_thoai,$dia_chi,$hinh,$gioitinh,$cap_bac,$trang_thai,$ma_nguoi_dung);
 }
-function delete_nguoidung() {
-    
+function checkuser($email, $password)
+{
+  $sql = "SELECT * FROM nguoidung WHERE email='" . $email . "' AND password='" . $password . "'";
+  $user = pdo_query_one($sql);
+  return $user;
 }
 ?>

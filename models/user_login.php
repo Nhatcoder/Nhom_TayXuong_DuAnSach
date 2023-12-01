@@ -22,4 +22,8 @@ function checkuser($email, $password)
   $user = pdo_query_one($sql);
   return $user;
 }
+function insert_nguoidung1($ho_ten,$email,$mat_khau,$so_dien_thoai,$dia_chi,$hinh,$gioitinh){
+    $sql = "INSERT INTO nguoidung(ho_ten,email,mat_khau,so_dien_thoai,dia_chi,hinh,gioitinh) VALUES('$ho_ten','$email','$mat_khau','$so_dien_thoai','$dia_chi','$hinh','$gioitinh') ";
+  return pdo_execute($sql);
+}
 ?>

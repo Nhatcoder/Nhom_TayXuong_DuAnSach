@@ -137,6 +137,7 @@
                                                                                 <div class="mb-3">
                                                                                         <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create
                                                                                                 Account</button>
+                                                                                                <?= (isset($thongbao))?$thongbao:''?>
                                                                                 </div>
                                                                         </form>
                                                                                 <div class="text-center mb-4">

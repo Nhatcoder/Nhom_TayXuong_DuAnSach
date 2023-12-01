@@ -348,7 +348,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                          }
                          insert_nguoidung1($ho_ten, $email, $mat_khau,$so_dien_thoai,$dia_chi,$avatar,$gioitinh);
                          $thongbao = "Đăng ký thành công";
-                         $VIEW = "views/main/main.php";
+                         header('location: index.php?act=login');
                      }
              
                      include($VIEW?$VIEW:"views/main/login.php");

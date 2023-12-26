@@ -24,7 +24,7 @@
 </head>
 
 <?php
-    $act = $_GET['act'] ?? "";
+$act = $_GET['act'] ?? "";
 ?>
 
 <body class="<?= $act == "sanpham" || $act == "danhmuc" || $act == "search" ? "left-sidebar" : "" ?>">
@@ -56,41 +56,41 @@
                         <li class="nav-item">
 
                             <?php
-                                if($user) {
-                                    if(isset($_SESSION['myCart'])) {
-                                        ?>
-                                            <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
+                            if ($user) {
+                                if (isset($_SESSION['myCart'])) {
+                            ?>
+                                    <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
                         &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
                         &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
                         &quot;animationSpeed&quot;: 500
                         }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                                <span class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0"><?= $_SESSION['myCart'] ?></span>
-                                                <i class="glph-icon flaticon-icon-126515"></i>
-                                            </a>
-                                        <?php
-                                    } else {
-                                        ?>
-                                            <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
-                        &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
-                        &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
-                        &quot;animationSpeed&quot;: 500
-                        }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                                <i class="glph-icon flaticon-icon-126515"></i>
-                                            </a>
-                                        <?php
-                                    }
+                                        <span class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0"><?= $_SESSION['myCart'] ?></span>
+                                        <i class="glph-icon flaticon-icon-126515"></i>
+                                    </a>
+                                <?php
                                 } else {
-                                    ?>
-                                        <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
+                                ?>
+                                    <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
+                        &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
+                        &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
+                        &quot;animationSpeed&quot;: 500
+                        }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
+                                        <i class="glph-icon flaticon-icon-126515"></i>
+                                    </a>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <a id="sidebarNavToggler1" href="index.php?act=giohang" role="button" class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay="{
                     &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
                     &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
                     &quot;animationSpeed&quot;: 500
                     }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight" data-unfold-duration="500">
-                                        
-                                            <i class="glph-icon flaticon-icon-126515"></i>
-                                        </a>
-                                    <?php
-                                }
+
+                                    <i class="glph-icon flaticon-icon-126515"></i>
+                                </a>
+                            <?php
+                            }
                             ?>
 
                         </li>
@@ -123,15 +123,18 @@
                     </div>
                     <div class="site-navigation mr-auto d-none d-xl-block">
                         <ul class="nav">
-                            <li class="nav-item dropdown">
-                                <a id="homeDropdownInvoker" href="index.php" class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center active" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#homeDropdownMenu" data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
+                            <li class="nav-item">
+                                <a id="homeDropdownInvoker" href="index.php" class="border-bottom border-primary nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center active" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#homeDropdownMenu" data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                     Trang chủ
                                 </a>
                             </li>
-                            <li class="nav-item"><a href="index.php?act=sanpham" class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium border-bottom border-primary border-width-2">Sản phẩm</a>
+                            <li class="nav-item"><a href="index.php?act=sanpham" class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium border-width-2">Sản phẩm</a>
                             </li>
                             <li class="nav-item dropdown">
 
+                                <?php
+                                // if (isset($_GET["act"]) == "sanpham") echo "border-bottom border-primary";
+                                ?>
                                 <a id="shopDropdownInvoker" href="index.php?act=danhmuc" class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center target-of-invoker-has-unfolds" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#shopDropdownMenu" data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                     Danh mục
                                 </a>
@@ -613,4 +616,3 @@
             </div>
         </div>
     </aside>
-    

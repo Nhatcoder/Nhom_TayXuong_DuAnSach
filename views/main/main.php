@@ -800,11 +800,11 @@
             ?>
                 <div class="product">
                     <form action="index.php" method="post">
-                        <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
-                        <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
+                        <input type="hidden" name="ma_sach" value="<?= $product['ma_sach'] ?>">
+                        <input type="hidden" name="ten_sach" value="<?= $product['ten_sach'] ?>">
                         <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                         <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                        <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="so_luong" value="1">
 
                         <div class="product__inner overflow-hidden p-3 p-md-4d875">
                             <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
@@ -875,11 +875,11 @@
                     ?>
                         <li class="product col">
                             <form action="index.php" method="POST">
-                                <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
-                                <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
+                                <input type="hidden" name="ma_sach" value="<?= $product['ma_sach'] ?>">
+                                <input type="hidden" name="ten_sach" value="<?= $product['ten_sach'] ?>">
                                 <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                                 <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="so_luong" value="1">
 
                                 <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                     <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">

@@ -43,17 +43,17 @@
                                                             $i = 0;
                                                             $thanhtien = 0;
                                                             foreach ($_SESSION['mycart'] as $key => $value) {
-                                                                $tongtien = $value['gia'] * $value['quantity'];
+                                                                $tongtien = $value['gia'] * $value['so_luong'];
                                                                 $thanhtien += $tongtien;
                                                                 ?>
                                                                     <tr class="woocommerce-cart-form__cart-item cart_item">
                                                                         <td class="product-name" data-title="Product">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['id_sanpham'] ?>">
-                                                                                    <img width="170px" src="./public/upload/<?= $value['images'] ?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
+                                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['ma_sach'] ?>">
+                                                                                    <img width="170px" src="./public/upload/<?= $value['hinh'] ?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
                                                                                 </a>
                                                                                 <div class="ml-3 m-w-200-lg-down">
-                                                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['id_sanpham'] ?>"><?= $value['name'] ?></a>
+                                                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['ma_sach'] ?>"><?= $value['ten_sach'] ?></a>
                                                                                     <a href="#" class="text-gray-700 font-size-2 d-block" tabindex="0">Cao cấp</a>
                                                                                 </div>
                                                                             </div>
@@ -67,14 +67,14 @@
                                                                                 <div class="border px-3 width-120">
                                                                                     <div class="js-quantity">
                                                                                         <div class="d-flex align-items-center">
-                                                                                            <label class="screen-reader-text sr-only">Quantity</label>
+                                                                                            <label class="screen-reader-text sr-only">Số lượng</label>
                                                                                             <a class="js-minus text-dark" href="javascript:;">
                                                                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="1px">
                                                                                                     <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z">
                                                                                                     </path>
                                                                                                 </svg>
                                                                                             </a>
-                                                                                            <input type="number" class="amount_check input-text qty text js-result form-control text-center border-0" step="1" min="1" max="100" name="quantity[]" value="<?= $value['quantity'] ?>" title="Qty">
+                                                                                            <input type="number" class="amount_check input-text qty text js-result form-control text-center border-0" step="1" min="1" max="100" name="quantity[]" value="<?= $value['so_luong'] ?>" title="Qty">
                                                                                             <a class="js-plus text-dark" href="javascript:;">
                                                                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="10px">
                                                                                                     <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M10.000,5.000 L6.000,5.000 L6.000,10.000 L5.000,10.000 L5.000,5.000 L-0.000,5.000 L-0.000,4.000 L5.000,4.000 L5.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,5.000 Z">

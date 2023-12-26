@@ -1,28 +1,28 @@
 <?php
     function select__userByid($userID) {
-        $sql = "SELECT * FROM users WHERE id=?";
+        $sql = "SELECT * FROM nguoidung WHERE ma_nguoi_dung=?";
         return pdo_query_one($sql, $userID);
     }
 
-    function insert__account($name,$email,$phone,$address,$password) {
-        $sql = "INSERT INTO users (name,email,phone,address,password) VALUES (?, ?, ?, ?, ?)";
-        pdo_execute($sql,$name,$email,$phone,$address,$password);
+    function insert__account($ho_ten,$email,$phone,$dia_chi,$mat_khau) {
+        $sql = "INSERT INTO nguoidung (ho_ten,email,phone,dia_chi,mat_khau) VALUES (?, ?, ?, ?, ?)";
+        pdo_execute($sql,$ho_ten,$email,$phone,$dia_chi,$mat_khau);
     }
 
     function selectAllAccount($email) {
-        $sql = "SELECT * FROM users WHERE email = ?";
+        $sql = "SELECT * FROM nguoidung WHERE email = ?";
         pdo_execute($sql,$email);
 
     }
 
     function checkPass($email) {
-        $sql = "SELECT * FROM users WHERE email = ? OR phone = ?";
+        $sql = "SELECT * FROM nguoidung WHERE email = ? OR phone = ?";
         return pdo_query_one($sql,$email,$email);
     }
 
-    function update__account($name,$email,$phone,$address,$password,$user_id) {
-        $sql = "UPDATE users SET name = ?, email = ?, phone = ?, address = ?, password = ? WHERE id = ?";
-        pdo_execute($sql,$name,$email,$phone,$address,$password, $user_id);
+    function update__account($ho_ten,$email,$phone,$dia_chi,$mat_khau,$user_id) {
+        $sql = "UPDATE nguoidung SET ho_ten = ?, email = ?, phone = ?, dia_chi = ?, mat_khau = ? WHERE ma_nguoi_dung = ?";
+        pdo_execute($sql,$ho_ten,$email,$phone,$dia_chi,$mat_khau, $user_id);
     }
 
 ?>

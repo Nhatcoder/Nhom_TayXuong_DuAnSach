@@ -1,26 +1,26 @@
 <?php
     function list__danhmuc() {
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM danhmuc";
         return pdo_query($sql);
     }
 
     function load_sanpham_bydanhmuc($iddm) {
         $sql = "SELECT 
-                    products.id_product,
-                    products.name,
-                    products.images,
-                    products.so_luong,
-                    products.gia,
-                    products.mo_ta,
-                    products.category_id,
-                    categories.id,
-                    categories.ten_danhmuc
+                    sach.ma_sach,
+                    sach.ten_sach,
+                    sach.hinh,
+                    sach.so_luong,
+                    sach.gia,
+                    sach.mo_ta,
+                    sach.ma_danh_muc,
+                    danhmuc.ma_danhmuc,
+                    danhmuc.ten_danhmuc
                 FROM 
-                    products 
+                    sach 
                 INNER JOIN
-                    categories ON products.category_id = categories.id    
+                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc    
                 WHERE
-                    products.category_id = ?
+                    sach.ma_danh_muc = ?
         ";
         return pdo_query($sql,$iddm);
     }

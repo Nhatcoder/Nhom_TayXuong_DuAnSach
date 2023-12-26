@@ -9,7 +9,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 $vnp_TmnCode = "G2QKJU4Y"; //Mã định danh merchant kết nối (Terminal Id)
 $vnp_HashSecret = "PMDGOWFWONAWTIYOLFWSEKPJGHNIQBJE"; //Secret key
 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_Returnurl = "http://localhost/Nhom_TayXuong_DuAnSach/index.php?act=camon"; // Kết quả trả về
+$vnp_Returnurl = "http://localhost/tshoess_shop/index.php?act=camon"; // Kết quả trả về
 $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 $apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 //Config input format

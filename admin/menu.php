@@ -15,7 +15,7 @@
                 <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Vanh cắt cơn</a>
+                <a href="#" class="d-block"><?= $user['name'] ?></a>
             </div>
         </div>
 
@@ -35,10 +35,11 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open pb-1">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="index.php" class="nav-link active">
+                        <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+                        <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
-                            Bảng điều khiển
+                            Bảng thống kê
                         </p>
                     </a>
                 </li>
@@ -60,12 +61,7 @@
                             <a href="index.php?act=themdanhmuc" class="nav-link">
                                 <p>Thêm danh mục</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php?act=suadanhmuc" class="nav-link">
-                                <p>Sửa danh mục</p>
-                            </a>
-                        </li>        
+                        </li>     
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -88,9 +84,21 @@
                                 <p>Thêm sản phẩm</p>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                        <i class="fa-solid fa-comment"></i>
+                        <p>
+                            Bình luận
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="index.php?act=suasanpham" class="nav-link">
-                                <p>Sửa sản phẩm</p>
+                            <a href="index.php?act=listcomment" class="nav-link">
+                                <p>Danh sách bình luận</p>
                             </a>
                         </li>
                     </ul>
@@ -98,7 +106,24 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
-                        <i class="fa-brands fa-product-hunt"></i>
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <p>
+                            Đơn hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?act=listorder" class="nav-link">
+                                <p>Danh sách đơn hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                        <i class="fa-solid fa-user"></i>
                         <p>
                             Tài khoản
                             <i class="right fas fa-angle-left"></i>
@@ -106,21 +131,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="index.php?act=nguoidung" class="nav-link">
+                            <a href="index.php?act=listaccount" class="nav-link">
                                 <p>Danh sách tài khoản</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="index.php?act=themsanpham" class="nav-link">
-                                <p>Thêm tài khoản</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php?act=suasanpham" class="nav-link">
-                                <p>Sửa tài khoản</p>
-                            </a>
-                        </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.php" class="nav-link">
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="fa-brands fa-product-hunt"></i> -->
+                        <p>
+                            Quay về trang người dùng
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

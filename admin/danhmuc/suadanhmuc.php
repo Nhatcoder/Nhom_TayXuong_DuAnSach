@@ -9,7 +9,7 @@
         <!-- /.card-header -->
         <!-- form start -->
         <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
-          <input type="hidden" name="ma_danhmuc" value="<?= $ma_danhmuc ?>">
+          <input type="hidden" name="ma_danhmuc" value="<?= $id ?>">
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Tên danh mục</label>

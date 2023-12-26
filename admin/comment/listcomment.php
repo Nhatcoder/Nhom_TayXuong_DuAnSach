@@ -5,11 +5,10 @@
     <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Danh sách danh mục</h3>
+                <h3 class="card-title">Danh sách bình luận</h3>
                 </div>
                 <!-- /.card-header -->
                 <div style="margin: 10px 0;">
-                    <a href="?act=themdanhmuc" class="btn btn-success">Thêm danh mục</a>
                     <button class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xoá không?')">Xóa</button>
                 </div>
                 <!-- Table start -->
@@ -17,21 +16,20 @@
                     <tr>                   
                         <th></th>
                         <th>STT</th>
-                        <th>Tên danh mục</th>
-                        <th>Trạng thái</th>
+                        <th>Người dùng</th>
+                        <th>Nội dung</th>
                         <th>Thao tác</th>
                     </tr>
                     <?php
-                        foreach($listDanhmuc as $key => $danhmuc) {
+                        foreach($loadComment as $key => $comment) {
                             ?>
                                 <tr>
-                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $danhmuc['id'] ?>" id=""></th>
+                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $comment['comment_id'] ?>" id=""></th>
                                     <td><?= $key + 1 ?></td>
-                                    <td><?= $danhmuc['ten_danhmuc'] ?></td>
-                                    <td><?= $danhmuc['trang_thai'] ? "Hiển thị" : "Ẩn" ?></td>
+                                    <td><?= $comment['name'] ?></td>
+                                    <td><?= $comment['content'] ?></td>
                                     <td>
-                                        <a href="index.php?act=suadanhmuc&id_danhmuc=<?= $danhmuc['id'] ?>" class="btn btn-success">Sửa</a>
-                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoadanhmuc&id_danhmuc=<?= $danhmuc['id'] ?>" class="btn btn-danger">Xóa</a>
+                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoacomment&id_comment=<?= $comment['comment_id'] ?>" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             <?php

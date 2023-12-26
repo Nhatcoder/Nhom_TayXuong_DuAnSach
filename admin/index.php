@@ -2,14 +2,35 @@
     ob_start();
     session_start();
 
-    include "../models/danhmuc.php";
-    include "../models/sach.php";
-    include "../models/user_login.php";
-    include("header.php");
+    require_once "../models/pdo.php";
 
+    include "../models/adminModel/danhmuc.php";
+    include "../models/adminModel/product.php";
+    include "../models/adminModel/accountModel.php";
+    include "../models/adminModel/orderModel.php";
+    include "../models/adminModel/thongkeModel.php";
+    include "../models/userModel/accountModel.php";
+
+    $userID = $_SESSION['user_id'] ?? 0;
+    $user = select__userByid($userID);
+
+    if($user['role_as'] != 1) {
+        header('location: ../index.php');
+        die;
+    }
+
+
+    include("header.php");
 
     // Danh mục
     $listDanhmuc = load_all_danhmuc();
+
+    // Đơn hàng
+    $countOrder = count_donhang();
+    $countAccount = count_Account();
+    $doanhthu = danh_thu();
+    $countProduct = count_product();
+
 
     if (isset($_GET["act"]) && $_GET["act"]) {
 
@@ -77,7 +98,8 @@
                 break;
             // Sản phẩm
             case 'listsanpham':
-                $listsanpham = load_all_sach();
+
+                $listsanpham = load_all_product();
                 include('sanpham/listsanpham.php');
                 break;
 
@@ -91,7 +113,7 @@
                     move_uploaded_file($file['tmp_name'], "../public/upload/" . $hinh);
 
                     //insert vào database
-                    insert_sach($ten_sach, $hinh, $nha_xuat_ban, $so_luong, $gia, $mo_ta, $ngay_xuat_ban, $ma_danh_muc, 1);
+                    insert_product($_POST['ma_danh_muc'],$_POST['ten_sp'], $hinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong']);
 
                     header("location: ?act=listsanpham");
                     die;
@@ -101,9 +123,9 @@
                 include('sanpham/themsanpham.php');
                 break;
             case 'suasanpham':
-                if(isset($_GET['id_sach']) && ($_GET['id_sach'] > 0)){
-                    $id_sach = $_GET['id_sach'];
-                    $sanpham = load_one_sach($id_sach);
+                if(isset($_GET['sneaker_id']) && ($_GET['sneaker_id'] > 0)){
+                    $sneaker_id = $_GET['sneaker_id'];
+                    $sanpham = load_one_sach($sneaker_id);
                     extract($sanpham);
                 } else {
                     $id_sach = "";
@@ -117,27 +139,57 @@
                     $hinh = $file['name'];
                     move_uploaded_file($file['tmp_name'], "../public/upload/" . $hinh);
 
-                    update_sach($_POST['ma_sach'], $_POST['ten_sach'], $hinh ? $hinh : $oldhinh, $_POST['nha_xuat_ban'], $_POST['so_luong'], $_POST['gia'], $_POST['mo_ta'], $_POST['ngay_xuat_ban'], $_POST['ma_danh_muc']);
+                    update_product($_POST['ma_danh_muc'], $_POST['ten_sp'], $hinh ? $hinh : $oldhinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong'],$_POST['sneaker_id']);
                     header("location: index.php?act=listsanpham");
                 }
 
                 include('sanpham/suasanpham.php');
                 break;
             case 'xoasanpham':
-                if(isset($_GET['id_sach']) && ($_GET['id_sach'] > 0)){
-                    $id_sach = $_GET['id_sach'];
+                if(isset($_GET['sneaker_id']) && ($_GET['sneaker_id'] > 0)){
+                    $sneaker_id = $_GET['sneaker_id'];
                 } else {
-                    $id_sach = "";
+                    $sneaker_id = "";
                 }
 
-                delete_sach($id_sach);
+                delete_product($sneaker_id);
                 header("location: index.php?act=listsanpham");
                 break;
-            case 'nguoidung':
-                $listnguoidung = load_all_user();
-                include ('nguoidung/danhsach.php');
+
+            case 'listcomment':
+                $loadComment = loadall__comment__Byid();
+                include ('comment/listcomment.php');
                 break;
-                
+            case 'xoacomment':
+                if(isset($_GET['id_comment']) && ($_GET['id_comment'] > 0)) {
+                    $id_comment = $_GET['id_comment'];
+                }
+                deleteComment($id_comment);
+                header('Location: index.php?act=listcomment');
+                break;
+            case 'listorder':
+                $listorder = select_donhang();
+                include ('order/listorder.php');
+                break;
+            case 'listOrder_detail':
+                $order_id = $_GET['order_id'];
+                $listOrderdetail = listOrder_detail($order_id);
+                include ('order/listorderdetail.php');
+                break;
+            case 'listaccount':
+                $listaccount = list_account();
+                include ('taikhoan/listaccount.php');
+                break;
+            case 'deleteAccount';
+                if(isset($_GET['account_id']) && ($_GET['account_id'] > 0)) {
+                    $accountId = $_GET['account_id'];
+                } else {
+                    $accountId = "";
+                }
+
+                deleteAccount($accountId);
+                header('Location: index.php?act=listaccount');
+                break;
         }
     } else {
         include("main.php");

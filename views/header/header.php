@@ -442,6 +442,7 @@
                                 <input class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm..." aria-label="Search">
                             </div>
                             <input class="btn btn-outline-success my-2 my-sm-0 sr-only" name="timkiem" value="Tìm kiếm" type="submit">
+                            <!-- <button name="timkiem">Tìm kiếm</button> -->
                         </form>
                     </div>
                 </div>

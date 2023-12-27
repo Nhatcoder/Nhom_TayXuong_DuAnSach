@@ -118,7 +118,8 @@ if (isset($_GET["act"]) && $_GET["act"]) {
     switch ($act) {
         case "search":
             if (isset($_POST['timkiem'])) {
-                $listpro_search = search_product($_POST['keyword']);
+                $keyword = $_POST['keyword'];
+                $listpro_search = search_product($keyword);
             }
             include("views/main/viewsearch.php");
             break;
@@ -131,6 +132,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             } else {
                 $id_danhmuc = "";
             }
+    
             $listproduct_dm = load_sanpham_bydanhmuc($id_danhmuc);
             include("views/main/danhmuc.php");
             break;
@@ -422,7 +424,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                 echo '<script>alert("Cập nhật tài khoản thành công")</script>';
                 echo '<script>window.location.href="' . $_SERVER['HTTP_REFERER'] . '"</script>';
             }
-            
+
             include("views/main/account.php");
             break;
         case 'dangxuat':

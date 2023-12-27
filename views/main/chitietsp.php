@@ -2,9 +2,9 @@
     <main id="main" class="site-main ">
         <div class="product">
             <form action="index.php?act=themgiohang" method="post">
-                <input type="hidden" name="id_sanpham" value="<?= $sp_chitiet['id_product'] ?>">
-                <input type="hidden" name="name" value="<?= $sp_chitiet['name'] ?>">
-                <input type="hidden" name="images" value="<?= $sp_chitiet['images'] ?>">
+                <input type="hidden" name="id_sanpham" value="<?= $sp_chitiet['ma_sach'] ?>">
+                <input type="hidden" name="name" value="<?= $sp_chitiet['ten_sach'] ?>">
+                <input type="hidden" name="images" value="<?= $sp_chitiet['hinh'] ?>">
                 <input type="hidden" name="gia" value="<?= $sp_chitiet['gia'] ?>">
                 <div class="container">
                     <div class="row">
@@ -14,13 +14,13 @@
                                     <div class="slick-list draggable">
                                         <div class="slick-track" style="opacity: 1; width: 1410px; transform: translate3d(0px, 0px, 0px);">
                                             <div class="js-slide slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 470px; height: auto;" tabindex="0" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">
-                                                <img src="./public/upload/<?= $sp_chitiet["images"] ?>" alt="Image Description" class="mx-auto img-fluid">
+                                                <img src="./public/upload/<?= $sp_chitiet["hinh"] ?>" alt="Image Description" class="mx-auto img-fluid">
                                             </div>
                                             <div class="js-slide slick-slide" data-slick-index="1" aria-hidden="true" style="width: 470px; height: auto;" tabindex="-1" role="tabpanel" id="slick-slide01" aria-describedby="slick-slide-control01">
-                                                <img src="./public/upload/<?= $sp_chitiet["images"] ?>" alt="Image Description" class="mx-auto img-fluid">
+                                                <img src="./public/upload/<?= $sp_chitiet["hinh"] ?>" alt="Image Description" class="mx-auto img-fluid">
                                             </div>
                                             <div class="js-slide slick-slide" data-slick-index="2" aria-hidden="true" style="width: 470px; height: auto;" tabindex="-1" role="tabpanel" id="slick-slide02" aria-describedby="slick-slide-control02">
-                                                <img src="./public/upload/<?= $sp_chitiet["images"] ?>" alt="Image Description" class="mx-auto img-fluid">
+                                                <img src="./public/upload/<?= $sp_chitiet["hinh"] ?>" alt="Image Description" class="mx-auto img-fluid">
                                             </div>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-7 pl-0 summary entry-summary border-left">
                             <div class="space-top-2 px-4 px-xl-7 border-bottom pb-5">
-                                <h1 class="product_title entry-title font-size-7 mb-3"><?= $sp_chitiet['name'] ?></h1>
+                                <h1 class="product_title entry-title font-size-7 mb-3"><?= $sp_chitiet['ten_sach'] ?></h1>
                                 <div class="font-size-2 mb-4">
                                     <span class="text-yellow-darker">
                                         <span class="fas fa-star"></span>
@@ -242,79 +242,133 @@
                                             </div>
                                         </div>
                                         <h4 class="font-size-3 mb-8">1-5 of 44 reviews</h4>
-                                        <ul class="list-unstyled mb-8">
+                                        <ul class="list-unstyled mb-8" id="listbl">
                                             <?php
-                                                foreach($load_comment as $comment) {
-                                                    ?>
-                                                        <li class="mb-4 pb-5 border-bottom">
-                                                            <div class="d-flex align-items-center mb-3">
-                                                                <h6 class="mb-0"><?= $comment['name'] ?></h6>
-                                                                <div class="text-yellow-darker ml-3">
-                                                                    <small class="fas fa-star"></small>
-                                                                    <small class="fas fa-star"></small>
-                                                                    <small class="fas fa-star"></small>
-                                                                    <small class="fas fa-star"></small>
-                                                                    <small class="far fa-star"></small>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-4 text-lh-md"><?= $comment['content'] ?></p>
-                                                            <div class="text-gray-600 mb-4"><?= date('d-m-Y', strtotime($comment['create_at'])) ?></div>
-                                                            <ul class="nav">
-                                                                <li class="mr-7">
-                                                                    <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                                        <i class="text-dark font-size-5 flaticon-like-1"></i>
-                                                                        <span class="ml-2">90</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="mr-7">
-                                                                    <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                                        <i class="text-dark font-size-5 flaticon-dislike"></i>
-                                                                        <span class="ml-2">10</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="mr-7">
-                                                                    <a href="#" class="text-gray-600 d-flex align-items-center">
-                                                                        <i class="text-dark font-size-5 flaticon-flag"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    <?php
-                                                }
-                                            ?>   
-                                        </ul>
-
-                                        <?php
-                                            if($user) {
-                                                ?>
-                                                    <h4 class="font-size-3 mb-4">Xem tất cả đánh giá</h4>
-                                                    <div class="d-flex align-items-center mb-6">
-                                                        <h6 class="mb-0">Chọn xếp hạng</h6>
-                                                        <div class="text-yellow-darker ml-3 font-size-4">
-                                                            <small class="far fa-star"></small>
-                                                            <small class="far fa-star"></small>
-                                                            <small class="far fa-star"></small>
-                                                            <small class="far fa-star"></small>
+                                            foreach ($load_comment as $comment) {
+                                            ?>
+                                                <li class="mb-4 pb-5 border-bottom">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <h6 class="mb-0"><?= $comment['ho_ten'] ?></h6>
+                                                        <div class="text-yellow-darker ml-3">
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
+                                                            <small class="fas fa-star"></small>
                                                             <small class="far fa-star"></small>
                                                         </div>
                                                     </div>
-                                                    <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                                        <div class="js-form-message form-group mb-4">
-                                                            <label for="descriptionTextarea" class="form-label text-dark h6 mb-3">Chi tiết xin vui lòng! Đánh giá của bạn giúp những người mua sắm khác.</label>
-                                                            <textarea name="noidung" class="form-control rounded-0 p-4" rows="7" id="descriptionTextarea" placeholder="Nhập đánh giá & bình luận của bạn..." required="" data-msg="Please enter your message." data-error-class="u-has-error" data-success-class="u-has-success"></textarea>
-                                                        </div>
-                                                        <div class="d-flex">
-                                                            <button type="submit" name="binhluan" class="btn btn-dark btn-wide rounded-0 transition-3d-hover">Gửi bình luận</button>
-                                                        </div>
-                                                    </form>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                    Vui lòng đăng nhập để sử dụng tính năng bình luận.
-                                                <?php
+                                                    <p class="mb-4 text-lh-md"><?= $comment['noi_dung'] ?></p>
+                                                    <div class="text-gray-600 mb-4"><?= date('d-m-Y', strtotime($comment['ngay_binh_luan'])) ?></div>
+                                                    <ul class="nav">
+                                                        <li class="mr-7">
+                                                            <a href="#" class="text-gray-600 d-flex align-items-center">
+                                                                <i class="text-dark font-size-5 flaticon-like-1"></i>
+                                                                <span class="ml-2">90</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="mr-7">
+                                                            <a href="#" class="text-gray-600 d-flex align-items-center">
+                                                                <i class="text-dark font-size-5 flaticon-dislike"></i>
+                                                                <span class="ml-2">10</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="mr-7">
+                                                            <a href="#" class="text-gray-600 d-flex align-items-center">
+                                                                <i class="text-dark font-size-5 flaticon-flag"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            <?php
                                             }
+                                            ?>
+                                        </ul>
+                                            <style>
+                                                #listbl{
+                                                    height: 500px;
+                                                    overflow-y: scroll;
+                                                }
+                                            </style>
+                                        <?php
+                                        if ($user) {
                                         ?>
-                                        
+                                            <h4 class="font-size-3 mb-4">Xem tất cả đánh giá</h4>
+                                            <div class="d-flex align-items-center mb-6">
+                                                <h6 class="mb-0">Chọn xếp hạng</h6>
+                                                <div class="text-yellow-darker ml-3 font-size-4">
+                                                    <small class="far fa-star"></small>
+                                                    <small class="far fa-star"></small>
+                                                    <small class="far fa-star"></small>
+                                                    <small class="far fa-star"></small>
+                                                    <small class="far fa-star"></small>
+                                                </div>
+                                            </div>
+                                            <form action=" " method="post" id="insert_data_bl">
+                                                <div class="js-form-message form-group mb-4">
+                                                    <label for="descriptionTextarea" class="form-label text-dark h6 mb-3">Chi tiết xin vui lòng! Đánh giá của bạn giúp những người mua sắm khác.</label>
+                                                    <textarea class="form-control rounded-0 p-4" rows="7" id="descriptionTextarea" placeholder="Nhập đánh giá & bình luận của bạn..." required="" data-msg="Please enter your message." data-error-class="u-has-error" data-success-class="u-has-success"></textarea>
+                                                </div>
+                                                <input type="hidden" id="idsp" name="idsp" value="<?= $_GET['giay'] ?>">
+                                                <div class="d-flex">
+                                                    <button type="submit" name="binhluan" id="mut_data" class="btn btn-dark btn-wide rounded-0 transition-3d-hover">Gửi bình luận</button>
+                                                </div>
+                                            </form>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    function fetch_data() {
+                                                        $.ajax({
+                                                            url: "views/main/ajaxbinhluan.php",
+                                                            method: "POST",
+                                                            success: function(data) {
+                                                                $('#listbl').html(data);
+                                                            },
+
+                                                            error: function(error) {
+                                                                alert("Lỗi rồi");
+                                                            }
+                                                        });
+                                                    }
+
+                                                    $('#mut_data').on('click', function(e) {
+                                                        e.preventDefault();
+                                                        var bl = $('#descriptionTextarea').val();
+                                                        var idsp = $('#idsp').val();
+                                                        // alert(bl)                   
+                                                        // alert(idsp)
+                                                        if (bl == '') {
+                                                            alert('Không được để trống!');
+                                                        } else {
+                                                            $.ajax({
+                                                                url: "views/main/ajaxbinhluan.php",
+                                                                method: "POST",
+                                                                data: {
+                                                                    bl: bl,
+                                                                    idsp: idsp
+                                                                },
+                                                                success: function(data) {
+                                                                    // alert(data);
+                                                                    // alert('Binh luan thanh cong')
+                                                                    $('#insert_data_bl')[0].reset()
+                                                                    fetch_data()
+                                                                },
+
+                                                                error: function(error) {
+                                                                    alert("Lỗi rồi");
+                                                                }
+                                                            });
+                                                        }
+
+                                                    });
+                                                })
+                                            </script>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <p style="color:red;"> Vui lòng đăng nhập để sử dụng tính năng bình luận!</p>
+                                        <?php
+                                        }
+                                        ?>
+
 
                                     </div>
                                 </div>
@@ -359,9 +413,9 @@
                                 foreach ($sanpham_lienquan as $sp_lienquan) {
                                 ?>
                                     <form action="index.php" method="post">
-                                        <input type="hidden" name="id_sanpham" value="<?= $sp_lienquan['id_product'] ?>">
-                                        <input type="hidden" name="name" value="<?= $sp_lienquan['name'] ?>">
-                                        <input type="hidden" name="images" value="<?= $sp_lienquan['images'] ?>">
+                                        <input type="hidden" name="id_sanpham" value="<?= $sp_lienquan['ma_sach'] ?>">
+                                        <input type="hidden" name="name" value="<?= $sp_lienquan['ten_sach'] ?>">
+                                        <input type="hidden" name="images" value="<?= $sp_lienquan['hinh'] ?>">
                                         <input type="hidden" name="gia" value="<?= $sp_lienquan['gia'] ?>">
                                         <input type="hidden" name="quantity" value="1">
 
@@ -369,11 +423,10 @@
                                             <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                                 <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                                     <div class="woocommerce-loop-product__thumbnail">
-                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['id_product'] ?>" class="d-block" tabindex="0"><img style="height:249px; object-fit: cover;" src="./public/upload/<?= $sp_lienquan['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['ma_sach'] ?>" class="d-block" tabindex="0"><img style="height:249px; object-fit: cover;" src="./public/upload/<?= $sp_lienquan['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
                                                     </div>
                                                     <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="" tabindex="0"><?= $sp_lienquan['ten_danhmuc'] ?></a></div>
-                                                        <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['id_product'] ?>" tabindex="0"><?= $sp_lienquan['name'] ?></a></h2>
+                                                        <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['ma_sach'] ?>" tabindex="0"><?= $sp_lienquan['ten_sach'] ?></a></h2>
                                                         <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html" class="text-gray-700" tabindex="0">Cao cấp</a></div>
                                                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                                             <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"><?= number_format($sp_lienquan['gia'], 0, ',', '.') ?></span>VNĐ</span>

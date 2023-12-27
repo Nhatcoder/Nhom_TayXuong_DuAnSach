@@ -13,6 +13,7 @@
     include ("models/userModel/thanhtoanModel.php");
     include ("models/userModel/commentModel.php");
 
+ 
     // Tài khoản session
     $userID = $_SESSION['user_id'] ?? 0;
     $user = select__userByid($userID);
@@ -140,17 +141,13 @@
                 if(isset($_GET['giay']) && ($_GET['giay']) > 0) {
                     $giayId = $_GET['giay'];
                     $sp_chitiet = product_chitiet($giayId);
-                    $sanpham_lienquan = sanpham_lienquan($sp_chitiet['category_id'],$giayId);
+                    $sanpham_lienquan = sanpham_lienquan($sp_chitiet['ma_danh_muc'],$giayId);
                     $load_comment = loadall__comment__Byid($giayId);
                 } else {
                     $giayId = "";
                 }
 
                 
-                if(isset($_POST['binhluan'])) {
-                    insert__comment($userID,$giayId,$_POST['noidung']);
-                    header('Location: index.php?act=chi-tiet-san-pham&giay='.$_GET['giay']);
-                }
 
                 include("views/main/chitietsp.php");
                 break;

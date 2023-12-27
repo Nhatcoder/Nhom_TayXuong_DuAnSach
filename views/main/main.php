@@ -38,7 +38,7 @@
                                             </h2>
                                             <div class="font-size-2 mb-1 text-truncate"><a href="#" class="text-gray-700">Giá</a></div>
                                             <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                <span class="woocommerce-Price-amount amount"><?= $productCart['so_luong'] ?> x <span class="woocommerce-Price-currencySymbol"></span><?= number_format($tongtien, 0, ',', '.') ?></span>
+                                                <span class="woocommerce-Price-amount amount"><?= $productCart['so_luong'] ?> x <span class="woocommerce-Price-currencySymbol"></span><?= number_format($productCart['gia'], 0, ',', '.') ?> VNĐ</span>
                                             </div>
                                         </div>
                                         <div class="mt-3 ml-3">

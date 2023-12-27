@@ -24,7 +24,9 @@ if (!isset($_SESSION['mycart'])) {
     $_SESSION['mycart'] = [];
 }
 
+
 // session_destroy();
+
 
 // echo "<pre>";
 // print_r($_SESSION['mycart']);
@@ -75,6 +77,7 @@ if (isset($_POST['dangnhap'])) {
 // Thêm vào giỏ hàng
 if (isset($_POST['addCart'])) {
     $thanhtien = 0;
+
     $ma_sach = $_POST['ma_sach'];
     $ten_sach = $_POST['ten_sach'];
     $hinh = $_POST['hinh'];
@@ -84,25 +87,25 @@ if (isset($_POST['addCart'])) {
 
     $index = count($_SESSION['mycart']);
 
+    $found = false;
+
     if ($_SESSION['mycart']) {
         foreach ($_SESSION['mycart'] as $key => $value) {
-            if ($value['id_sanpham'] == $ma_sach) {
-                $_SESSION['mycart'][$key]['$ten_sach'] += $so_luong;
-                break;
-            } else {
-                $_SESSION['mycart'][$index] = $_POST;
-                $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
+            if ($value['ma_sach'] == $ma_sach) {
+                $_SESSION['mycart'][$key]['so_luong'] += $so_luong;
+                $_SESSION['mycart'][$key]['thanhtien'] = $gia * $_SESSION['mycart'][$key]['so_luong'];
+                $found = true;
                 break;
             }
         }
-    } else {
+    }
+
+    if (!$found) {
         $_SESSION['mycart'][$index] = $_POST;
         $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
     }
-
-    echo '<script>alert("Thêm vào giỏ hàng thành công")</script>';
-    echo '<script>window.location.href="' . $_SERVER['HTTP_REFERER'] . '"</script>';
 }
+
 
 
 // Sản phẩm
@@ -147,8 +150,11 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
             include("views/main/chitietsp.php");
             break;
-        case 'themgiohang':
 
+
+
+
+        case 'themgiohang':
             if (isset($_POST['addToCart'])) {
 
                 if ($user) {
@@ -204,6 +210,31 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             }
 
             break;
+
+        case 'capnhatgiohang':
+            // // Cập nhật giỏ hàng
+            if (isset($_POST['update_cart'])) {
+                $ma_sach_arr = $_POST['ma_sach'];
+                $so_luong_arr = $_POST['so_luong'];
+
+                foreach ($_SESSION['mycart'] as $key => $value) {
+                    $ma_sach = $ma_sach_arr[$key];
+                    $so_luong_moi = $so_luong_arr[$key];
+
+                    if ($value['ma_sach'] == $ma_sach) {
+                        $gia = $value['gia'];
+
+                        $_SESSION['mycart'][$key]['so_luong'] = $so_luong_moi;
+                        $_SESSION['mycart'][$key]['thanhtien'] = $gia * $so_luong_moi;
+                    }
+                }
+            }
+
+
+            include("views/main/giohang.php");
+
+            break;
+
         case 'giohang':
             include("views/main/giohang.php");
             break;

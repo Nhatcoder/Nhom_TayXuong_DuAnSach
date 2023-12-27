@@ -23,6 +23,8 @@
         $sql = "UPDATE nguoidung SET ho_ten = ?, email = ?, so_dien_thoai = ?, dia_chi = ?, mat_khau = ? WHERE ma_nguoi_dung = ?";
         pdo_execute($sql,$ho_ten,$email,$so_dien_thoai,$dia_chi,$mat_khau, $user_id);
     }
+
+
     function sendMail($email){
         $sql = "SELECT * FROM duanxuong.nguoidung where email = '$email'";
         $sendMail = pdo_query_one($sql);

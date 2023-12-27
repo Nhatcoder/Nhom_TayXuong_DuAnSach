@@ -118,7 +118,7 @@
                     </div>
                     <div class="site-branding pr-md-4">
                         <a href="index.php" class="d-block mb-1">
-                            <img width="120px" src="./images/lgsnk.jpg" alt="">
+                            <img width="80px" style="padding: 5px;" src="./template/assets/img/favicon.png" alt="">
                         </a>
                     </div>
                     <div class="site-navigation mr-auto d-none d-xl-block">
@@ -140,7 +140,7 @@
                                     foreach ($listDanhmuc as $danhmuc) {
                                     ?>
                                         <li>
-                                            <a href="index.php?act=danhmuc&id_danhmuc=<?= $danhmuc['id'] ?>" class="dropdown-item link-black-100">
+                                            <a href="index.php?act=danhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="dropdown-item link-black-100">
                                                 <?= $danhmuc['ten_danhmuc'] ?>
                                             </a>
                                         </li>

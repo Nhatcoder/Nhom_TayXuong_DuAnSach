@@ -1,33 +1,33 @@
 <?php
     function count_donhang() {
-        $sql = "SELECT * FROM orders
-                WHERE created_at >= CURRENT_TIMESTAMP - INTERVAL 7 DAY
-                ORDER BY id DESC";
+        $sql = "SELECT * FROM donhang
+                WHERE create_at >= CURRENT_TIMESTAMP - INTERVAL 7 DAY
+                ORDER BY ma_don DESC";
         return pdo_query($sql);
     }
 
     function count_Account() {
-        $sql = "SELECT * FROM users WHERE 1 ORDER BY id ASC";
+        $sql = "SELECT * FROM nguoidung WHERE 1 ORDER BY ma_nguoi_dung ASC";
         return pdo_query($sql);
     }
 
     function danh_thu($day = 7) {
         $sql = "SELECT
-                    o.id AS order_id,
-                    SUM(od.quantity * p.gia) AS total_sell
+                    o.ma_don AS order_id,
+                    SUM(od.so_luong * p.gia) AS total_sell
                 FROM
-                    order_detail od
+                    chitiet_donhang od
                 JOIN
-                    products p ON od.product_id = p.id_product
+                    sach p ON od.ma_sach = p.ma_sach
                 JOIN
-                    orders o ON od.order_id = o.id
+                    donhang o ON od.ma_don = o.ma_don
                 WHERE
-                    date(created_at) >= DATE_SUB(CURRENT_DATE,INTERVAL $day DAY)";
+                    date(create_at) >= DATE_SUB(CURRENT_DATE,INTERVAL $day DAY)";
         return pdo_query_one($sql);
     }
 
     function count_product() {
-        $sql = "SELECT * FROM products WHERE 1 ORDER BY id_product DESC";
+        $sql = "SELECT * FROM sach WHERE 1 ORDER BY ma_sach DESC";
         return pdo_query($sql);
     }
 ?>

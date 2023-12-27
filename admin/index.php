@@ -14,16 +14,18 @@
     $userID = $_SESSION['user_id'] ?? 0;
     $user = select__userByid($userID);
 
-    if($user['role_as'] != 1) {
-        header('location: ../index.php');
-        die;
-    }
+    // if($user['role_as'] != 1) {
+    //     header('location: ../index.php');
+    //     die;
+    // }
 
 
     include("header.php");
 
     // Danh mục
     $listDanhmuc = load_all_danhmuc();
+    // print_r($listDanhmuc);
+    // die();
 
     // Đơn hàng
     $countOrder = count_donhang();
@@ -113,7 +115,7 @@
                     move_uploaded_file($file['tmp_name'], "../public/upload/" . $hinh);
 
                     //insert vào database
-                    insert_product($_POST['ma_danh_muc'],$_POST['ten_sp'], $hinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong']);
+                    insert_product($_POST['ma_danh_muc'],$_POST['ten_sp'], $hinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong'], $_POST['nha_xb'], $_POST['ngay_xb']);
 
                     header("location: ?act=listsanpham");
                     die;
@@ -139,7 +141,7 @@
                     $hinh = $file['name'];
                     move_uploaded_file($file['tmp_name'], "../public/upload/" . $hinh);
 
-                    update_product($_POST['ma_danh_muc'], $_POST['ten_sp'], $hinh ? $hinh : $oldhinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong'],$_POST['sneaker_id']);
+                    update_product($_POST['ma_danh_muc'], $_POST['ten_sp'], $hinh ? $hinh : $oldhinh, $_POST['gia'], $_POST['mo_ta'], $_POST['so_luong'],$_POST['sneaker_id'], $_POST['nha_xb'], $_POST['ngay_xb']);
                     header("location: index.php?act=listsanpham");
                 }
 

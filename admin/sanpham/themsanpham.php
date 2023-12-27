@@ -35,6 +35,14 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="exampleInputEmail1">Nhà xuất bản</label>
+              <input type="text" name="nha_xb" class="form-control" placeholder="Nhập nhà xuất bản...">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Ngày xuất bản</label>
+              <input type="date" name="ngay_xb" class="form-control" placeholder="Nhập ngày xuất bản...">
+            </div>
+            <div class="form-group">
               <label for="exampleInputPassword1">Mô tả</label>
               <textarea name="mo_ta" class="form-control" placeholder="Nhập mô tả..." id="" cols="30" rows="10"></textarea>
             </div>
@@ -43,7 +51,7 @@
                     <select class="custom-select" name="ma_danh_muc" id="">
                       <option value="0">Chọn danh mục</option>
                       <?php foreach ($listDanhmuc as $dm) : ?>
-                          <option value="<?= $dm['id'] ?>">
+                          <option value="<?= $dm['ma_danhmuc'] ?>">
                               <?= $dm['ten_danhmuc'] ?>
                           </option>
                       <?php endforeach ?>

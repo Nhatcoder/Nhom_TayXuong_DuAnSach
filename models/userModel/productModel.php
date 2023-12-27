@@ -1,74 +1,74 @@
 <?php
     function load_all_product() {
         $sql = "SELECT 
-                    products.id_product,
-                    products.name,
-                    products.images,
-                    products.so_luong,
-                    products.gia,
-                    products.mo_ta,
-                    products.category_id,
-                    categories.id,
-                    categories.ten_danhmuc
+                    sach.ma_sach,
+                    sach.ten_sach,
+                    sach.hinh,
+                    sach.so_luong,
+                    sach.gia,
+                    sach.mo_ta,
+                    sach.ma_danh_muc,
+                    danhmuc.ma_danhmuc,
+                    danhmuc.ten_danhmuc
                 FROM 
-                    products 
+                    sach 
                 INNER JOIN
-                    categories ON products.category_id = categories.id    
-                ORDER BY products.id_product DESC";
+                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc    
+                ORDER BY sach.ma_sach DESC";
         return pdo_query($sql);
     }
 
     function product_chitiet($id) {
         $sql = "SELECT
-                    products.id_product,
-                    products.name,
-                    products.images,
-                    products.so_luong,
-                    products.gia,
-                    products.mo_ta,
-                    products.category_id
+                    sach.ma_sach,
+                    sach.ten_sach,
+                    sach.hinh,
+                    sach.so_luong,
+                    sach.gia,
+                    sach.mo_ta,
+                    sach.ma_danh_muc
                 FROM
-                    products 
+                    sach 
                 WHERE
-                    products.id_product = ?
+                    sach.ma_sach = ?
         ";
         return pdo_query_one($sql, $id);
     }
 
-    function sanpham_lienquan($category_id,$id) {
+    function sanpham_lienquan($ma_danh_muc,$id) {
         $sql = "SELECT
-                    products.id_product,
-                    products.name,
-                    products.images,
-                    products.so_luong,
-                    products.gia,
-                    products.mo_ta,
-                    products.category_id,
-                    categories.id,
-                    categories.ten_danhmuc
+                    sach.ma_sach,
+                    sach.ten_sach,
+                    sach.hinh,
+                    sach.so_luong,
+                    sach.gia,
+                    sach.mo_ta,
+                    sach.ma_danh_muc,
+                    danhmuc.ma_danhmuc,
+                    danhmuc.ten_danhmuc
                 FROM 
-                    products 
+                    sach 
                 INNER JOIN
-                    categories ON products.category_id = categories.id    
-                WHERE category_id = $category_id AND id_product <> $id ORDER BY id_product DESC";
+                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc    
+                WHERE ma_danh_muc = $ma_danh_muc AND ma_sach <> $id ORDER BY ma_sach DESC";
         return pdo_query($sql);
     }
 
     function search_product($keyword) {
         $sql = "SELECT    
-                    products.id_product,
-                    products.name,
-                    products.images,
-                    products.so_luong,
-                    products.gia,
-                    products.mo_ta,
-                    products.category_id,
-                    categories.id,
-                    categories.ten_danhmuc
+                    sach.ma_sach,
+                    sach.ten_sach,
+                    sach.hinh,
+                    sach.so_luong,
+                    sach.gia,
+                    sach.mo_ta,
+                    sach.ma_danh_muc,
+                    danhmuc.ma_danhmuc,
+                    danhmuc.ten_danhmuc
                 FROM 
-                    products 
+                    sach 
                 INNER JOIN
-                    categories ON products.category_id = categories.id WHERE name LIKE '%".$keyword."%'";
+                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc WHERE ten_sach LIKE '%".$keyword."%'";
         return pdo_query($sql);
     }
 ?>

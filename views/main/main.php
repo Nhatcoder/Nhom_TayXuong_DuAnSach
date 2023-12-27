@@ -10,66 +10,66 @@
                     </button>
                 </div>
 
-            
+
                 <div class="u-sidebar__body">
                     <div class="u-sidebar__content u-header-sidebar__content">
 
                         <header class="border-bottom px-4 px-md-6 py-4">
                             <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-icon-126515 mr-3 font-size-5"></i>Giỏ hàng của bạn <?= count($_SESSION['mycart']) ?></h2>
                         </header>
-                        
+
                         <?php
-                            if(isset($_SESSION['mycart']) && (count($_SESSION['mycart']) > 0)) {
-                                
-                                $i = 0;
-                                $thanhtien = 0;
-                                foreach ($_SESSION['mycart'] as $productCart) {
-                                    $tongtien = $productCart['gia'] * $productCart['quantity'];
-                                    $thanhtien += $tongtien;
-                                    ?>
-                                        <div class="px-4 py-5 px-md-6 border-bottom">
-                                            <div class="media">
-                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $productCart['id_sanpham'] ?>" class="d-block"><img style="width:140px; height:180px; object-fit: cover;" src="./public/upload/<?= $productCart['images'] ?>" class="img-fluid" alt="image-description"></a>
-                                                <div class="media-body ml-4d875">
-                                                    <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate"><a href="#">Cao cấp</a>
-                                                    </div>
-                                                    <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
-                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $productCart['id_sanpham'] ?>" class="text-dark"><?= $productCart['name'] ?></a>
-                                                    </h2>
-                                                    <div class="font-size-2 mb-1 text-truncate"><a href="#" class="text-gray-700">Giá</a></div>
-                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                        <span class="woocommerce-Price-amount amount"><?= $productCart['quantity'] ?> x <span class="woocommerce-Price-currencySymbol"></span><?= number_format($tongtien, 0, ',', '.') ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-3 ml-3">
-                                                    <a onclick="return confirm('Bạn có muốn xóa sản phẩm này không?')" href="index.php?act=delete_cart&idcart=<?= $i ?>" class="text-dark"><i class="fas fa-times"></i></a>
-                                                </div>
+                        if (isset($_SESSION['mycart']) && (count($_SESSION['mycart']) > 0)) {
+
+                            $i = 0;
+                            $thanhtien = 0;
+                            foreach ($_SESSION['mycart'] as $productCart) {
+                                $tongtien = $productCart['gia'] * $productCart['so_luong'];
+                                $thanhtien += $tongtien;
+                        ?>
+                                <div class="px-4 py-5 px-md-6 border-bottom">
+                                    <div class="media">
+                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $productCart['ma_sach'] ?>" class="d-block"><img style="width:140px; height:180px; object-fit: cover;" src="./public/upload/<?= $productCart['hinh'] ?>" class="img-fluid" alt="image-description"></a>
+                                        <div class="media-body ml-4d875">
+                                            <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate"><a href="#">Cao cấp</a>
+                                            </div>
+                                            <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
+                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $productCart['ma_sach'] ?>" class="text-dark"><?= $productCart['ten_sach'] ?></a>
+                                            </h2>
+                                            <div class="font-size-2 mb-1 text-truncate"><a href="#" class="text-gray-700">Giá</a></div>
+                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                <span class="woocommerce-Price-amount amount"><?= $productCart['so_luong'] ?> x <span class="woocommerce-Price-currencySymbol"></span><?= number_format($tongtien, 0, ',', '.') ?></span>
                                             </div>
                                         </div>
-                                    <?php
-                                    $i++;
-                                }
-                                ?>
-                                    <div class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
-                                        <h4 class="mb-0 font-size-3">Thành tiền:</h4>
-                                        <div class="font-weight-medium"><?= number_format($thanhtien, 0, ',', '.') ?> VNĐ</div>
+                                        <div class="mt-3 ml-3">
+                                            <a onclick="return confirm('Bạn có muốn xóa sản phẩm này không?')" href="index.php?act=delete_cart&idcart=<?= $i ?>" class="text-dark"><i class="fas fa-times"></i></a>
+                                        </div>
                                     </div>
-                                    
-                                <?php
-                            } else {
-                                ?>
-                                    <div class="px-4 py-5 px-md-6 border-bottom">
-                                        Giỏ hàng đang trống
-                                    </div>
-                                <?php
+                                </div>
+                            <?php
+                                $i++;
                             }
+                            ?>
+                            <div class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
+                                <h4 class="mb-0 font-size-3">Thành tiền:</h4>
+                                <div class="font-weight-medium"><?= number_format($thanhtien, 0, ',', '.') ?> VNĐ</div>
+                            </div>
+
+                        <?php
+                        } else {
+                        ?>
+                            <div class="px-4 py-5 px-md-6 border-bottom">
+                                Giỏ hàng đang trống
+                            </div>
+                        <?php
+                        }
                         ?>
                         <div class="px-4 mb-8 px-md-6">
                             <a href="index.php?act=giohang" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">Xem giỏ hàng</a>
                             <a href="index.php?act=thanhtoan" class="btn btn-block py-4 rounded-0 btn-dark">Thanh toán</a>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -693,16 +693,16 @@
                     <div class="hero row min-height-588 align-items-center">
                         <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SNEAKERS</p>
+                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SÁCH</p>
                                 <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
-                                    <span class="hero__title-line-1 font-weight-regular d-block">SNEAKERS</span>
-                                    <span class="hero__title-line-2 font-weight-bold d-block">CAO CẤP</span>
+                                    <span class="hero__title-line-1 font-weight-regular d-block">SÁCH</span>
+                                    <span class="hero__title-line-2 font-weight-bold d-block">HAY</span>
                                 </h2>
                                 <a href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/shop/v1.html" class="btn btn-dark btn-wide rounded-0 hero__btn" data-scs-animation-in="fadeInLeft" data-scs-animation-delay="400">XEM NGAY</a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight" data-scs-animation-delay="500">
-                            <img class="img-fluid" src="./images/bg.png" alt="image-description">
+                            <img class="img-fluid" src="./template/assets/img/800x420/img1.png" alt="image-description">
                         </div>
                     </div>
                 </div>
@@ -710,16 +710,16 @@
                     <div class="hero row min-height-588 align-items-center">
                         <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SNEAKERS</p>
+                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SÁCH</p>
                                 <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
-                                    <span class="hero__title-line-1 font-weight-regular d-block">SNEAKERS</span>
-                                    <span class="hero__title-line-2 font-weight-bold d-block">CAO CẤP</span>
+                                    <span class="hero__title-line-1 font-weight-regular d-block">SÁCH</span>
+                                    <span class="hero__title-line-2 font-weight-bold d-block">HAY</span>
                                 </h2>
                                 <a href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/shop/v1.html" class="btn btn-dark btn-wide rounded-0 hero__btn" data-scs-animation-in="fadeInLeft" data-scs-animation-delay="400">XEM NGAY</a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight" data-scs-animation-delay="500">
-                            <img class="img-fluid" src="./images/bg.png" alt="image-description">
+                            <img class="img-fluid" src="./template/assets/img/800x420/img1.png" alt="image-description">
                         </div>
                     </div>
                 </div>
@@ -727,16 +727,16 @@
                     <div class="hero row min-height-588 align-items-center">
                         <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SNEAKERS</p>
+                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SÁCH</p>
                                 <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
-                                    <span class="hero__title-line-1 font-weight-regular d-block">SNEAKERS</span>
-                                    <span class="hero__title-line-2 font-weight-bold d-block">CAO CẤP</span>
+                                    <span class="hero__title-line-1 font-weight-regular d-block">SÁCH</span>
+                                    <span class="hero__title-line-2 font-weight-bold d-block">HAY</span>
                                 </h2>
                                 <a href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/shop/v1.html" class="btn btn-dark btn-wide rounded-0 hero__btn" data-scs-animation-in="fadeInLeft" data-scs-animation-delay="400">XEM NGAY</a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight" data-scs-animation-delay="500">
-                            <img class="img-fluid" src="./images/bg.png" alt="image-description">
+                            <img class="img-fluid" src="./template/assets/img/800x420/img1.png" alt="image-description">
                         </div>
                     </div>
                 </div>
@@ -744,16 +744,16 @@
                     <div class="hero row min-height-588 align-items-center">
                         <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SNEAKERS</p>
+                                <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">THẾ GIỚI SÁCH</p>
                                 <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
-                                    <span class="hero__title-line-1 font-weight-regular d-block">SNEAKERS</span>
-                                    <span class="hero__title-line-2 font-weight-bold d-block">CAO CẤP</span>
+                                    <span class="hero__title-line-1 font-weight-regular d-block">SÁCH</span>
+                                    <span class="hero__title-line-2 font-weight-bold d-block">HAY</span>
                                 </h2>
                                 <a href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/shop/v1.html" class="btn btn-dark btn-wide rounded-0 hero__btn" data-scs-animation-in="fadeInLeft" data-scs-animation-delay="400">XEM NGAY</a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight" data-scs-animation-delay="500">
-                            <img class="img-fluid" src="./images/bg.png" alt="image-description">
+                            <img class="img-fluid" src="./template/assets/img/800x420/img1.png" alt="image-description">
                         </div>
                     </div>
                 </div>
@@ -800,27 +800,27 @@
             ?>
                 <div class="product">
                     <form action="index.php" method="post">
-                        <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                        <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                        <input type="hidden" name="images" value="<?= $product['images'] ?>">
+                        <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                        <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
+                        <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                         <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
                         <input type="hidden" name="quantity" value="1">
 
                         <div class="product__inner overflow-hidden p-3 p-md-4d875">
                             <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                 <div class="woocommerce-loop-product__thumbnail">
-                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block">
-                                        <img style="height:249px; object-fit: cover;" src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description">
+                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block">
+                                        <img style="height:249px; object-fit: cover;" src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description">
                                     </a>
                                 </div>
                                 <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href=""><?= $product['ten_danhmuc'] ?></a>
+                                    <div class="text-uppercase font-size-1 mb-1 text-truncate">
                                     </div>
                                     <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
+                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_sach'] ?></a>
                                     </h2>
                                     <div class="font-size-2  mb-1 text-truncate">
-                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a>
+                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a>
                                     </div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                         <span class="woocommerce-Price-amount amount">
@@ -871,53 +871,53 @@
             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                 <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-6 border-top border-left my-0">
                     <?php
-                        foreach($listProduct as $product) {
-                            ?>
-                                <li class="product col">
-                                    <form action="index.php" method="POST">
-                                        <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                                        <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                                        <input type="hidden" name="images" value="<?= $product['images'] ?>">
-                                        <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                        <input type="hidden" name="quantity" value="1">
+                    foreach ($listProduct as $product) {
+                    ?>
+                        <li class="product col">
+                            <form action="index.php" method="POST">
+                                <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                                <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
+                                <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
+                                <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
+                                <input type="hidden" name="quantity" value="1">
 
-                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                            <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                                <div class="woocommerce-loop-product__thumbnail">
-                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block"><img src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
-                                                </div>
-                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a>
-                                                    </div>
-                                                    <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
-                                                    </h2>
-                                                    <div class="font-size-2  mb-1 text-truncate"><a href="others/authors-single.html" class="text-gray-700">Cao cấp</a>
-                                                    </div>
-                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="product__hover d-flex align-items-center">
-                                                    <a href="index.php" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                                        <button name="addCart" class="product__add-to-cart">Thêm giỏ hàng</button>
-                                                        <button name="addCart" class="ic__addcart product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></button>
-                                                    </a>
-                                                    <a href="index.php" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                        <i class="flaticon-switch"></i>
-                                                    </a>
-                                                    <a href="index.php" class="h-p-bg btn btn-outline-primary border-0">
-                                                        <i class="flaticon-heart"></i>
-                                                    </a>
-                                                </div>
+                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                        <div class="woocommerce-loop-product__thumbnail">
+                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                        </div>
+                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                            <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                            </div>
+                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_sach'] ?></a>
+                                            </h2>
+                                            <div class="font-size-2  mb-1 text-truncate"><a href="others/authors-single.html" class="text-gray-700">Cao cấp</a>
+                                            </div>
+                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?> VNĐ</span>
                                             </div>
                                         </div>
-                                    </form>
-                                </li>
-                            <?php
-                        }
-                    ?>    
-                    
+                                        <div class="product__hover d-flex align-items-center">
+                                            <a href="index.php" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
+                                                <button name="addCart" class="product__add-to-cart">Thêm giỏ hàng</button>
+                                                <button name="addCart" class="ic__addcart product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></button>
+                                            </a>
+                                            <a href="index.php" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                <i class="flaticon-switch"></i>
+                                            </a>
+                                            <a href="index.php" class="h-p-bg btn btn-outline-primary border-0">
+                                                <i class="flaticon-heart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    <?php
+                    }
+                    ?>
+
                 </ul>
             </div>
             <div class="tab-pane fade" id="onsale" role="tabpanel" aria-labelledby="onsale-tab">
@@ -1026,7 +1026,7 @@
                         <div class="banner px-lg-8 px-3 py-4 py-xl-0 d-flex h-100 align-items-center justify-content-center">
                             <div class="banner__body">
                                 <div class="banner__image pb-1 mb-5">
-                                    <img class="img-fluid" src="./images/bg.png" alt="image-description">
+                                    <img class="img-fluid" src="./template/assets/img/800x420/img1.png" alt="image-description">
                                 </div>
                                 <h3 class="banner_text m-0">
                                     <span class="d-block mb-1 font-size-10 font-weight-regular">GIẢM GIÁ</span>
@@ -1043,49 +1043,49 @@
                     <div class="col-xl-8">
                         <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left my-0">
                             <?php
-                                foreach($listProduct as $product) {
-                                    ?>
-                                        <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                            <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                                            <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                                            <input type="hidden" name="images" value="<?= $product['images'] ?>">
-                                            <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <li class="product col">
-                                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                                        <div class="woocommerce-loop-product__thumbnail">
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block"><img src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
-                                                        </div>
-                                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a>
-                                                            </div>
-                                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
-                                                            </h2>
-                                                            <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
-                                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0,',','.') ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product__hover d-flex align-items-center">
-                                                            <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                                                <span class="product__add-to-cart">Thêm giỏ hàng</span>
-                                                                <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
-                                                            </button>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-switch"></i>
-                                                            </a>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-heart"></i>
-                                                            </a>
-                                                        </div>
+                            foreach ($listProduct as $product) {
+                            ?>
+                                <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                                    <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                                    <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
+                                    <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
+                                    <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <li class="product col">
+                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                            <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                <div class="woocommerce-loop-product__thumbnail">
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                </div>
+                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                                    </div>
+                                                    <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_sach'] ?></a>
+                                                    </h2>
+                                                    <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?> VNĐ</span>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </form>
-                                    <?php
-                                }
+                                                <div class="product__hover d-flex align-items-center">
+                                                    <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
+                                                        <span class="product__add-to-cart">Thêm giỏ hàng</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                                                    </button>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-switch"></i>
+                                                    </a>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-heart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </form>
+                            <?php
+                            }
                             ?>
                         </ul>
                     </div>
@@ -1114,49 +1114,49 @@
                     <div class="col-xl-8">
                         <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left my-0">
                             <?php
-                                foreach($listProduct as $product) {
-                                    ?>
-                                        <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                            <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                                            <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                                            <input type="hidden" name="images" value="<?= $product['images'] ?>">
-                                            <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <li class="product col">
-                                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                                        <div class="woocommerce-loop-product__thumbnail">
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block"><img src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
-                                                        </div>
-                                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a>
-                                                            </div>
-                                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
-                                                            </h2>
-                                                            <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
-                                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0,',','.') ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product__hover d-flex align-items-center">
-                                                            <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                                                <span class="product__add-to-cart">Thêm giỏ hàng</span>
-                                                                <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
-                                                            </button>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-switch"></i>
-                                                            </a>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-heart"></i>
-                                                            </a>
-                                                        </div>
+                            foreach ($listProduct as $product) {
+                            ?>
+                                <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                                    <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                                    <input type="hidden" name="name" value="<?= $product['name'] ?>">
+                                    <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
+                                    <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <li class="product col">
+                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                            <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                <div class="woocommerce-loop-product__thumbnail">
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                </div>
+                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_danhmuc'] ?></a>
+                                                    </div>
+                                                    <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['name'] ?></a>
+                                                    </h2>
+                                                    <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?></span>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </form>
-                                    <?php
-                                }
+                                                <div class="product__hover d-flex align-items-center">
+                                                    <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
+                                                        <span class="product__add-to-cart">Thêm giỏ hàng</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                                                    </button>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-switch"></i>
+                                                    </a>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-heart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </form>
+                            <?php
+                            }
                             ?>
                         </ul>
                     </div>
@@ -1185,49 +1185,49 @@
                     <div class="col-xl-8">
                         <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left my-0">
                             <?php
-                                foreach($listProduct as $product) {
-                                    ?>
-                                        <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                            <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                                            <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                                            <input type="hidden" name="images" value="<?= $product['images'] ?>">
-                                            <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <li class="product col">
-                                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                                        <div class="woocommerce-loop-product__thumbnail">
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block"><img src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
-                                                        </div>
-                                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a>
-                                                            </div>
-                                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
-                                                            </h2>
-                                                            <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
-                                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0,',','.') ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product__hover d-flex align-items-center">
-                                                            <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                                                <span class="product__add-to-cart">Thêm giỏ hàng</span>
-                                                                <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
-                                                            </button>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-switch"></i>
-                                                            </a>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-heart"></i>
-                                                            </a>
-                                                        </div>
+                            foreach ($listProduct as $product) {
+                            ?>
+                                <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                                    <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                                    <input type="hidden" name="name" value="<?= $product['name'] ?>">
+                                    <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
+                                    <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <li class="product col">
+                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                            <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                <div class="woocommerce-loop-product__thumbnail">
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                </div>
+                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_danhmuc'] ?></a>
+                                                    </div>
+                                                    <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['name'] ?></a>
+                                                    </h2>
+                                                    <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?></span>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </form>
-                                    <?php
-                                }
+                                                <div class="product__hover d-flex align-items-center">
+                                                    <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
+                                                        <span class="product__add-to-cart">Thêm giỏ hàng</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                                                    </button>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-switch"></i>
+                                                    </a>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-heart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </form>
+                            <?php
+                            }
                             ?>
                         </ul>
                     </div>
@@ -1256,49 +1256,49 @@
                     <div class="col-xl-8">
                         <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left my-0">
                             <?php
-                                foreach($listProduct as $product) {
-                                    ?>
-                                        <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                            <input type="hidden" name="id_sanpham" value="<?= $product['id_product'] ?>">
-                                            <input type="hidden" name="name" value="<?= $product['name'] ?>">
-                                            <input type="hidden" name="images" value="<?= $product['images'] ?>">
-                                            <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <li class="product col">
-                                                <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                                                    <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                                        <div class="woocommerce-loop-product__thumbnail">
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="d-block"><img src="./public/upload/<?= $product['images'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
-                                                        </div>
-                                                        <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a>
-                                                            </div>
-                                                            <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['name'] ?></a>
-                                                            </h2>
-                                                            <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
-                                                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                                <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0,',','.') ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product__hover d-flex align-items-center">
-                                                            <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                                                <span class="product__add-to-cart">Thêm giỏ hàng</span>
-                                                                <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
-                                                            </button>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-switch"></i>
-                                                            </a>
-                                                            <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="h-p-bg btn btn-outline-primary border-0">
-                                                                <i class="flaticon-heart"></i>
-                                                            </a>
-                                                        </div>
+                            foreach ($listProduct as $product) {
+                            ?>
+                                <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+                                    <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
+                                    <input type="hidden" name="name" value="<?= $product['name'] ?>">
+                                    <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
+                                    <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <li class="product col">
+                                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
+                                            <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+                                                <div class="woocommerce-loop-product__thumbnail">
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                </div>
+                                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_danhmuc'] ?></a>
+                                                    </div>
+                                                    <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['name'] ?></a>
+                                                    </h2>
+                                                    <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                        <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',', '.') ?></span>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </form>
-                                    <?php
-                                }
+                                                <div class="product__hover d-flex align-items-center">
+                                                    <button name="addCart" class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="ADD TO CART">
+                                                        <span class="product__add-to-cart">Thêm giỏ hàng</span>
+                                                        <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                                                    </button>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-switch"></i>
+                                                    </a>
+                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="h-p-bg btn btn-outline-primary border-0">
+                                                        <i class="flaticon-heart"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </form>
+                            <?php
+                            }
                             ?>
                         </ul>
                     </div>

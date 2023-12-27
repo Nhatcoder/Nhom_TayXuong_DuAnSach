@@ -41,7 +41,7 @@
                                                             class="required" title="required">*</abbr></label>
                                                     <input type="text" class="input-text form-control"
                                                         name="name" id="billing_first_name" placeholder=""
-                                                        value="<?= $user['name'] ?>" autocomplete="given-name" autofocus="autofocus">
+                                                        value="<?= $user['ho_ten'] ?>" autocomplete="given-name" autofocus="autofocus">
                                                 </p>
                                                 <p class="col-lg-6 mb-4d75 form-row form-row-last validate-required"
                                                     id="billing_last_name_field" data-priority="20">
@@ -56,21 +56,21 @@
                                                     <label for="billing_company" class="form-label">Số điện thoại</label>
                                                     <input type="text" class="input-text form-control"
                                                         name="phone" id="billing_company" placeholder=""
-                                                        value="<?= $user['phone'] ?>" autocomplete="organization">
+                                                        value="<?= $user['so_dien_thoai'] ?>" autocomplete="organization">
                                                 </p>
                                                 <p class="col-12 mb-4d75 form-row form-row-wide"
                                                     id="billing_company_field" data-priority="30">
                                                     <label for="billing_company" class="form-label">Địa chỉ</label>
                                                     <input type="text" class="input-text form-control"
                                                         name="address" id="billing_company" placeholder=""
-                                                        value="<?= $user['address'] ?>" autocomplete="organization">
+                                                        value="<?= $user['dia_chi'] ?>" autocomplete="organization">
                                                 </p>
                                                 <p class="col-12 mb-4d75 form-row form-row-wide"
                                                     id="billing_company_field" data-priority="30">
                                                     <label for="billing_company" class="form-label">Mật khẩu</label>
                                                     <input type="password" class="input-text form-control"
                                                         name="password" id="billing_company" placeholder=""
-                                                        value="<?= $user['password'] ?>" autocomplete="organization">
+                                                        value="<?= $user['mat_khau'] ?>" autocomplete="organization">
                                                 </p>
                                             </div>
                                         </div>

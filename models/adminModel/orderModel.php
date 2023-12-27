@@ -2,25 +2,25 @@
 
     function select_donhang() {
         $sql = "SELECT 
-                    u.id as user_id,
-                    o.id as orderid,
+                    u.id as ma_nguoi_dung ,
+                    o.id as ma_don,
                     CONCAT(u.name) AS fullName,
-                    o.ma_donhang,
-                    o.name,
-                    o.phone,
-                    o.addr,
-                    o.status,
-                    o.thanhtoan,
+                    o.ma_don_hang,
+                    o.ho_ten,
+                    o.so_dien_thoai,
+                    o.dia_chi,
+                    o.trangthai,
+                    o.payment_method,
                     o.created_at,
-                    SUM(od.price * od.quantity) AS total
+                    SUM(od.gia * od.so_luong) AS total
                 FROM 
-                    `orders` o
+                    `donhang` o
                 JOIN 
-                    users u ON u.id = o.user_id
+                nguoidung u ON u.ma_don = o.ma_nguoi_dung
                 JOIN 
-                    order_detail od ON od.order_id = o.id
+                chitiet_donhang od ON od.ma_don = o.ma_don
                 GROUP BY 
-                    o.id";
+                    o.ma_don";
         return pdo_query($sql);
     }
 

@@ -23,7 +23,7 @@
 
                                 <div class="p-4 p-md-6">
                                     <?php
-                                        if($user['role_as'] == 1) {
+                                        if($user['cap_bac'] == 1) {
                                             ?>
                                                 <div class="form-group mb-4">
                                                     <div class="js-form-message js-focus-state">
@@ -35,7 +35,7 @@
                                     ?>
                                     <div class="form-group mb-4">
                                         <div class="js-form-message js-focus-state">
-                                            <label id="signinEmailLabel" class="form-label" for="signinEmail">Người dùng:<a class="text__hover" href="index.php?act=account" style="color: #000;"> <?= $user['name'] ?></a></label>
+                                            <label id="signinEmailLabel" class="form-label" for="signinEmail">Người dùng:<a class="text__hover" href="index.php?act=account" style="color: #000;"> <?= $user['ho_ten'] ?></a></label>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
@@ -99,12 +99,19 @@
                                 </div>
                             </form>
 
-                            <form action="index.php" method="post">
+                            <form action="index.php" method="post" enctype="multipart/form-data">
                                 <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <header class="border-bottom px-4 px-md-6 py-4">
                                         <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-resume mr-3 font-size-5"></i>Tạo tài khoản</h2>
                                     </header>
                                     <div class="p-4 p-md-6">
+                                        <div class="form-group mb-4">
+                                            <div class="">
+                                                <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Ảnh
+                                                    *</label><br>
+                                                <input type="file" class="" name="hinh" id="signinEmail1" placeholder="Nhập họ và tên..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                            </div>
+                                        </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Họ và tên
@@ -137,6 +144,12 @@
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Mật khẩu *</label>
                                                 <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword1" placeholder="VD: 123@abc,v.v" aria-label aria-describedby="signinPasswordLabel1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="js-form-message js-focus-state">
+                                                <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Giới tính *</label><br>
+                                                Nam <input name="gender" value="Nam" type="radio"> Nữ <input name="gender" value="Nữ" type="radio">
                                             </div>
                                         </div>
                                         <div class="mb-3">

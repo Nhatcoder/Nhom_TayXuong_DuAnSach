@@ -33,7 +33,11 @@
     if(isset($_POST['dangky'])) {
         $password = $_POST['password'];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        insert__account($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$hashed_password);
+
+        $hinh = $_FILES['hinh']['name'];
+        move_uploaded_file($_FILES['hinh']['tmp_name'], "public/upload/" . $hinh);
+
+        insert__account($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$hinh, $_POST['gender'],$hashed_password);
         echo "<script>alert('Chúc mừng bạn đã đăng ký thành công')</script>";
         echo '<script>window.location.href="index.php"</script>';
     }
@@ -49,10 +53,10 @@
             $row = checkPass($email);
 
             if($row) {
-                $hashed_password = $row['password'];
+                $hashed_password = $row['mat_khau'];
                 if(password_verify($password, $hashed_password)) {
-                    $_SESSION['user_id'] = $row['id'];
-                    echo "<script>alert('Xin chào: {$row['name']}')</script>";
+                    $_SESSION['user_id'] = $row['ma_nguoi_dung'];
+                    echo "<script>alert('Xin chào: {$row['ho_ten']}')</script>";
                     echo '<script>window.location.href="index.php"</script>';
                     // header('location: index.php');
                     // exit();

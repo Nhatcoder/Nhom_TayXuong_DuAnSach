@@ -24,4 +24,8 @@
         pdo_execute($sql,$ho_ten,$email,$so_dien_thoai,$dia_chi,$mat_khau, $user_id);
     }
 
+    function sendMail($email,$name,$pass) {
+        
+    }
+
 ?>

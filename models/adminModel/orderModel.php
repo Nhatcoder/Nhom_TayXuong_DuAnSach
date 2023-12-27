@@ -2,44 +2,44 @@
 
     function select_donhang() {
         $sql = "SELECT 
-                    u.id as user_id,
-                    o.id as orderid,
-                    CONCAT(u.name) AS fullName,
-                    o.ma_donhang,
-                    o.name,
-                    o.phone,
-                    o.addr,
-                    o.status,
-                    o.thanhtoan,
-                    o.created_at,
-                    SUM(od.price * od.quantity) AS total
+                    u.ma_nguoi_dung as user_id,
+                    o.ma_don as orderid,
+                    u.ho_ten AS fullName,
+                    u.dia_chi AS addr,
+                    u.so_dien_thoai AS phone,
+                    o.ma_don_hang as ma_donhang,
+                    o.ma_nguoi_dung,
+                    o.trang_thai,
+                    o.payment_method,
+                    o.create_at,
+                    SUM(od.gia * od.so_luong) AS total
                 FROM 
-                    `orders` o
+                    `donhang` o
                 JOIN 
-                    users u ON u.id = o.user_id
+                    `nguoidung` u ON u.ma_nguoi_dung = o.ma_nguoi_dung
                 JOIN 
-                    order_detail od ON od.order_id = o.id
+                    `chitiet_donhang` od ON od.ma_don = o.ma_don
                 GROUP BY 
-                    o.id";
+                    o.ma_don";
         return pdo_query($sql);
     }
 
     function listOrder_detail($order_id){
         $sql="SELECT 
-                od.id,
-                od.product_id,
-                p.id_product,
-                p.name,
-                p.images,
-                od.price,
-                od.quantity,
-                od.price * od.quantity AS total
+                od.ma_chi_tiet as id,
+                od.ma_sach,
+                p.ma_sach,
+                p.ten_sach as name,
+                p.hinh as images,
+                od.gia as price,
+                od.so_luong as quantity,
+                od.gia * od.so_luong AS total
             FROM 
-                order_detail od
+                chitiet_donhang od
             JOIN 
-                products p ON p.id_product = od.product_id
+                sach p ON p.ma_sach = od.ma_sach
             WHERE 
-                od.order_id = ".$order_id;
+                od.ma_chi_tiet = ".$order_id;
 
         return pdo_query($sql);
     }

@@ -20,7 +20,6 @@
                         <th>Email</th>
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
-                        <th>Mật khẩu</th>
                         <th>Phân quyền</th>
                         <th>Thao tác</th>
                     </tr>
@@ -29,19 +28,18 @@
                             extract($account);
                             ?>
                                 <tr>
-                                    <td><input type="checkbox" name="id_user[]" value="<?= $id ?>" class="checkbox"></td>
+                                    <td><input type="checkbox" name="id_user[]" value="<?= $ma_nguoi_dung ?>" class="checkbox"></td>
                                     <td><?= $key + 1 ?></td>
-                                    <td><?= $name ?></td>
+                                    <td><?= $ho_ten ?></td>
                                     <td><?= $email ?></td>
-                                    <td><?= $address ?></td>
+                                    <td><?= $dia_chi ?></td>
                                     <td>
-                                        <?= $phone ?>
+                                        <?= $so_dien_thoai ?>
                                     </td>
-                                    <td><?= $password ?></td>
-                                    <td><?= $role_as == 1 ? "Admin" : "Người dùng" ?></td>
+                                    <td><?= $cap_bac == 1 ? "Admin" : "Người dùng" ?></td>
 
                                     <td>
-                                        <a onclick="return confirm('Bạn có muốn xóa không?')" href="index.php?act=deleteAccount&account_id=<?= $id ?>"><input type="button" value="Xóa"></a>
+                                        <a onclick="return confirm('Bạn có muốn xóa không?')" href="index.php?act=deleteAccount&account_id=<?= $ma_nguoi_dung ?>"><input type="button" value="Xóa"></a>
 
                                     </td>
                                 </tr>

@@ -1,6 +1,6 @@
 <?php
     function insert__comment($userId,$productId,$content) {
-        $sql = "INSERT INTO `comments`(`user_id`, `product_id`, `content`) 
+        $sql = "INSERT INTO `binhluan`(`ma_nguoidung`, `ma_sach`, `noi_dung`) 
                 VALUES 
                 ('$userId','$productId','$content')";
         pdo_execute($sql);
@@ -8,22 +8,22 @@
 
     function loadall__comment__Byid($idproduct) {
         $sql = "SELECT
-                    comments.comment_id,
-                    comments.user_id,
-                    comments.product_id,
-                    comments.content,
-                    comments.create_at,
-                    users.id,
-                    users.name,
-                    users.email
+                    binhluan.ma_binhluan,
+                    binhluan.ma_nguoidung,
+                    binhluan.ma_sach,
+                    binhluan.noi_dung,
+                    binhluan.ngay_binh_luan,
+                    nguoidung.ma_nguoi_dung,
+                    nguoidung.ho_ten,
+                    nguoidung.email
                 FROM
-                    comments
+                    binhluan
                 INNER JOIN
-                    users ON comments.user_id = users.id
+                    nguoidung ON binhluan.ma_nguoidung = nguoidung.ma_nguoi_dung
                 INNER JOIN
-                    products ON comments.product_id = products.id_product
+                    sach ON binhluan.ma_sach = sach.ma_sach
                 WHERE
-                    products.id_product = $idproduct
+                    sach.ma_sach = $idproduct
         ";
         return pdo_query($sql);
     }

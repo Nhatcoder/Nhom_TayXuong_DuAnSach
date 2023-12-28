@@ -437,7 +437,6 @@
                 if (isset($_POST['capnhat'])) {
                     $password = $_POST['password'];
                     $hashpass = password_hash($password, PASSWORD_DEFAULT);
-
                     update__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hashpass, $userID);
                     echo '<script>alert("Cập nhật tài khoản thành công")</script>';
                     echo '<script>window.location.href="' . $_SERVER['HTTP_REFERER'] . '"</script>';
@@ -448,7 +447,36 @@
                 unset($_SESSION['user_id']);
                 header('Location: index.php');
                 break;
-                
+           case 'forgot':
+            include "views/main/tb_forgot_pass.php";
+            break;     
+                case 'quenMatKhau':
+                    if (isset($_POST['btn_forgot_password'])) {
+                        $email = $_POST['email'];
+                        $sendMail = sendMail($email);
+                        if (empty($email)) {
+                            $err_Mail = 'Vui lòng nhập email';
+                        } else {
+        
+                            if ($sendMail) {
+                                $successMail = 'Mật khẩu của bạn là' . $sendMail['mat_khau'];
+                            } else {
+                                $err_Mail = 'Email của bạn không tồn tại';
+                            }
+                        }
+                    }
+                    if (isset($_POST['btn_forgot_password'])) {
+                        $email = $_POST['email'];
+                        $sendMail = sendMail($email);
+                        if ($sendMail) {
+                            checkemailPass($email, $sendMail['username'], $sendMail['mat_khau']);
+                            $successMail = 'Gửi email thành công bạn vui lòng kiểm tra lại email của mình';
+                            header("location: index.php?act=forgot");
+                        } else {
+                            $err_Email = "Email của bạn không tồn tại trên hệ thống";
+                        }
+                    }
+                    break;
             case 'order':
                 $listorder_detail = list_orderDetail($userID);
                 include("views/main/order.php");

@@ -56,7 +56,7 @@
                         <?php
                         } else {
                         ?>
-                            <form action="index.php" method="post">
+                            <form action="index.php" method="post" onsubmit="return login()">
                                 <div id="login" data-target-group="idForm">
 
                                     <header class="border-bottom px-4 px-md-6 py-4">
@@ -67,13 +67,15 @@
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel" class="form-label" for="signinEmail">Email / Số điện thoại *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" placeholder="creativelayers088@gmail.com">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" placeholder="creativelayers088@gmail.com" id="email">
+                                                <span id="err_email" style="color: red;"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinPasswordLabel" class="form-label" for="signinPassword">Mật khẩu *</label>
-                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" aria-describedby="signinPasswordLabel">
+                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" aria-describedby="signinPasswordLabel" id="password">
+                                                <span id="err_password" style="color: red;"></span>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between mb-5 align-items-center">
@@ -479,6 +481,52 @@
         count++;
     } else {
         err_phone.textContent = '';
+
+    }
+    if (count > 0) {
+
+        return false;
+    } else {
+        return true;
+    }
+
+
+
+
+
+}
+</script>
+<script>
+        function login(){
+    var email = document.getElementById('email');
+    var err_email = document.getElementById('err_email');
+    var password = document.getElementById('password');
+    var err_password = document.getElementById('err_password');
+
+    var count = 0;
+    var emailRegex = /^[^\s@]+@gmail\.com$/;
+    if (email.value == '') {
+        err_email.textContent = 'Vui lòng nhập email';
+        err_email.style.color = 'red';
+        count++;
+    } else if (!emailRegex.test(email.value)) {
+        err_email.textContent = 'Email không hợp lệ';
+        err_email.style.color = 'red';
+        count++;
+    } else {
+        err_email.textContent = '';
+    }
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (password.value == '') {
+        err_password.textContent = 'Vui lòng nhập mật khẩu';
+        err_password.style.color = 'red';
+        count++;
+    } else if (!passwordRegex.test(password.value)) {
+        err_password.textContent = 'Mật khẩu ít nhất 8 kí tự, 1 kí tự viết hoa viết thường và số';
+        err_password.style.color = 'red';
+        count++;
+    } else {
+        err_password.textContent = '';
 
     }
     if (count > 0) {

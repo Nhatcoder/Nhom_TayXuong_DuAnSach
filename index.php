@@ -13,18 +13,18 @@ include("models/userModel/categoryModel.php");
 include("models/userModel/thanhtoanModel.php");
 include("models/userModel/commentModel.php");
 
-
 // Tài khoản session
 $userID = $_SESSION['user_id'] ?? 0;
 $user = select__userByid($userID);
 
 $listDanhmuc = list__danhmuc();
 
-// Giỏ hàng
-if (!isset($_SESSION['mycart'])) {
-    $_SESSION['mycart'] = [];
-}
 
+// session_destroy();
+
+// echo "<pre>";
+// print_r($_SESSION['mycart']);
+// die();
 
 include("views/header/header.php");
 
@@ -33,11 +33,7 @@ include("views/header/header.php");
 if (isset($_POST['dangky'])) {
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $hinh = $_FILES['hinh']['name'];
-    move_uploaded_file($_FILES['hinh']['tmp_name'], "public/upload/" . $hinh);
-
-    insert__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hinh, $_POST['gender'], $hashed_password);
+    insert__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hashed_password);
     echo "<script>alert('Chúc mừng bạn đã đăng ký thành công')</script>";
     echo '<script>window.location.href="index.php"</script>';
 }
@@ -53,10 +49,10 @@ if (isset($_POST['dangnhap'])) {
         $row = checkPass($email);
 
         if ($row) {
-            $hashed_password = $row['mat_khau'];
+            $hashed_password = $row['password'];
             if (password_verify($password, $hashed_password)) {
-                $_SESSION['user_id'] = $row['ma_nguoi_dung'];
-                echo "<script>alert('Xin chào: {$row['ho_ten']}')</script>";
+                $_SESSION['user_id'] = $row['id'];
+                echo "<script>alert('Xin chào: {$row['name']}')</script>";
                 echo '<script>window.location.href="index.php"</script>';
                 // header('location: index.php');
                 // exit();
@@ -75,40 +71,37 @@ if (isset($_POST['dangnhap'])) {
 // Thêm vào giỏ hàng
 if (isset($_POST['addCart'])) {
     $thanhtien = 0;
-    if ($user) {
 
-        $id = $_POST['id_sanpham'];
-        $name = $_POST['name'];
-        $img = $_POST['images'];
-        $price = $_POST['gia'];
-        $soluong = $_POST['quantity'];
-        $thanhtien = $price * $soluong;
+    $ma_sach = $_POST['ma_sach'];
+    $ten_sach = $_POST['ten_sach'];
+    $hinh = $_POST['hinh'];
+    $gia = $_POST['gia'];
+    $so_luong = $_POST['so_luong'];
+    $thanhtien = $gia * $so_luong;
 
-        $index = count($_SESSION['mycart']);
+    $index = count($_SESSION['mycart']);
 
-        if ($_SESSION['mycart']) {
-            foreach ($_SESSION['mycart'] as $key => $value) {
-                if ($value['id_sanpham'] == $id) {
-                    $_SESSION['mycart'][$key]['quantity'] += $soluong;
-                    break;
-                } else {
-                    $_SESSION['mycart'][$index] = $_POST;
-                    $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
-                    break;
-                }
+    $found = false;
+
+    if ($_SESSION['mycart']) {
+        foreach ($_SESSION['mycart'] as $key => $value) {
+            if ($value['ma_sach'] == $ma_sach) {
+                $_SESSION['mycart'][$key]['so_luong'] += $so_luong;
+                $_SESSION['mycart'][$key]['thanhtien'] = $gia * $_SESSION['mycart'][$key]['so_luong'];
+                $found = true;
+                echo '<script>alert("Thêm vào giỏ hàng thành công.")</script>';
+                break;
             }
-        } else {
-            $_SESSION['mycart'][$index] = $_POST;
-            $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
         }
+    }
 
-        echo '<script>alert("Thêm vào giỏ hàng thành công")</script>';
-        echo '<script>window.location.href="' . $_SERVER['HTTP_REFERER'] . '"</script>';
-    } else {
-        echo '<script>alert("Vui lòng đăng nhập!")</script>';
-        echo '<script>window.location.href="index.php"</script>';
+    if (!$found) {
+        $_SESSION['mycart'][$index] = $_POST;
+        $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
+        echo '<script>alert("Thêm vào giỏ hàng thành công.")</script>';
     }
 }
+
 
 
 // Sản phẩm
@@ -119,8 +112,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
     switch ($act) {
         case "search":
             if (isset($_POST['timkiem'])) {
-                $keyword = $_POST['keyword'];
-                $listpro_search = search_product($keyword);
+                $listpro_search = search_product($_POST['keyword']);
             }
             include("views/main/viewsearch.php");
             break;
@@ -133,15 +125,14 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             } else {
                 $id_danhmuc = "";
             }
-    
             $listproduct_dm = load_sanpham_bydanhmuc($id_danhmuc);
             include("views/main/danhmuc.php");
             break;
         case 'chi-tiet-san-pham':
-            if(isset($_GET['giay']) && ($_GET['giay']) > 0) {
+            if (isset($_GET['giay']) && ($_GET['giay']) > 0) {
                 $giayId = $_GET['giay'];
                 $sp_chitiet = product_chitiet($giayId);
-                $sanpham_lienquan = sanpham_lienquan($sp_chitiet['ma_danh_muc'],$giayId);
+                $sanpham_lienquan = sanpham_lienquan($sp_chitiet['ma_danh_muc'], $giayId);
                 $load_comment = loadall__comment__Byid($giayId);
             } else {
                 $giayId = "";
@@ -155,8 +146,12 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
             include("views/main/chitietsp.php");
             break;
-        case 'themgiohang':
 
+            // if (isset($_POST['addToCart'])) {
+
+
+
+        case 'themgiohang':
             if (isset($_POST['addToCart'])) {
 
                 if ($user) {
@@ -212,13 +207,32 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             }
 
             break;
-        case 'giohang':
-            if (!isset($_SESSION['user_id'])) {
-                echo '<script>alert("Bạn cần đăng nhập để vào giỏ hàng")</script>';
-                echo '<script>window.location.href="index.php"</script>';
+
+        case 'capnhatgiohang':
+            // // Cập nhật giỏ hàng
+            if (isset($_POST['update_cart'])) {
+                $ma_sach_arr = $_POST['ma_sach'];
+                $so_luong_arr = $_POST['so_luong'];
+
+                foreach ($_SESSION['mycart'] as $key => $value) {
+                    $ma_sach = $ma_sach_arr[$key];
+                    $so_luong_moi = $so_luong_arr[$key];
+
+                    if ($value['ma_sach'] == $ma_sach) {
+                        $gia = $value['gia'];
+
+                        $_SESSION['mycart'][$key]['so_luong'] = $so_luong_moi;
+                        $_SESSION['mycart'][$key]['thanhtien'] = $gia * $so_luong_moi;
+                    }
+                }
             }
 
 
+            include("views/main/giohang.php");
+
+            break;
+
+        case 'giohang':
             include("views/main/giohang.php");
             break;
 
@@ -416,53 +430,23 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                 unset($_SESSION['ma_don_hang']);
                 include("views/main/camon.php");
             }
+
             break;
         case 'account':
             if (isset($_POST['capnhat'])) {
                 $password = $_POST['password'];
                 $hashpass = password_hash($password, PASSWORD_DEFAULT);
+
                 update__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hashpass, $userID);
                 echo '<script>alert("Cập nhật tài khoản thành công")</script>';
                 echo '<script>window.location.href="' . $_SERVER['HTTP_REFERER'] . '"</script>';
             }
-
             include("views/main/account.php");
             break;
         case 'dangxuat':
             unset($_SESSION['user_id']);
             unset($_SESSION['mycart']);
             header('Location: index.php');
-            break;
-         case 'tb_forgot_pass':
-            include "views/main/tb_forgot_pass.php";
-            break;   
-        case 'quenMatKhau':
-            if (isset($_POST['btn_forgot_password'])) {
-                $email = $_POST['email'];
-                $sendMail = sendMail($email);
-                if (empty($email)) {
-                    $err_Mail = 'Vui lòng nhập email';
-                } else {
-
-                    if ($sendMail) {
-                        $successMail = 'Mật khẩu của bạn là' . $sendMail['mat_khau'];
-                    } else {
-                        $err_Mail = 'Email của bạn không tồn tại';
-                    }
-                }
-            }
-            if (isset($_POST['btn_forgot_password'])) {
-                $email = $_POST['email'];
-                $sendMail = sendMail($email);
-                if ($sendMail) {
-                    checkemailPass($email, $sendMail['ho_ten'], $sendMail['mat_khau']);
-                    $successMail = 'Gửi email thành công bạn vui lòng kiểm tra lại email của mình';
-                } else {
-                    $err_Email = "Email của bạn không tồn tại trên hệ thống";
-                }
-            }
-            header("location: index.php?act=tb_forgot_pass");
-
             break;
         case 'order':
             $listorder_detail = list_orderDetail($userID);

@@ -19,14 +19,9 @@ $user = select__userByid($userID);
 
 $listDanhmuc = list__danhmuc();
 
-
-// session_destroy();
-
-// echo "<pre>";
-// print_r($_SESSION['mycart']);
-// die();
-
 include("views/header/header.php");
+
+
 
 
 // Đăng ký
@@ -150,10 +145,6 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
             include("views/main/chitietsp.php");
             break;
-
-            // if (isset($_POST['addToCart'])) {
-
-
 
         case 'themgiohang':
             if (isset($_POST['addToCart'])) {
@@ -449,7 +440,6 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             break;
         case 'dangxuat':
             unset($_SESSION['user_id']);
-            unset($_SESSION['mycart']);
             header('Location: index.php');
             break;
             

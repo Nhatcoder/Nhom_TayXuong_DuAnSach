@@ -43,6 +43,29 @@ function delete_product($id_product)
     $sql = "DELETE FROM sach WHERE ma_sach=?";
     pdo_execute($sql, $id_product);
 }
+function thong_ke_hang_hoa(){
+    $sql = "SELECT danhmuc.ma_danhmuc AS madm, danhmuc.ten_danhmuc AS tendm, COUNT(sach.ma_sach) AS countSp, MIN(sach.gia) AS minPrice, MAX(sach.gia) AS maxPrice, AVG(sach.gia) AS avgPrice
+    FROM danhmuc
+    LEFT JOIN sach ON danhmuc.ma_danhmuc = sach.ma_danh_muc
+    GROUP BY danhmuc.ma_danhmuc
+    ORDER BY danhmuc.ma_danhmuc";
+   return pdo_query($sql);
+}
 
+function tk_sp_bc(){
+    $sql="SELECT
+    sp.ten_sach AS TenSanPham,
+    SUM(c.so_luong) AS TongSoLuong
+FROM
+    chitiet_donhang c
+JOIN
+    sach sp ON c.ma_sach = sp.ma_sach
+GROUP BY
+    c.ma_sach, sp.ten_sach
+ORDER BY
+    TongSoLuong DESC
+LIMIT 3";
+return pdo_query($sql);
+}
 
 ?>

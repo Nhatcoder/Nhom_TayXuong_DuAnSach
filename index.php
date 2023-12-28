@@ -453,6 +453,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             unset($_SESSION['mycart']);
             header('Location: index.php');
             break;
+            
         case 'order':
             $listorder_detail = list_orderDetail($userID);
             include("views/main/order.php");

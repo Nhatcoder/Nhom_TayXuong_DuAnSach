@@ -111,7 +111,6 @@
 
     // Sản phẩm
     $listProduct = load_all_product();
-
     if (isset($_GET["act"]) && $_GET["act"]) {
         $act = $_GET["act"];
         switch ($act) {
@@ -121,7 +120,10 @@
                 }
                 include("views/main/viewsearch.php");
                 break;
+
             case "sanpham";
+
+
                 include("views/main/sanpham.php");
                 break;
             case "danhmuc";

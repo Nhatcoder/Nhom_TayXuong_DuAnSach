@@ -43,7 +43,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="product__hover d-flex align-items-center">
-                                                            <span class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="" data-original-title="ADD TO CART">
+                                                            <span class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip" data-placement="right" title="" data-original-title="Thêm giỏ hàng">
                                                                 <button name="addCart" class="product__add-to-cart"><i class="flaticon-icon-126515"></i></button>
                                                                 <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
                                                             </span>

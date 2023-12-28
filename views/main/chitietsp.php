@@ -2,9 +2,9 @@
     <main id="main" class="site-main ">
         <div class="product">
             <form action="index.php?act=themgiohang" method="post">
-                <input type="hidden" name="id_sanpham" value="<?= $sp_chitiet['ma_sach'] ?>">
-                <input type="hidden" name="name" value="<?= $sp_chitiet['ten_sach'] ?>">
-                <input type="hidden" name="images" value="<?= $sp_chitiet['hinh'] ?>">
+                <input type="hidden" name="ma_sach" value="<?= $sp_chitiet['ma_sach'] ?>">
+                <input type="hidden" name="ten_sach" value="<?= $sp_chitiet['ten_sach'] ?>">
+                <input type="hidden" name="hinh" value="<?= $sp_chitiet['hinh'] ?>">
                 <input type="hidden" name="gia" value="<?= $sp_chitiet['gia'] ?>">
                 <div class="container">
                     <div class="row">
@@ -68,7 +68,7 @@
                                                         <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M-0.000,-0.000 L10.000,-0.000 L10.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"></path>
                                                     </svg>
                                                 </a>
-                                                <input type="number" class="input-text qty text js-result form-control text-center border-0" step="1" min="1" max="100" name="quantity" value="1" title="Qty">
+                                                <input type="number" class="input-text qty text js-result form-control text-center border-0" step="1" min="1" max="100" name="so_luong" value="1" title="Qty">
                                                 <a class="js-plus text-dark" href="javascript:;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="10px">
                                                         <path fill-rule="evenodd" fill="rgb(22, 22, 25)" d="M10.000,5.000 L6.000,5.000 L6.000,10.000 L5.000,10.000 L5.000,5.000 L-0.000,5.000 L-0.000,4.000 L5.000,4.000 L5.000,-0.000 L6.000,-0.000 L6.000,4.000 L10.000,4.000 L10.000,5.000 Z"></path>

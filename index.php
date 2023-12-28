@@ -146,7 +146,7 @@
 
                 if (isset($_POST['binhluan'])) {
                     insert__comment($userID, $giayId, $_POST['noidung']);
-                    header('Location: index.php?act=chi-tiet-san-pham&giay=' . $_GET['giay']);
+                    header('Location: index.php?act=chi-tiet-san-pham&sach=' . $_GET['sach']);
                 }
 
                 include("views/main/chitietsp.php");
@@ -155,56 +155,52 @@
             case 'themgiohang':
                 if (isset($_POST['addToCart'])) {
 
-                    if ($user) {
-                        $id = $_POST['id_sanpham'];
-                        $name = $_POST['name'];
-                        $img = $_POST['images'];
-                        $price = $_POST['gia'];
-                        $soluong = $_POST['quantity'];
-                        $thanhtien = $price * $soluong;
-
-                        // $itemExists = false;
-
-                        $index = count($_SESSION['mycart']);
-
-                        if ($_SESSION['mycart']) {
-                            foreach ($_SESSION['mycart'] as $key => $value) {
-                                if ($value['id_sanpham'] == $id) {
-                                    $_SESSION['mycart'][$key]['quantity'] += $soluong;
-                                    break;
-                                } else {
-                                    $_SESSION['mycart'][$index] = $_POST;
-                                    $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
-                                    break;
-                                }
+                    $thanhtien = 0;
+            
+                    $ma_sach = $_POST['ma_sach'];
+                    $ten_sach = $_POST['ten_sach'];
+                    $hinh = $_POST['hinh'];
+                    $gia = $_POST['gia'];
+                    $so_luong = $_POST['so_luong'];
+                    $thanhtien = $gia * $so_luong;
+            
+                    $index = count($_SESSION['mycart']);
+            
+                    $found = false;
+            
+                    if ($_SESSION['mycart']) {
+                        foreach ($_SESSION['mycart'] as $key => $value) {
+                            if ($value['ma_sach'] == $ma_sach) {
+                                $_SESSION['mycart'][$key]['so_luong'] += $so_luong;
+                                $_SESSION['mycart'][$key]['thanhtien'] = $gia * $_SESSION['mycart'][$key]['so_luong'];
+                                $found = true;
+                                break;
                             }
-                        } else {
-                            $_SESSION['mycart'][$index] = $_POST;
-                            $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
                         }
-
-
-                        // foreach ($_SESSION['mycart'] as &$cartItem) {
-                        //     if ($cartItem[0] == $id) {
-                        //         // Cập nhật số lượng và tổng giá của sản phẩm đã tồn tại
-                        //         $cartItem[4] += $soluong;
-                        //         $itemExists = true;
-                        //         break;
-                        //     }
-                        // }
-
-                        // if (!$itemExists) {
-                        //     // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm nó vào giỏ
-                        //     $sanphamadd = [$id, $name, $img, $price, $soluong, $thanhtien];
-                        //     $_SESSION['mycart'][] = $sanphamadd;
-                        // }
-
-                        echo '<script>alert("Thêm vào giỏ hàng thành công")</script>';
-                        echo '<script>window.location.href="index.php?act=chi-tiet-san-pham&giay=' . $_POST['id_sanpham'] . '"</script>';
-                    } else {
-                        echo '<script>alert("Vui lòng đăng nhập!")</script>';
-                        echo '<script>window.location.href="index.php"</script>';
                     }
+            
+                    if (!$found) {
+                        $_SESSION['mycart'][$index] = $_POST;
+                        $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
+                    }
+
+                    // foreach ($_SESSION['mycart'] as &$cartItem) {
+                    //     if ($cartItem[0] == $id) {
+                    //         // Cập nhật số lượng và tổng giá của sản phẩm đã tồn tại
+                    //         $cartItem[4] += $soluong;
+                    //         $itemExists = true;
+                    //         break;
+                    //     }
+                    // }
+
+                    // if (!$itemExists) {
+                    //     // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm nó vào giỏ
+                    //     $sanphamadd = [$id, $name, $img, $price, $soluong, $thanhtien];
+                    //     $_SESSION['mycart'][] = $sanphamadd;
+                    // }
+
+                    echo '<script>alert("Thêm vào giỏ hàng thành công")</script>';
+                    echo '<script>window.location.href="index.php?act=chi-tiet-san-pham&sach=' . $_POST['ma_sach'] . '"</script>';
                 }
 
                 break;
@@ -345,12 +341,15 @@
                     } else {
                         $_SESSION['ma_don_hang'] = generateRandomOrderCode();
                         $i = 0;
-                        $tongtien = 0;
+                        $thanhtien = 0;
                         foreach ($_SESSION['mycart'] as $cartItem) {
-                            $tongtien = $cartItem['gia'] * $cartItem['quantity'];
+                            $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
                             $thanhtien = $tongtien + $thanhtien;
                         }
 
+                        $_SESSION['thanhtien'] = $thanhtien;
+
+                        print_r($_SESSION['thanhtien']);
                         header('Location: index.php?act=camon');
                     }
                 }
@@ -379,16 +378,25 @@
                             $ma_donhang = $_SESSION["ma_don_hang"];
 
                             $loai_thanhtoan = "VNPAY";
-                            $thanhtoan = 1;
-
-                            $id_bill = insert_bill($userID, $ma_donhang, $_SESSION['thongtin']['billing_first_name'], $_SESSION['thongtin']['billing_phone'], $_SESSION['thongtin']['billing_address'], $thanhtoan, $loai_thanhtoan);
-
+                            $tongtien = 0;
+                            foreach ($_SESSION['mycart'] as $cartItem) {
+                                $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
+                                $thanhtien = $tongtien + $thanhtien;
+                            }
+        
+                            $_SESSION['thanhtien'] = $thanhtien;
+                            
+                            $id_bill = insert_bill($ma_donhang, $_SESSION['thongtin']['billing_first_name'], $_SESSION['thongtin']['billing_phone'], $_SESSION['thongtin']['billing_address'], $_SESSION['thanhtien'], $_SESSION['thongtin']['ghichu'], $loai_thanhtoan);
+        
+        
                             $i = 0;
                             $tongtien = 0;
-
+        
                             foreach ($_SESSION['mycart'] as $cartItem) {
-                                $tongtien = $cartItem['gia'] * $cartItem['quantity'];
-                                insert_bill_detail($id_bill, $cartItem['id_sanpham'], $cartItem['quantity'], $tongtien);
+        
+                                $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
+                                
+                                insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['so_luong'], $cartItem['gia'],$tongtien);
                                 $i++;
                             }
                         }
@@ -402,9 +410,9 @@
                         $vnp_TransactionNo = $_GET["vnp_TransactionNo"];
 
 
-                        unset($_SESSION["cart"]);
-                        unset($_SESSION["mycart"]);
-                        unset($_SESSION["madonhang"]);
+                        unset($_SESSION['mycart']);
+                        unset($_SESSION['ma_don_hang']);
+                        unset($_SESSION['thanhtien']);
                         include("./views/main/camon.php");
                     } else {
                         echo "<script>alert('Đã hủy thanh toán');</script>";
@@ -414,21 +422,31 @@
                     $loai_thanhtoan = "tienmat";
 
                     $ma_donhang = $_SESSION["ma_don_hang"];
-                    $thanhtoan = 0;
-                    $id_bill = insert_bill($userID, $ma_donhang, $_SESSION['thongtin']['billing_first_name'], $_SESSION['thongtin']['billing_phone'], $_SESSION['thongtin']['billing_address'], $thanhtoan, $loai_thanhtoan);
+                    $thanhtien = 0;
+                    foreach ($_SESSION['mycart'] as $cartItem) {
+                        $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
+                        $thanhtien = $tongtien + $thanhtien;
+                    }
+
+                    $_SESSION['thanhtien'] = $thanhtien;
+                    
+                    $id_bill = insert_bill($ma_donhang, $_SESSION['thongtin']['billing_first_name'], $_SESSION['thongtin']['billing_phone'], $_SESSION['thongtin']['billing_address'], $_SESSION['thanhtien'], $_SESSION['thongtin']['ghichu'], $loai_thanhtoan);
+
 
                     $i = 0;
                     $tongtien = 0;
 
                     foreach ($_SESSION['mycart'] as $cartItem) {
 
-                        $tongtien = $cartItem['gia'] * $cartItem['quantity'];
-                        insert_bill_detail($id_bill, $cartItem['id_sanpham'], $cartItem['quantity'], $tongtien);
+                        $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
+                        
+                        insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['so_luong'], $cartItem['gia'],$tongtien);
                         $i++;
                     }
 
                     unset($_SESSION['mycart']);
                     unset($_SESSION['ma_don_hang']);
+                    unset($_SESSION['thanhtien']);
                     include("views/main/camon.php");
                 }
 

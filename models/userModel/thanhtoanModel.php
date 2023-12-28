@@ -1,15 +1,15 @@
 <?php
-    function insert_bill($user_id,$ma_donhang,$name,$phone,$addr,$thanhtoan,$payment_method) {
-        $sql = "INSERT INTO `orders`(`user_id`, `ma_donhang`, `name`, `phone`, `addr`,`thanhtoan`,`payment_method`) 
+    function insert_bill($ma_donhang,$ten_nguoi_dung,$so_dien_thoai,$dia_chi,$tong_gia,$ghi_chu,$payment_method) {
+        $sql = "INSERT INTO `donhang`(`ma_don_hang`, `ten_nguoi_dung`, `so_dien_thoai`, `dia_chi`,`tong_gia`, `ghi_chu`,`payment_method`) 
                 VALUES 
                 (?,?,?,?,?,?,?)";
-        return pdo_execute_returnLastInsertId($sql,$user_id,$ma_donhang,$name,$phone,$addr,$thanhtoan,$payment_method);
+        return pdo_execute_returnLastInsertId($sql,$ma_donhang,$ten_nguoi_dung,$so_dien_thoai,$dia_chi,$tong_gia,$ghi_chu,$payment_method);
     }
 
-    function insert_bill_detail($order_id,$product_id,$quantity,$price) {
-        $sql = "INSERT INTO `order_detail`(`order_id`, `product_id`, `quantity`, `price`) 
+    function insert_bill_detail($order_id,$product_id,$quantity,$price,$thanhtien) {
+        $sql = "INSERT INTO `chitiet_donhang`(`ma_don`, `ma_sach`, `so_luong`, `gia`,`thanh_tien`) 
                 VALUES 
-                (?,?,?,?)";
-        pdo_execute($sql,$order_id,$product_id,$quantity,$price);
+                (?,?,?,?,?)";
+        pdo_execute($sql,$order_id,$product_id,$quantity,$price,$thanhtien);
     }
 ?>

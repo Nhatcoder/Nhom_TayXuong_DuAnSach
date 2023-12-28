@@ -415,6 +415,7 @@
     </div>
 </footer>
 <script>
+    
     function send_user(){
         var username = document.getElementById('username');
         var err_username = document.getElementById('err_username');
@@ -498,7 +499,9 @@
 
     }
 </script>
+
 <script>
+    
     function login(){
         var email = document.getElementById('email');
         var err_email = document.getElementById('err_email');

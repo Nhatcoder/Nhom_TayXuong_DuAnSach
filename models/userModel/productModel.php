@@ -30,7 +30,7 @@
                 FROM
                     sach 
                 WHERE
-                    sach.ma_sach = ?
+                    ma_sach = ?
         ";
         return pdo_query_one($sql, $id);
     }

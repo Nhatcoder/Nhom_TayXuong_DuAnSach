@@ -19,14 +19,8 @@ $user = select__userByid($userID);
 
 $listDanhmuc = list__danhmuc();
 
-// Giỏ hàng
-if (!isset($_SESSION['mycart'])) {
-    $_SESSION['mycart'] = [];
-}
-
 
 // session_destroy();
-
 
 // echo "<pre>";
 // print_r($_SESSION['mycart']);
@@ -95,6 +89,7 @@ if (isset($_POST['addCart'])) {
                 $_SESSION['mycart'][$key]['so_luong'] += $so_luong;
                 $_SESSION['mycart'][$key]['thanhtien'] = $gia * $_SESSION['mycart'][$key]['so_luong'];
                 $found = true;
+                echo '<script>alert("Thêm vào giỏ hàng thành công.")</script>';
                 break;
             }
         }
@@ -103,6 +98,7 @@ if (isset($_POST['addCart'])) {
     if (!$found) {
         $_SESSION['mycart'][$index] = $_POST;
         $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
+        echo '<script>alert("Thêm vào giỏ hàng thành công.")</script>';
     }
 }
 
@@ -151,6 +147,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             include("views/main/chitietsp.php");
             break;
 
+            // if (isset($_POST['addToCart'])) {
 
 
 

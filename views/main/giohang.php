@@ -34,7 +34,7 @@
                                                     <th class="product-price">Giá</th>
                                                     <th class="product-quantity">Số lượng</th>
                                                     <th class="product-subtotal">Tổng giá</th>
-                                                    <th class="product-remove">Xóa</th>g
+                                                    <th class="product-remove">Xóa</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -23,19 +23,19 @@
 
                                 <div class="p-4 p-md-6">
                                     <?php
-                                        if($user['role_as'] == 1) {
-                                            ?>
-                                                <div class="form-group mb-4">
-                                                    <div class="js-form-message js-focus-state">
-                                                        <label id="signinEmailLabel" class="form-label" for="signinEmail"><a class="text__hover" href="admin/index.php" style="color: #000;">Vào trang quản trị</a></label>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                        }
+                                    if ($user['cap_bac'] == 1) {
+                                    ?>
+                                        <div class="form-group mb-4">
+                                            <div class="js-form-message js-focus-state">
+                                                <label id="signinEmailLabel" class="form-label" for="signinEmail"><a class="text__hover" href="admin/index.php" style="color: #000;">Vào trang quản trị</a></label>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
                                     ?>
                                     <div class="form-group mb-4">
                                         <div class="js-form-message js-focus-state">
-                                            <label id="signinEmailLabel" class="form-label" for="signinEmail">Người dùng:<a class="text__hover" href="index.php?act=account" style="color: #000;"> <?= $user['name'] ?></a></label>
+                                            <label id="signinEmailLabel" class="form-label" for="signinEmail">Người dùng:<a class="text__hover" href="index.php?act=account" style="color: #000;"> <?= $user['ho_ten'] ?></a></label>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
@@ -87,7 +87,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium" href="javascript:;" data-target="#forgotPassword" data-link-group="idForm" data-animation-in="fadeIn">Quên mật khẩu?</a>
+                                            <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium" href="index.php?act=quenMatKhau" data-target="#forgotPassword" data-link-group="idForm" data-animation-in="fadeIn">Quên mật khẩu?</a>
                                         </div>
                                         <div class="mb-4d75">
                                             <button type="submit" name="dangnhap" class="btn btn-block py-3 rounded-0 btn-dark">Đăng nhập</button>
@@ -99,44 +99,62 @@
                                 </div>
                             </form>
 
-                            <form action="index.php" method="post">
+                            <form action="index.php" onsubmit="return send_user()" method="post" enctype="multipart/form-data">
                                 <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <header class="border-bottom px-4 px-md-6 py-4">
                                         <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-resume mr-3 font-size-5"></i>Tạo tài khoản</h2>
                                     </header>
                                     <div class="p-4 p-md-6">
                                         <div class="form-group mb-4">
+                                            <div class="">
+                                                <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Ảnh
+                                                    *</label><br>
+                                                <input type="file" class="" name="hinh" id="signinEmail1"  aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Họ và tên
                                                     *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="name" id="signinEmail1" placeholder="Nhập họ và tên..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="name" id="username" placeholder="Nhập họ và tên..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <span style="color: red;" id="err_username"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email
                                                     *</label>
-                                                <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail1" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" id="email" placeholder="creativelayers088@gmail.com" >
+                                                <span style="color: red;" id="err_email"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Số điện thoại
                                                     *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="phone" id="signinEmail1" placeholder="Nhập số điện thoại..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="phone" id="phone" placeholder="Nhập số điện thoại..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <span style="color: red;" id="err_phone"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Địa chỉ
                                                     *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="address" id="signinEmail1" placeholder="Nhập địa chỉ..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="address" id="address" placeholder="Nhập địa chỉ..." aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1">
+                                                <span style="color: red;" id="err_address"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Mật khẩu *</label>
-                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword1" placeholder="VD: 123@abc,v.v" aria-label aria-describedby="signinPasswordLabel1">
+                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="password" placeholder="VD: 123@abc,v.v" aria-label aria-describedby="signinPasswordLabel1">
+                                                <span style="color: red;" id="err_password"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <div class="js-form-message js-focus-state">
+                                                <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Giới tính *</label><br>
+                                                 <input name="gender" value="Nam" type="radio" checked> Nam <input name="gender" value="Nữ" type="radio"> Nữ 
                                             </div>
                                         </div>
                                         <div class="mb-3">
@@ -152,7 +170,8 @@
                             </form>
 
 
-                            <form action="index.php" method="post">
+                            <form action="index.php?act=quenMatKhau" method="post">
+                            <input type="hidden" name="id" value="<?= $id ?>">
                                 <div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
 
                                     <header class="border-bottom px-4 px-md-6 py-4">
@@ -167,10 +186,12 @@
                                                     *</label>
                                                 <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail3" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel3" required>
                                             </div>
+                                            <span style="color: green;"><?= isset($successMail) ? $successMail : "" ?></span>
+                                            <span style="color: red;"><?= isset($err_Mail) ? $err_Mail : "" ?></span>
                                         </div>
 
                                         <div class="mb-3">
-                                            <button type="submit" name="quenmk" class="btn btn-block py-3 rounded-0 btn-dark">Phục hồi mật khẩu</button>
+                                            <button type="submit" name="btn_forgot_password" class="btn btn-block py-3 rounded-0 btn-dark">Phục hồi mật khẩu</button>
                                         </div>
                                         <div class="text-center mb-4">
                                             <span class="small text-muted">Bạn có nhớ mật khẩu của mình không?</span>
@@ -391,7 +412,83 @@
         </div>
     </div>
 </footer>
+<script>
+    function send_user(){
+    var username = document.getElementById('username');
+    var err_username = document.getElementById('err_username');
 
+    var email = document.getElementById('email');
+    var err_email = document.getElementById('err_email');
+
+    var password = document.getElementById('password');
+    var err_password = document.getElementById('err_password');
+    var phone = document.getElementById('phone');
+    var err_phone = document.getElementById('err_phone');
+    var address = document.getElementById('address');
+    var err_address = document.getElementById('err_address');
+
+    var count = 0;
+    if (username.value == '') {
+        err_username.textContent = 'Vui lòng điền tên đăng nhập';
+        err_username.style.color = 'red';
+        count++;
+    } else {
+        err_username.textContent = '';
+    }
+    var emailRegex = /^[^\s@]+@gmail\.com$/;
+    if (email.value == '') {
+        err_email.textContent = 'Vui lòng nhập email';
+        err_email.style.color = 'red';
+        count++;
+    } else if (!emailRegex.test(email.value)) {
+        err_email.textContent = 'Email không hợp lệ';
+        err_email.style.color = 'red';
+        count++;
+    } else {
+        err_email.textContent = '';
+    }
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (password.value == '') {
+        err_password.textContent = 'Vui lòng nhập mật khẩu';
+        err_password.style.color = 'red';
+        count++;
+    } else if (!passwordRegex.test(password.value)) {
+        err_password.textContent = 'Mật khẩu ít nhất 8 kí tự, 1 kí tự viết hoa viết thường và số';
+        err_password.style.color = 'red';
+        count++;
+    } else {
+        err_password.textContent = '';
+
+    }
+    if (address.value == '') {
+        err_address.textContent = 'Vui lòng điền địa chỉ';
+        err_address.style.color = 'red';
+        count++;
+    } else {
+        err_address.textContent = '';
+    }
+    var phoneRegex=/((09|03|07|08|05)+([0-9]{8})\b)/g;
+;
+    if (phone.value == '') {
+        err_phone.textContent = 'Vui lòng nhập mật khẩu';
+        err_phone.style.color = 'red';
+        count++;
+    } else if (!phoneRegex.test(phone.value)) {
+        err_phone.textContent = 'Vui lòng nhập đúng địng dạng số điện thoại';
+        err_phone.style.color = 'red';
+        count++;
+    } else {
+        err_phone.textContent = '';
+
+    }
+    if (count > 0) {
+
+        return false;
+    } else {
+        return true;
+    }
+}
+</script>
 <script src="./views/assets/vendor/jquery/dist/jquery.min.js"></script>
 <script src="./views/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
 <script src="./views/assets/vendor/popper.js/dist/umd/popper.min.js"></script>

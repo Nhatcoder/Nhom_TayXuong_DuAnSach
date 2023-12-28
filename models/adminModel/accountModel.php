@@ -1,38 +1,38 @@
 <?php
     function list_account() {
-        $sql = "SELECT * FROM users WHERE 1 ORDER BY id DESC";
+        $sql = "SELECT * FROM nguoidung WHERE 1 ORDER BY ma_nguoi_dung DESC";
         return pdo_query($sql);
     }
 
     function loadall__comment__Byid() {
         $sql = "SELECT
-                    comments.comment_id,
-                    comments.user_id,
-                    comments.product_id,
-                    comments.content,
-                    comments.create_at,
-                    users.id,
-                    users.name,
-                    users.email
+                    binhluan.ma_binhluan,
+                    binhluan.ma_nguoidung,
+                    binhluan.ma_sach,
+                    binhluan.noi_dung,
+                    binhluan.ngay_binh_luan,
+                    nguoidung.ma_nguoi_dung,
+                    nguoidung.ho_ten,
+                    nguoidung.email
                 FROM
-                    comments
+                    binhluan
                 INNER JOIN
-                    users ON comments.user_id = users.id
+                    nguoidung ON binhluan.ma_nguoidung = nguoidung.ma_nguoi_dung
                 INNER JOIN
-                    products ON comments.product_id = products.id_product
+                    sach ON binhluan.ma_sach = sach.ma_sach
                 WHERE 1
-                    ORDER BY comments.comment_id DESC
+                    ORDER BY binhluan.ma_binhluan DESC
         ";
         return pdo_query($sql);
     }
 
     function deleteComment($id) {
-        $sql = "DELETE FROM comments WHERE comment_id = ?";
+        $sql = "DELETE FROM binhluan WHERE ma_binhluan = ?";
         pdo_execute($sql,$id);
     }
 
     function deleteAccount($id) {
-        $sql = "DELETE FROM users WHERE id = ?";
+        $sql = "DELETE FROM nguoidung WHERE ma_nguoi_dung = ?";
         pdo_execute($sql,$id);
     }
 ?>

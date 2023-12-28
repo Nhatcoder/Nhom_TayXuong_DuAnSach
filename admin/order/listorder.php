@@ -33,25 +33,26 @@
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $order['ma_donhang'] ?></td>
                                     <td><?= $order['fullName'] ?></td>
-                                    <td><?= $order['name']."<br> ĐC: ".$order['addr']."<br> SĐT: ".$order['phone']."" ?></td>
-                                    <td><?= number_format($order['total'],0,',','.') ?></td>
-                                    <td><?= date('d-m-Y H:i:s',strtotime($order['created_at'])) ?></td>
+                                    <td><?= $order['fullName']."<br> ĐC: ".$order['addr']."<br> SĐT: ".$order['phone']."" ?></td>
+                                    <td><?= number_format($order['total'],0,',','.') ?> VNĐ</td>
+                                    <td><?= date('d-m-Y H:i:s',strtotime($order['create_at'])) ?></td>
                                     <td>
                                         <select onchange="changeStatus(this,<?=$order['orderid']?>)"
                                                 class="form-select-sm selected_status" name="status"
-                                                <?=($order['status'] == 3 || $order['status'] == 4) ? 'disabled' : ''?>
+                                                <?=($order['trang_thai'] == 'completed' || $order['trang_thai'] == 'canceled') ? 'disabled' : ''?>
                                         >
                                             <?php
                                             $status = 
                                                     [
-                                                        0 => 'Đơn hàng mới',
-                                                        1 => 'Chuẩn bị hàng', 
-                                                        2 => 'Đã giao', 
-                                                        3 => 'Hoàn thành',
-                                                        4 => 'Đã hủy'
+                                                        'pending' => 'Chờ xác nhận',
+                                                        'confirmed' => 'Đã xác nhận',
+                                                        'shipping' => 'Đang vận chuyển',
+                                                        'completed' => 'Hoàn thành',
+                                                        // 'requestCanceled' => 'Yêu cầu huỷ',
+                                                        'canceled' => 'Đã huỷ'
                                                     ];
                                             foreach ($status as $key => $value):?>
-                                                <option <?= $key == $order['status'] ? 'selected' : '' ?>
+                                                <option <?= $key == $order['trang_thai'] ? 'selected' : '' ?>
                                                         style="font-size: 14px; padding: 5px" class="status"
                                                         value="<?= $key ?>"><?= $value ?>    
                                                 </option>
@@ -61,7 +62,7 @@
                                     <td>
                                         <span>
                                             <?php
-                                                if($order['thanhtoan'] == 0) {
+                                                if($order['payment_method'] == 'tienmat') {
                                                     echo "Chưa thanh toán";
                                                 } else {
                                                     echo "Đã thanh toán";
@@ -89,7 +90,7 @@
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    if (parseInt(this.responseText) === 3 || parseInt(this.responseText) === 4) {
+                    if (this.responseText === 'completed' || this.responseText === 'canceled') {
                         select.disabled = true;
                     }
                 }

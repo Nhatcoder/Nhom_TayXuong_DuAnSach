@@ -25,13 +25,13 @@
                         foreach($listDanhmuc as $key => $danhmuc) {
                             ?>
                                 <tr>
-                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $danhmuc['id'] ?>" id=""></th>
+                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $danhmuc['ma_danhmuc'] ?>" id=""></th>
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $danhmuc['ten_danhmuc'] ?></td>
                                     <td><?= $danhmuc['trang_thai'] ? "Hiển thị" : "Ẩn" ?></td>
                                     <td>
-                                        <a href="index.php?act=suadanhmuc&id_danhmuc=<?= $danhmuc['id'] ?>" class="btn btn-success">Sửa</a>
-                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoadanhmuc&id_danhmuc=<?= $danhmuc['id'] ?>" class="btn btn-danger">Xóa</a>
+                                        <a href="index.php?act=suadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-success">Sửa</a>
+                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoadanhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             <?php

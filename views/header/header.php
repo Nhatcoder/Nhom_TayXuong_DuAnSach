@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./views/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="./views/assets/vendor/slick-carousel/slick/slick.css">
     <link rel="stylesheet" href="./views/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./views/assets/css/theme.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
@@ -445,6 +446,7 @@ $act = $_GET['act'] ?? "";
                                 <input class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100" type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm..." aria-label="Search">
                             </div>
                             <input class="btn btn-outline-success my-2 my-sm-0 sr-only" name="timkiem" value="Tìm kiếm" type="submit">
+                            <!-- <button name="timkiem">Tìm kiếm</button> -->
                         </form>
                     </div>
                 </div>

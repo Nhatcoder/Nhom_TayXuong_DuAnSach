@@ -31,18 +31,18 @@
                                 <tr>
                                     <td><input type="checkbox" name="ma_sach[]" value="<?php echo $ma_sach ?>" class="checkbox"></td>
                                     <td><?php echo $key + 1 ?></td>
-                                    <td><?php echo $name ?></td>
-                                    <td><?php echo $gia ?></td>
+                                    <td><?php echo $ten_sach ?></td>
+                                    <td><?php echo number_format($gia,0,',','.') ?> VND</td>
                                     <td><?php echo $so_luong ?></td>
                                     <td>
-                                        <img src="../public/upload/<?= $images ?>" width="90" alt="">
+                                        <img src="../public/upload/<?= $hinh ?>" width="90" alt="">
                                     </td>
                                     <td><?php echo $ten_danhmuc ?></td>
 
                                     <td>
-                                        <a href="?act=suasanpham&sneaker_id=<?= $id_product ?>">
+                                        <a href="?act=suasanpham&sneaker_id=<?= $ma_sach ?>">
                                             <input type="button" value="Sửa"></a>
-                                        <a onclick="return confirm('Bạn có muốn xóa không?')" href="index.php?act=xoasanpham&sneaker_id=<?= $id_product ?>"><input type="button" value="Xóa"></a>
+                                        <a onclick="return confirm('Bạn có muốn xóa không?')" href="index.php?act=xoasanpham&sneaker_id=<?= $ma_sach ?>"><input type="button" value="Xóa"></a>
 
                                     </td>
                                 </tr>

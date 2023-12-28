@@ -182,7 +182,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
                         }
                     } else {
                         $_SESSION['mycart'][$index] = $_POST;
-                        $_SESSION['mycart'][$index]['thanhtien'] = $thanhtien;
+                        $_SESSION['mycart'][$index]['thanhtien'] =  $thanhtien;
                     }
 
 

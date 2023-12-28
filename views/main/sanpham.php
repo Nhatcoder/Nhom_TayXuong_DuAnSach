@@ -23,9 +23,9 @@
                                 foreach($listProduct as $product) {
                                     ?>
                                         <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
-                                            <input type="hidden" name="id_sanpham" value="<?= $product['ma_sach'] ?>">
-                                            <input type="hidden" name="name" value="<?= $product['ten_sach'] ?>">
-                                            <input type="hidden" name="images" value="<?= $product['hinh'] ?>">
+                                            <input type="hidden" name="ma_sach" value="<?= $product['ma_sach'] ?>">
+                                            <input type="hidden" name="ten_sach" value="<?= $product['ten_sach'] ?>">
+                                            <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                                             <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
                                             <input type="hidden" name="so_luong" value="1">
                                             <li class="product col">

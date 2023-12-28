@@ -30,31 +30,31 @@ include("views/header/header.php");
 
 
 // Đăng ký
-if(isset($_POST['dangky'])) {
+if (isset($_POST['dangky'])) {
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $hinh = $_FILES['hinh']['name'];
     move_uploaded_file($_FILES['hinh']['tmp_name'], "public/upload/" . $hinh);
 
-    insert__account($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$hinh, $_POST['gender'],$hashed_password);
+    insert__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hinh, $_POST['gender'], $hashed_password);
     echo "<script>alert('Chúc mừng bạn đã đăng ký thành công')</script>";
     echo '<script>window.location.href="index.php"</script>';
 }
 
 // Đăng nhập
-if(isset($_POST['dangnhap'])) {
+if (isset($_POST['dangnhap'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $checkaccount = selectAllAccount($email);
 
-    if(!$checkaccount) {
+    if (!$checkaccount) {
         $row = checkPass($email);
 
-        if($row) {
+        if ($row) {
             $hashed_password = $row['mat_khau'];
-            if(password_verify($password, $hashed_password)) {
+            if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $row['ma_nguoi_dung'];
                 echo "<script>alert('Xin chào: {$row['ho_ten']}')</script>";
                 echo '<script>window.location.href="index.php"</script>';
@@ -66,7 +66,6 @@ if(isset($_POST['dangnhap'])) {
         } else {
             echo "<script>alert('Tài khoản không tồn tại')</script>";
         }
-
     } else {
         echo "<script>alert('lỗi truy vấn cơ sở dữ liệu')</script>";
     }
@@ -134,8 +133,8 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             include("views/main/danhmuc.php");
             break;
         case 'chi-tiet-san-pham':
-            if (isset($_GET['giay']) && ($_GET['giay']) > 0) {
-                $giayId = $_GET['giay'];
+            if (isset($_GET['sach']) && ($_GET['sach']) > 0) {
+                $giayId = $_GET['sach'];
                 $sp_chitiet = product_chitiet($giayId);
                 $sanpham_lienquan = sanpham_lienquan($sp_chitiet['ma_danh_muc'], $giayId);
                 $load_comment = loadall__comment__Byid($giayId);
@@ -253,10 +252,10 @@ if (isset($_GET["act"]) && $_GET["act"]) {
 
         case 'thanhtoan':
 
-            if (!isset($_SESSION['user_id'])) {
-                header('Location: index.php');
-                exit();
-            }
+            // if (!isset($_SESSION['user_id'])) {
+            //     header('Location: index.php');
+            //     exit();
+            // }
 
 
             if (isset($_POST['quantity'])) {

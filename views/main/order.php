@@ -54,11 +54,11 @@
                                                                         </td>
                                                                         <td class="product-name" data-title="Product">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['id_product'] ?>">
+                                                                                <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['ma_sach'] ?>">
                                                                                     <img width="100px" src="./public/upload/<?= $value['images'] ?>" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="">
                                                                                 </a>
                                                                                 <div class="ml-3 m-w-200-lg-down">
-                                                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['id_product'] ?>"><?= $value['namepro'] ?></a>
+                                                                                    <a href="index.php?act=chi-tiet-san-pham&giay=<?= $value['ma_sach'] ?>"><?= $value['namepro'] ?></a>
                                                                                     <a href="#" class="text-gray-700 font-size-2 d-block" tabindex="0">Cao cấp</a>
                                                                                 </div>
                                                                             </div>

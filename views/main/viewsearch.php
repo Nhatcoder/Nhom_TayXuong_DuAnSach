@@ -28,7 +28,7 @@
                                                 <input type="hidden" name="ten_sach" value="<?= $product['ten_sach'] ?>">
                                                 <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                                                 <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                                <input type="hidden" name="soluong" value="1">
+                                                <input type="hidden" name="so_luong" value="1">
                                                 <li class="product col">
                                                     <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                                         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
@@ -36,9 +36,9 @@
                                                                 <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
                                                             </div>
                                                             <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a></div>
-                                                                <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v1.html"><?= $product['name'] ?></a></h2>
-                                                                <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_danhmuc'] ?></a></div>
+                                                                <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v1.html"><?= $product['ten_sach'] ?></a></h2>
+                                                                <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
                                                                 <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                                                     <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',','.') ?> VNĐ</span>
                                                                 </div>
@@ -69,7 +69,7 @@
                                                 <input type="hidden" name="ten_sach" value="<?= $product['ten_sach'] ?>">
                                                 <input type="hidden" name="hinh" value="<?= $product['hinh'] ?>">
                                                 <input type="hidden" name="gia" value="<?= $product['gia'] ?>">
-                                                <input type="hidden" name="soluong" value="1">
+                                                <input type="hidden" name="so_luong" value="1">
                                                 <li class="product col">
                                                     <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                                         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
@@ -77,9 +77,9 @@
                                                                 <a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="d-block"><img src="./public/upload/<?= $product['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
                                                             </div>
                                                             <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                                                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>"><?= $product['ten_danhmuc'] ?></a></div>
+                                                                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>"><?= $product['ten_danhmuc'] ?></a></div>
                                                                 <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v1.html"><?= $product['ten_sach'] ?></a></h2>
-                                                                <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['id_product'] ?>" class="text-gray-700">Cao cấp</a></div>
+                                                                <div class="font-size-2  mb-1 text-truncate"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $product['ma_sach'] ?>" class="text-gray-700">Cao cấp</a></div>
                                                                 <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                                                     <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($product['gia'], 0, ',','.') ?> VNĐ</span>
                                                                 </div>
@@ -129,7 +129,7 @@
                                     foreach ($listDanhmuc as $danhmuc) {
                                         ?>
                                             <li class="cat-item cat-item-9 cat-parent">
-                                                <a href="index.php?act=danhmuc&id_danhmuc=<?= $danhmuc['id'] ?>"><?= $danhmuc['ten_danhmuc'] ?></a>
+                                                <a href="index.php?act=danhmuc&id_danhmuc=<?= $danhmuc['ma_danhmuc'] ?>"><?= $danhmuc['ten_danhmuc'] ?></a>
                                             </li>
                                         <?php
                                     }

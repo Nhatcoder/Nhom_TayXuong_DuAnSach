@@ -68,7 +68,7 @@
                 FROM 
                     sach 
                 INNER JOIN
-                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc WHERE ten_sach LIKE '%".$keyword."%'";
+                    danhmuc ON sach.ma_danh_muc = danhmuc.ma_danhmuc WHERE sach.ten_sach LIKE '%".$keyword."%' ";
         return pdo_query($sql);
     }
 ?>

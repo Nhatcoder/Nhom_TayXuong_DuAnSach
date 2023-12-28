@@ -12,4 +12,9 @@
                 (?,?,?,?,?)";
         pdo_execute($sql,$order_id,$product_id,$quantity,$price,$thanhtien);
     }
+
+    function update_thanhtoan($soluong,$ma_sach) {
+        $sql = "UPDATE sach SET so_luong = so_luong - ? WHERE ma_sach = ?";
+        pdo_execute($sql,$soluong,$ma_sach);
+    }
 ?>

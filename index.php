@@ -399,6 +399,7 @@
                                 $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
                                 
                                 insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['so_luong'], $cartItem['gia'],$tongtien);
+                                update_thanhtoan($cartItem['so_luong'],$cartItem['ma_sach']);
                                 $i++;
                             }
                         }
@@ -443,6 +444,7 @@
                         $tongtien = $cartItem['gia'] * $cartItem['so_luong'];
                         
                         insert_bill_detail($id_bill, $cartItem['ma_sach'], $cartItem['so_luong'], $cartItem['gia'],$tongtien);
+                        update_thanhtoan($cartItem['so_luong'],$cartItem['ma_sach']);
                         $i++;
                     }
 

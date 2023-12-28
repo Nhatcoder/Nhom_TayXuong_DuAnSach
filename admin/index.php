@@ -14,10 +14,10 @@
     $userID = $_SESSION['user_id'] ?? 0;
     $user = select__userByid($userID);
 
-    if($user['cap_bac'] != 1) {
-        header('location: ../index.php');
-        die;
-    }
+    // if($user['cap_bac'] != 1) {
+    //     header('location: ../index.php');
+    //     die;
+    // }
 
 
     include("header.php");

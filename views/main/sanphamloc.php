@@ -20,7 +20,7 @@
 
                         <ul class="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left mb-6">
                             <?php
-                            foreach ($load_all_product_page as $product) {
+                            foreach ($load_all_product_loc as $product) {
                             ?>
                                 <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
                                     <input type="hidden" name="ma_sach" value="<?= $product['ma_sach'] ?>">
@@ -68,45 +68,48 @@
 
                 <!-- Phân trang -->
                 <?php
-                $count = count($load_all_product);
-                $trang = ceil($count / 12);
-                if ($count >= 12) {
-                    if (isset($_GET['trang'])) {
-                        $page = intval($_GET['trang']);
-                    } else {
-                        $page = 1;
-                    }
+                $count = count($load_all_product_loc);
+                if ($count > 0) {
+
+                    $trang = ceil($count / 12);
+                    if ($count >= 12) {
+                        if (isset($_GET['trang'])) {
+                            $page = intval($_GET['trang']);
+                        } else {
+                            $page = 1;
+                        }
                 ?>
-                    <div class="d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link prev" href="index.php?act=sanpham&trang=<?= max(1, $page - 1)  ?>"><i class="fas fa-chevron-left"></i></a>
-                            </li>
-
-                            <?php
-                            for ($i = 1; $i <= $trang; $i++) {
-                                $activeClass = ($i == $page) ? 'active' : '';
-                            ?>
-
-                                <li class="page-item <?= $activeClass ?>"><a class="page-link" href="index.php?act=sanpham&trang=<?= $i ?>"><span>
-                                            <?= $i ?>
-                                        </span></a>
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link prev" href="index.php?act=sanpham&trang=<?= max(1, $page - 1)  ?>"><i class="fas fa-chevron-left"></i></a>
                                 </li>
 
-                            <?php } ?>
+                                <?php
+                                for ($i = 1; $i <= $trang; $i++) {
+                                    $activeClass = ($i == $page) ? 'active' : '';
+                                ?>
 
-                            <li class="page-item">
-                                <a class="page-link next" href="index.php?act=sanpham&trang=<?= min($trang, $page + 1) ?>">
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                                    <li class="page-item <?= $activeClass ?>"><a class="page-link" href="index.php?act=sanpham&trang=<?= $i ?>"><span>
+                                                <?= $i ?>
+                                            </span></a>
+                                    </li>
 
+                                <?php } ?>
+
+                                <li class="page-item">
+                                    <a class="page-link next" href="index.php?act=sanpham&trang=<?= min($trang, $page + 1) ?>">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    <?php }
+                } else {
+                    ?>
+                    <h5>Không có sản phẩm giá từ <?= $gia_start ?> đến <?= $gia_end ?></h5>
                 <?php } ?>
             </div>
-
-
-
             <div id="secondary" class="sidebar widget-area order-1" role="complementary">
                 <div id="widgetAccordion">
                     <div id="woocommerce_product_categories-2" class="widget p-4d875 border woocommerce widget_product_categories">
@@ -132,7 +135,6 @@
                                 <?php
                                 }
                                 ?>
-
                             </ul>
                         </div>
                     </div>

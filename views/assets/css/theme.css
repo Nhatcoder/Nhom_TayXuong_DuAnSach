@@ -29583,3 +29583,7 @@ footer .widget select.custom-select,
   border: none;
   background: transparent;
 }
+
+.search_price{
+  margin-top: 30px;
+}

@@ -24,12 +24,12 @@
                         foreach($loadComment as $key => $comment) {
                             ?>
                                 <tr>
-                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $comment['comment_id'] ?>" id=""></th>
+                                    <th><input type="checkbox" name="id_checkbox[]" value="<?= $comment['ma_binhluan'] ?>" id=""></th>
                                     <td><?= $key + 1 ?></td>
-                                    <td><?= $comment['name'] ?></td>
-                                    <td><?= $comment['content'] ?></td>
+                                    <td><?= $comment['ho_ten'] ?></td>
+                                    <td><?= $comment['noi_dung'] ?></td>
                                     <td>
-                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoacomment&id_comment=<?= $comment['comment_id'] ?>" class="btn btn-danger">Xóa</a>
+                                        <a onclick="return confirm('Bạn có chắc muốn xoá không?')" href="index.php?act=xoacomment&id_comment=<?= $comment['ma_binhluan'] ?>" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             <?php

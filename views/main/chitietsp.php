@@ -308,7 +308,7 @@
                                                     <label for="descriptionTextarea" class="form-label text-dark h6 mb-3">Chi tiết xin vui lòng! Đánh giá của bạn giúp những người mua sắm khác.</label>
                                                     <textarea class="form-control rounded-0 p-4" rows="7" id="descriptionTextarea" placeholder="Nhập đánh giá & bình luận của bạn..." required="" data-msg="Please enter your message." data-error-class="u-has-error" data-success-class="u-has-success"></textarea>
                                                 </div>
-                                                <input type="hidden" id="idsp" name="idsp" value="<?= $_GET['giay'] ?>">
+                                                <input type="hidden" id="idsp" name="idsp" value="<?= $_GET['sach'] ?>">
                                                 <div class="d-flex">
                                                     <button type="submit" name="binhluan" id="mut_data" class="btn btn-dark btn-wide rounded-0 transition-3d-hover">Gửi bình luận</button>
                                                 </div>
@@ -423,7 +423,7 @@
                                             <div class="product__inner overflow-hidden p-3 p-md-4d875">
                                                 <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                                     <div class="woocommerce-loop-product__thumbnail">
-                                                        <a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['ma_sach'] ?>" class="d-block" tabindex="0"><img style="height:249px; object-fit: cover;" src="./public/upload/<?= $sp_lienquan['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
+                                                        <a href="index.php?act=chi-tiet-san-pham&sach=<?= $sp_lienquan['ma_sach'] ?>" class="d-block" tabindex="0"><img style="height:249px; object-fit: cover;" src="./public/upload/<?= $sp_lienquan['hinh'] ?>" class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="image-description"></a>
                                                     </div>
                                                     <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                                                         <h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="index.php?act=chi-tiet-san-pham&giay=<?= $sp_lienquan['ma_sach'] ?>" tabindex="0"><?= $sp_lienquan['ten_sach'] ?></a></h2>

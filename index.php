@@ -30,29 +30,33 @@ include("views/header/header.php");
 
 
 // Đăng ký
-if (isset($_POST['dangky'])) {
+if(isset($_POST['dangky'])) {
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    insert__account($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $hashed_password);
+
+    $hinh = $_FILES['hinh']['name'];
+    move_uploaded_file($_FILES['hinh']['tmp_name'], "public/upload/" . $hinh);
+
+    insert__account($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$hinh, $_POST['gender'],$hashed_password);
     echo "<script>alert('Chúc mừng bạn đã đăng ký thành công')</script>";
     echo '<script>window.location.href="index.php"</script>';
 }
 
 // Đăng nhập
-if (isset($_POST['dangnhap'])) {
+if(isset($_POST['dangnhap'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $checkaccount = selectAllAccount($email);
 
-    if (!$checkaccount) {
+    if(!$checkaccount) {
         $row = checkPass($email);
 
-        if ($row) {
-            $hashed_password = $row['password'];
-            if (password_verify($password, $hashed_password)) {
-                $_SESSION['user_id'] = $row['id'];
-                echo "<script>alert('Xin chào: {$row['name']}')</script>";
+        if($row) {
+            $hashed_password = $row['mat_khau'];
+            if(password_verify($password, $hashed_password)) {
+                $_SESSION['user_id'] = $row['ma_nguoi_dung'];
+                echo "<script>alert('Xin chào: {$row['ho_ten']}')</script>";
                 echo '<script>window.location.href="index.php"</script>';
                 // header('location: index.php');
                 // exit();
@@ -62,6 +66,7 @@ if (isset($_POST['dangnhap'])) {
         } else {
             echo "<script>alert('Tài khoản không tồn tại')</script>";
         }
+
     } else {
         echo "<script>alert('lỗi truy vấn cơ sở dữ liệu')</script>";
     }

@@ -24,6 +24,9 @@
                         <th>Tổng tiền</th>
                     </tr>
                     <?php
+                        // echo "<pre>";
+                        // print_r($listOrderdetail);
+                        // echo "</pre>";
                         foreach($listOrderdetail as $key => $orderdetail) {
                             ?>
                                 <tr>

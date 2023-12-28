@@ -56,7 +56,7 @@
                         <?php
                         } else {
                         ?>
-                            <form action="index.php" method="post">
+                            <form action="index.php" method="post" onsubmit="return login()">
                                 <div id="login" data-target-group="idForm">
 
                                     <header class="border-bottom px-4 px-md-6 py-4">
@@ -67,13 +67,15 @@
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel" class="form-label" for="signinEmail">Email / Số điện thoại *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" placeholder="creativelayers088@gmail.com">
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" placeholder="creativelayers088@gmail.com" id="email">
+                                                <span id="err_email" style="color: red;"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinPasswordLabel" class="form-label" for="signinPassword">Mật khẩu *</label>
-                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" aria-describedby="signinPasswordLabel">
+                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" aria-describedby="signinPasswordLabel" id="password">
+                                                <span id="err_password" style="color: red;"></span>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between mb-5 align-items-center">
@@ -124,8 +126,8 @@
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email
                                                     *</label>
-                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" id="email" placeholder="creativelayers088@gmail.com" >
-                                                <span style="color: red;" id="err_email"></span>
+                                                <input type="text" class="form-control rounded-0 height-4 px-4" name="email" id="email_dangky" placeholder="creativelayers088@gmail.com" >
+                                                <span style="color: red;" id="err_emailsignup"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
@@ -147,8 +149,8 @@
                                         <div class="form-group mb-4">
                                             <div class="js-form-message js-focus-state">
                                                 <label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Mật khẩu *</label>
-                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="password" placeholder="VD: 123@abc,v.v" aria-label aria-describedby="signinPasswordLabel1">
-                                                <span style="color: red;" id="err_password"></span>
+                                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="passsignup" placeholder="VD: 123@abc,v.v" aria-label aria-describedby="signinPasswordLabel1">
+                                                <span style="color: red;" id="err_passwordsignup"></span>
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
@@ -413,81 +415,132 @@
     </div>
 </footer>
 <script>
+    
     function send_user(){
-    var username = document.getElementById('username');
-    var err_username = document.getElementById('err_username');
+        var username = document.getElementById('username');
+        var err_username = document.getElementById('err_username');
 
-    var email = document.getElementById('email');
-    var err_email = document.getElementById('err_email');
+        var email = document.getElementById('email_dangky');
+        var err_emailsignup = document.getElementById('err_emailsignup');
 
-    var password = document.getElementById('password');
-    var err_password = document.getElementById('err_password');
-    var phone = document.getElementById('phone');
-    var err_phone = document.getElementById('err_phone');
-    var address = document.getElementById('address');
-    var err_address = document.getElementById('err_address');
+        var password = document.getElementById('passsignup');
+        var err_passwordsignup = document.getElementById('err_passwordsignup');
 
-    var count = 0;
-    if (username.value == '') {
-        err_username.textContent = 'Vui lòng điền tên đăng nhập';
-        err_username.style.color = 'red';
-        count++;
-    } else {
-        err_username.textContent = '';
-    }
-    var emailRegex = /^[^\s@]+@gmail\.com$/;
-    if (email.value == '') {
-        err_email.textContent = 'Vui lòng nhập email';
-        err_email.style.color = 'red';
-        count++;
-    } else if (!emailRegex.test(email.value)) {
-        err_email.textContent = 'Email không hợp lệ';
-        err_email.style.color = 'red';
-        count++;
-    } else {
-        err_email.textContent = '';
-    }
-    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (password.value == '') {
-        err_password.textContent = 'Vui lòng nhập mật khẩu';
-        err_password.style.color = 'red';
-        count++;
-    } else if (!passwordRegex.test(password.value)) {
-        err_password.textContent = 'Mật khẩu ít nhất 8 kí tự, 1 kí tự viết hoa viết thường và số';
-        err_password.style.color = 'red';
-        count++;
-    } else {
-        err_password.textContent = '';
+        var phone = document.getElementById('phone');
+        var err_phone = document.getElementById('err_phone');
+
+        var address = document.getElementById('address');
+        var err_address = document.getElementById('err_address');
+
+        var count = 0;
+        if (username.value == '') {
+            err_username.textContent = 'Vui lòng điền tên đăng nhập';
+            err_username.style.color = 'red';
+            count++;
+        } else {
+            err_username.textContent = '';
+        }
+        var emailRegex = /^[^\s@]+@gmail\.com$/;
+        if (email.value == '') {
+            err_emailsignup.textContent = 'Vui lòng nhập email';
+            err_emailsignup.style.color = 'red';
+            count++;
+        } else if (!emailRegex.test(email.value)) {
+            err_emailsignup.textContent = 'Email không hợp lệ';
+            err_emailsignup.style.color = 'red';
+            count++;
+        } else {
+            err_emailsignup.textContent = '';
+        }
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        if (password.value == '') {
+            err_passwordsignup.textContent = 'Vui lòng nhập mật khẩu';
+            err_passwordsignup.style.color = 'red';
+            count++;
+        } else if (!passwordRegex.test(password.value)) {
+            err_passwordsignup.textContent = 'Mật khẩu ít nhất 8 kí tự, 1 kí tự viết hoa viết thường và số';
+            err_passwordsignup.style.color = 'red';
+            count++;
+        } else {
+            err_passwordsignup.textContent = '';
+
+        }
+        if (address.value == '') {
+            err_address.textContent = 'Vui lòng điền địa chỉ';
+            err_address.style.color = 'red';
+            count++;
+        } else {
+            err_address.textContent = '';
+        }
+        var phoneRegex=/((09|03|07|08|05)+([0-9]{8})\b)/g;
+    ;
+        if (phone.value == '') {
+            err_phone.textContent = 'Vui lòng nhập mật khẩu';
+            err_phone.style.color = 'red';
+            count++;
+        } else if (!phoneRegex.test(phone.value)) {
+            err_phone.textContent = 'Vui lòng nhập đúng địng dạng số điện thoại';
+            err_phone.style.color = 'red';
+            count++;
+        } else {
+            err_phone.textContent = '';
+
+        }
+        if (count > 0) {
+
+            return false;
+        } else {
+            return true;
+        }
+
+
+
+
 
     }
-    if (address.value == '') {
-        err_address.textContent = 'Vui lòng điền địa chỉ';
-        err_address.style.color = 'red';
-        count++;
-    } else {
-        err_address.textContent = '';
-    }
-    var phoneRegex=/((09|03|07|08|05)+([0-9]{8})\b)/g;
-;
-    if (phone.value == '') {
-        err_phone.textContent = 'Vui lòng nhập mật khẩu';
-        err_phone.style.color = 'red';
-        count++;
-    } else if (!phoneRegex.test(phone.value)) {
-        err_phone.textContent = 'Vui lòng nhập đúng địng dạng số điện thoại';
-        err_phone.style.color = 'red';
-        count++;
-    } else {
-        err_phone.textContent = '';
+</script>
 
-    }
-    if (count > 0) {
+<script>
+    
+    function login(){
+        var email = document.getElementById('email');
+        var err_email = document.getElementById('err_email');
+        var password = document.getElementById('password');
+        var err_password = document.getElementById('err_password');
 
-        return false;
-    } else {
-        return true;
+        var count = 0;
+        var emailRegex = /^[^\s@]+@gmail\.com$/;
+        if (email.value == '') {
+            err_email.textContent = 'Vui lòng nhập email';
+            err_email.style.color = 'red';
+            count++;
+        } else if (!emailRegex.test(email.value)) {
+            err_email.textContent = 'Email không hợp lệ';
+            err_email.style.color = 'red';
+            count++;
+        } else {
+            err_email.textContent = '';
+        }
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        if (password.value == '') {
+            err_password.textContent = 'Vui lòng nhập mật khẩu';
+            err_password.style.color = 'red';
+            count++;
+        } else if (!passwordRegex.test(password.value)) {
+            err_password.textContent = 'Mật khẩu ít nhất 8 kí tự, 1 kí tự viết hoa viết thường và số';
+            err_password.style.color = 'red';
+            count++;
+        } else {
+            err_password.textContent = '';
+
+        }
+        if (count > 0) {
+
+            return false;
+        } else {
+            return true;
+        }
     }
-}
 </script>
 <script src="./views/assets/vendor/jquery/dist/jquery.min.js"></script>
 <script src="./views/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>

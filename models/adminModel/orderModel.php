@@ -10,7 +10,7 @@ function select_donhang()
                     u.dia_chi AS addr,
                     u.so_dien_thoai AS phone,
                     o.ma_don_hang as ma_donhang,
-                    o.ma_nguoi_dung,
+                    o.ten_nguoi_dung,
                     o.trang_thai,
                     o.payment_method,
                     o.create_at,
@@ -20,7 +20,7 @@ function select_donhang()
                     `donhang` o
                 JOIN 
 
-                    `nguoidung` u ON u.ma_nguoi_dung = o.ma_nguoi_dung
+                    `nguoidung` u ON u.ma_nguoi_dung = o.ten_nguoi_dung
                 JOIN 
                     `chitiet_donhang` od ON od.ma_don = o.ma_don
                 GROUP BY 

@@ -11,22 +11,21 @@
 </div>
 
 <div class="site-content bg-punch-light overflow-hidden" id="content">
-    <!-- <form class="woocommerce-cart-form table-responsive" action="index.php?act=thanhtoan" method="post"> -->
-    <div class="container">
-        <?php
-        if (isset($_SESSION['mycart']) && (count($_SESSION['mycart']) > 0)) {
-        ?>
+    <form class="woocommerce-cart-form table-responsive" id="forms" action="index.php?act=thanhtoan" method="post">
+        <div class="container">
+            <?php
+            if (isset($_SESSION['mycart']) && (count($_SESSION['mycart']) > 0)) {
+            ?>
 
-            <header class="entry-header space-top-2 space-bottom-1 mb-2">
-                <h1 class="entry-title font-size-7">Có <?= count($_SESSION['mycart']) ?> sản phẩm</h1>
-            </header>
-            <div class="row pb-8" style="display: grid;grid-template-columns: repeat(2,1fr);gap: 20px;">
-                <div id="primary" style="width: 1100px;" class="content-area">
-                    <main id="main" class="site-main ">
-                        <div class="page type-page status-publish hentry">
-                            <div class="entry-content">
-                                <div class="woocommerce">
-                                    <form action="index.php?act=capnhatgiohang" method="post">
+                <header class="entry-header space-top-2 space-bottom-1 mb-2">
+                    <h1 class="entry-title font-size-7">Có <?= count($_SESSION['mycart']) ?> sản phẩm</h1>
+                </header>
+                <div class="row pb-8" style="display: grid;grid-template-columns: repeat(2,1fr);gap: 20px;">
+                    <div id="primary" style="width: 1100px;" class="content-area">
+                        <main id="main" class="site-main ">
+                            <div class="page type-page status-publish hentry">
+                                <div class="entry-content">
+                                    <div class="woocommerce">
                                         <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents">
                                             <thead>
                                                 <tr>
@@ -105,59 +104,82 @@
                                                 ?>
                                                 <tr>
                                                     <td colspan="5" class="actions">
-                                                        <input type="submit" class="button" name="update_cart" value="Cập nhật giỏ hàng">
+                                                        <input type="submit" class="button" name="update_cart" id="update_cart" value="Cập nhật giỏ hàng">
                                                         <!-- <input type="hidden" id="_wpnonce" name="_wpnonce" value="db025d7a70"><input type="hidden" name="_wp_http_referer" value="/storefront/cart/"> -->
                                                     </td>
+                                                    <script>
+                                                        const formAttribust = document.getElementById('forms');
+                                                        const update_cart = document.getElementById('update_cart');
+                                                        const thanhtoan = document.getElementById('thanhtoan');
+
+                                                        if(update_cart) {
+                                                            update_cart.addEventListener('click', function() {
+                                                                formAttribust.setAttribute('action', 'index.php?act=capnhatgiohang');
+                                                            });
+                                                            
+                                                        }
+
+                                                        if(thanhtoan) {
+                                                            thanhtoan.addEventListener('click', function() {
+                                                                formAttribust.setAttribute('action', 'index.php?act=thanhtoan');
+                                                            });
+
+                                                        }
+                                                    </script>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
 
-                                    </form>
+                            </div>
+                        </main>
+                    </div>
+                    <div id="secondary" class="sidebar cart-collaterals order-1" role="complementary">
+                        <div id="cartAccordion" class="border border-gray-900 bg-white mb-5">
+                            <div class="p-4d875 border">
+                                <div id="cartHeadingOne" class="cart-head">
+                                    <a class="d-flex align-items-center justify-content-between text-dark" href="#" data-toggle="collapse" data-target="#cartCollapseOne" aria-expanded="true" aria-controls="cartCollapseOne">
+                                        <h3 class="cart-title mb-0 font-weight-medium font-size-3">Tổng thanh toán</h3>
 
+                                    </a>
                                 </div>
                             </div>
-
-                        </div>
-                    </main>
-                </div>
-                <div id="secondary" class="sidebar cart-collaterals order-1" role="complementary">
-                    <div id="cartAccordion" class="border border-gray-900 bg-white mb-5">
-                        <div class="p-4d875 border">
-                            <div id="cartHeadingOne" class="cart-head">
-                                <a class="d-flex align-items-center justify-content-between text-dark" href="#" data-toggle="collapse" data-target="#cartCollapseOne" aria-expanded="true" aria-controls="cartCollapseOne">
-                                    <h3 class="cart-title mb-0 font-weight-medium font-size-3">Tổng thanh toán</h3>
-
-                                </a>
+                            <div class="p-4d875 border">
+                                <table class="shop_table shop_table_responsive">
+                                    <tbody>
+                                        <tr class="order-total">
+                                            <th>Tổng giá:</th>
+                                            <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"> </span> <?= number_format($thanhtien, 0, ',', '.') ?> VNĐ</span></strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="p-4d875 border">
-                            <table class="shop_table shop_table_responsive">
-                                <tbody>
-                                    <tr class="order-total">
-                                        <th>Tổng giá:</th>
-                                        <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"> </span> <?= number_format($thanhtien, 0, ',', '.') ?> VNĐ</span></strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="wc-proceed-to-checkout">
+                            <button name="thanhtoan" id="thanhtoan" class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">Thanh toán</button>
                         </div>
-                    </div>
-                    <div class="wc-proceed-to-checkout">
-                        <button name="thanhtoan" class="checkout-button button alt wc-forward btn btn-dark btn-block rounded-0 py-4">Thanh toán</button>
+                        
                     </div>
                 </div>
-            </div>
-        <?php
-        } else {
-        ?>
-            <div class="box_noProduct" style="width: 100%;">
-                <div class="no__product">
-                    <h2>Giỏ hàng của bạn đang trống</h2>
-                    <a href="index.php">Mua Ngay</a>
+            <?php
+            } else {
+            ?>
+                <div class="box_noProduct" style="width: 100%;">
+                    <div class="no__product">
+                        <h2>Giỏ hàng của bạn đang trống</h2>
+                        <a href="index.php">Mua Ngay</a>
+                    </div>
                 </div>
-            </div>
-        <?php
-        }
-        ?>
-    </div>
+            <?php
+            }
+            ?>
+        </div>
+    </form>
+
 </div>
+
+<script>
+    
+</script>

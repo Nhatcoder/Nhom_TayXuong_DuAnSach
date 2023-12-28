@@ -38,16 +38,22 @@
                                             <div class="woocommerce-billing-fields__field-wrapper row">
                                                 <p class="col-lg-6 mb-4d75 form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="billing_first_name_field" data-priority="10">
                                                     <label for="billing_first_name" class="form-label">Họ và tên <abbr class="required" title="required">*</abbr></label>
-                                                    <input type="text" value="<?= $user['name'] ?>" class="input-text form-control" name="billing_first_name" id="billing_first_name" placeholder="" autocomplete="given-name" autofocus="autofocus">
+                                                    <input type="text" value="<?= $user['ho_ten'] ?? "" ?>" class="input-text form-control" name="billing_first_name" id="billing_first_name" placeholder="" autocomplete="given-name" autofocus="autofocus">
                                                 </p>
                                                 <p class="col-12 mb-4d75 form-row form-row-wide" id="billing_company_field" data-priority="30">
                                                     <label for="billing_company" class="form-label">Địa chỉ <abbr class="required" title="required">*</abbr></label>
-                                                    <input type="text" class="input-text form-control" name="billing_address" id="billing_company" value="<?= $user['address'] ?>">
+                                                    <input type="text" class="input-text form-control" name="billing_address" id="billing_company" value="<?= $user['dia_chi'] ?? "" ?>">
                                                 </p>
                                                 <p class="col-12 mb-3 form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50">
                                                     <label for="billing_address_1" class="form-label">Số điện thoại
                                                         <abbr class="required" title="required">*</abbr></label>
-                                                    <input type="text" class="input-text form-control" name="billing_phone" id="billing_address_1" value="<?= $user['phone'] ?>" autocomplete="address-line1">
+                                                    <input type="text" class="input-text form-control" name="billing_phone" id="billing_address_1" value="<?= $user['so_dien_thoai'] ?? "" ?>" autocomplete="address-line1">
+                                                </p>
+                                                <p class="col-12 mb-3 form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50">
+                                                    <label for="billing_address_1" class="form-label">Ghi chú
+                                                        <abbr class="required" title="required">*</abbr><br><br></label>
+                                                    
+                                                    <textarea name="ghichu" id="" cols="30" rows="10"></textarea>
                                                 </p>
                                                 <p class="col-12 mb-3 form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50">
                                                     <label for="billing_address_1" class="form-label">Phương thức thanh toán
@@ -92,14 +98,14 @@
                                                         <?php
                                                             $thanhtien = 0;
                                                             foreach($_SESSION['mycart'] as $key => $productBill) {
-                                                                $tongtien = $productBill['gia'] * $productBill['quantity'];
+                                                                $tongtien = $productBill['gia'] * $productBill['so_luong'];
                                                                 $thanhtien += $tongtien;
                                                                 ?>
                                                                     <tr class="cart_item">
-                                                                        <img width="60px" src="./public/upload/<?= $productBill['images'] ?>" alt="">
+                                                                        <img width="60px" src="./public/upload/<?= $productBill['hinh'] ?>" alt="">
                                                                         <td class="product-name">
                                                                             
-                                                                            <?= $productBill['name'] ?>&nbsp; <strong class="product-quantity">× <?= $productBill['quantity'] ?></strong>
+                                                                            <?= $productBill['ten_sach'] ?>&nbsp; <strong class="product-quantity">× <?= $productBill['so_luong'] ?></strong>
                                                                         </td>
                                                                         <td class="product-total">
                                                                             <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol"></span><?= number_format($tongtien, 0, ',', '.') ?> VNĐ</span>

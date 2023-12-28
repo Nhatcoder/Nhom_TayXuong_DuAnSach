@@ -132,7 +132,7 @@ if (isset($_GET["act"]) && $_GET["act"]) {
             if (isset($_GET['giay']) && ($_GET['giay']) > 0) {
                 $giayId = $_GET['giay'];
                 $sp_chitiet = product_chitiet($giayId);
-                $sanpham_lienquan = sanpham_lienquan($sp_chitiet['category_id'], $giayId);
+                $sanpham_lienquan = sanpham_lienquan($sp_chitiet['ma_danh_muc'], $giayId);
                 $load_comment = loadall__comment__Byid($giayId);
             } else {
                 $giayId = "";

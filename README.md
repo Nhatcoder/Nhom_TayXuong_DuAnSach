@@ -3,7 +3,9 @@
 <ol>
   Thành viên gồm các vị như sau
   <li>Linh Văn Tráng</li>
-  <li>Trần Việt Anh</li>
+  <li>Trần Việt Anh 
+    <h2>5cm Yếu nhớt</h2>
+  </li>
   <li>Nguyễn Ngọc Quốc</li>
   <li>Nguyễn Tiến Dũng</li>
   <li>Trần Văn Nhật</li>

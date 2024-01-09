@@ -56,7 +56,7 @@ foreach ($bllist as $key => $value) {
     </ul>
 </li>';
 }
-$output='<ul class="list-unstyled mb-8" id="listbl">'.$listbl.'</ul>';
+$output='<ul class="list-unstyled mb-8">'.$listbl.'</ul>';
 echo $output;
 
 

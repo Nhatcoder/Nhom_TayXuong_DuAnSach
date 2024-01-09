@@ -159,7 +159,12 @@
                 break;
 
             case 'listcomment':
-                $loadComment = loadall__comment__Byid();
+                $loadComment = sp_bl();
+                // $loadComment = loadall__comment__Byid();
+                include ('comment/listspcomment.php');
+                break;
+            case 'listspcomment':
+                $loadSpComment = loadall__comment__Byid($_GET['ma_sach']);
                 include ('comment/listcomment.php');
                 break;
             case 'xoacomment':
@@ -171,6 +176,8 @@
                 break;
             case 'listorder':
                 $listorder = select_donhang();
+                // echo '<pre>';
+                // var_dump($listorder);
                 include ('order/listorder.php');
                 break;
             case 'listOrder_detail':

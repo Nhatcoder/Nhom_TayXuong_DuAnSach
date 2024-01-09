@@ -10,6 +10,8 @@ if (isset($_POST['thoigian'])) {
 } else {
     $thoigian = "";
     $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(365)->toDateString();
+    // $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(7)->toDateString();
+
 }
 
 if ($thoigian == "7ngay") {
@@ -29,6 +31,9 @@ if ($thoigian == "7ngay") {
 }
 
 $now = Carbon::now("Asia/Ho_Chi_Minh")->toDateString();
+$subdays = $subdays.' '.'00:00:00';
+$now = $now.' '.'23:59:59';
+
 
 // $sql = "SELECT * FROM tbl_thongke WHERE ngaydat BETWEEN '$subdays' AND '$now' ORDER BY ngaydat ASC";
 $sql = "SELECT
@@ -41,14 +46,16 @@ donhang
 INNER JOIN
 chitiet_donhang ON donhang.ma_don = chitiet_donhang.ma_don
 WHERE donhang.create_at BETWEEN '$subdays' AND '$now'
+AND donhang.trang_thai = 'completed'
 GROUP BY
 ngay
 ORDER BY
-ngay 
+ngay
 ";
 $result = pdo_query($sql);
 
 $chart_data = array();
+
 
 foreach ($result as $row) {
     $chart_data[] = array(
@@ -58,5 +65,6 @@ foreach ($result as $row) {
         'quantity' => $row['tong_so_luong'],
     );
 }
-
-echo json_encode($chart_data);
+$ee = [$chart_data,[1,2,3]];
+$ep= json_encode($ee);
+echo $ep;

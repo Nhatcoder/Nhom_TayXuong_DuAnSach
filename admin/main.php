@@ -91,37 +91,36 @@
 
             <!-- TO DO List -->
     </section>
-    <div>
+    <div style="margin-left:20px;">
         <div>
             <h3 class="caption-subject text-uppercase">
                 Thống Kê Doanh Thu:
-                <b id="text-date">365 Ngày qua</b>
             </h3>
-            <select id="select-date" name="id_trangthai" class="select2_demo_3 form-control">
-                <option value="7ngay"> 7 Ngày qua </option>
-                <option value="28ngay"> 28 Ngày qua </option>
-                <option value="60ngay"> 60 Ngày qua </option>
-                <option value="90ngay"> 90 Ngày qua </option>
-                <option value="180ngay"> 180 Ngày qua </option>
-                <option selected value="365ngay"> 365 Ngày qua </option>
-            </select>
+            <div style="display: grid;
+    grid-template-columns: 25% 70%;
+    gap: 30px;">
+                <input type="date" id="selectedDate" style="margin-left: 20px;">
+
+                <select id="select-date" name="id_trangthai" class="select2_demo_3 form-control">
+                    <option value="7ngay"> 7 Ngày qua </option>
+                    <option value="28ngay"> 28 Ngày qua </option>
+                    <option value="60ngay"> 60 Ngày qua </option>
+                    <option value="90ngay"> 90 Ngày qua </option>
+                    <option value="180ngay"> 180 Ngày qua </option>
+                    <option selected value="365ngay"> 365 Ngày qua </option>
+                </select>
+            </div>
             <div id="myfirstchart">
             </div>
         </div>
-        <div style="    display: grid;
-    grid-template-columns: 70% 30%;
-    gap: 70px;">
-            <div id="line-adwords">
-
-            </div>
-            <div>
-                <h5>Thống kê sản phẩm bán chạy</h5>
-                <div class="text-center">
-                    <!-- Thống kê số lượng sản phẩm trong danh mục -->
-                    <div id="chart"></div>
-                </div>
+        <div>
+            <h5>Thống kê sản phẩm bán chạy</h5>
+            <div class="text-center">
+                <!-- Thống kê số lượng sản phẩm trong danh mục -->
+                <div id="chart"></div>
             </div>
         </div>
+
     </div>
     <script>
         var myChart; // Khai báo biến biểu đồ ở mức toàn cục
@@ -138,7 +137,6 @@
                 // fillOpacity: 0,
                 animate: 'bounce',
             });
-
             $('#select-date').change(function() {
                 var thoigian = $(this).val();
                 if (thoigian == '7ngay') {
@@ -156,6 +154,48 @@
                 }
                 $('#text-date').text(text);
                 $.ajax({
+                    url: "./ajaxthongke2.php",
+                    method: "POST",
+                    dataType: "JSON",
+                    data: {
+                        thoigian: thoigian
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        myChart.setData(data[0]); // Sử dụng biến biểu đồ đã khai báo ở trên
+                        var options = {
+                            series: [data[1][1]],
+                            chart: {
+                                width: 550,
+                                type: 'pie',
+                            },
+                            labels: [data[1][0]],
+                            responsive: [{
+                                breakpoint: 480,
+                                options: {
+                                    chart: {
+                                        width: 400
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }
+                            }]
+                        };
+                        $('#chart').empty()
+                        if (data[1][0] !== undefined) {
+                            var chart = new ApexCharts(document.querySelector("#chart"), options);
+                            chart.render();
+                        }
+                    }
+                });
+
+            })
+            $('#selectedDate').change(function() {
+                // alert($('#selectedDate').val());
+                var thoigian = $('#selectedDate').val();
+
+                $.ajax({
                     url: "./ajaxthongke.php",
                     method: "POST",
                     dataType: "JSON",
@@ -165,19 +205,18 @@
                     success: function(data) {
                         console.log(data);
                         myChart.setData(data[0]); // Sử dụng biến biểu đồ đã khai báo ở trên
-                        $('#text-date').text(text);
                         var options = {
-                            series: <?= $soluong ?>,
+                            series: [data[1][1]],
                             chart: {
-                                width: 350,
+                                width: 550,
                                 type: 'pie',
                             },
-                            labels: <?= $tensp ?>,
+                            labels: [data[1][0]],
                             responsive: [{
                                 breakpoint: 480,
                                 options: {
                                     chart: {
-                                        width: 200
+                                        width: 400
                                     },
                                     legend: {
                                         position: 'bottom'
@@ -185,9 +224,12 @@
                                 }
                             }]
                         };
-                        $('#chart').empty
-                        var chart = new ApexCharts(document.querySelector("#chart"), options);
-                        chart.render();
+                        $('#chart').empty()
+                        // console.log(data[1][0]);
+                        if (data[1][0] !== undefined) {
+                            var chart = new ApexCharts(document.querySelector("#chart"), options);
+                            chart.render();
+                        }
                     }
                 });
 
@@ -205,23 +247,20 @@
                     dataType: "JSON",
 
                     success: function(data) {
-                        console.log(typeof data)
-                        console.log(data[0])
-
+                        console.log(data);
                         myChart.setData(data[0]); // Sử dụng biến biểu đồ đã khai báo ở trên
-                        $('#text-date').text(text);
                         var options = {
-                            series: <?= $soluong ?>,
+                            series: [data[1][1]],
                             chart: {
-                                width: 350,
+                                width: 550,
                                 type: 'pie',
                             },
-                            labels: <?= $tensp ?>,
+                            labels: [data[1][0]],
                             responsive: [{
                                 breakpoint: 480,
                                 options: {
                                     chart: {
-                                        width: 200
+                                        width: 400
                                     },
                                     legend: {
                                         position: 'bottom'
@@ -239,76 +278,6 @@
             // Gọi hàm thongke để tạo biểu đồ ban đầu
             thongke();
         });
-
-        var optionsLine = {
-            chart: {
-                height: 328,
-                type: 'line',
-                zoom: {
-                    enabled: false
-                },
-                dropShadow: {
-                    enabled: true,
-                    top: 3,
-                    left: 2,
-                    blur: 4,
-                    opacity: 1,
-                }
-            },
-            stroke: {
-                curve: 'smooth',
-                width: 2
-            },
-            //colors: ["#3F51B5", '#2196F3'],
-
-            series: [
-                <?= $maxprice ?>,
-                <?= $minprice ?>,
-                <?= $trungbinh ?>
-            ],
-
-
-            title: {
-                text: 'Thống kê giá cả theo danh mục',
-                align: 'left',
-                offsetY: 25,
-                offsetX: 5,
-            },
-            subtitle: {
-                text: 'Tổng tiền',
-                offsetY: 55,
-                offsetX: 5
-            },
-            markers: {
-                size: 8,
-                strokeWidth: 0,
-                hover: {
-                    size: 9
-                }
-            },
-            grid: {
-                show: true,
-                padding: {
-                    bottom: 0
-                }
-            },
-
-            labels: <?= $label; ?>,
-
-            xaxis: {
-                tooltip: {
-                    enabled: false
-                }
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'right',
-                offsetY: -20
-            }
-        }
-
-        var chartLine = new ApexCharts(document.querySelector('#line-adwords'), optionsLine);
-        chartLine.render();
     </script>
     <!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->

@@ -1,41 +1,26 @@
 <?php
 include("../models/carbon_date/autoload.php");
-include("../models/pdo.php"); 
+include("../models/pdo.php");
+include("../models/adminModel/product.php");
 
 
 use Carbon\Carbon;
 
-if (isset($_POST['thoigian'])) {
-    $thoigian = $_POST['thoigian'];
+if (isset($_POST['thoigian']) != []) {
+    $thoigian = $_POST['thoigian'];    $now = Carbon::now("Asia/Ho_Chi_Minh")->toDateString();
+    $now = $thoigian . ' ' . '23:59:59';
+    $thoigian = $thoigian . ' ' . '00:00:00';
 } else {
-    $thoigian = "";
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(365)->toDateString();
-    // $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(7)->toDateString();
+
+    $thoigian = Carbon::now("Asia/Ho_Chi_Minh")->subdays(365)->toDateString();
+
+    $now = Carbon::now("Asia/Ho_Chi_Minh")->toDateString();
+    $thoigian = $thoigian . ' ' . '00:00:00';
+    $now = $now . ' ' . '23:59:59';
+
 
 }
 
-if ($thoigian == "7ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(7)->toDateString();
-} else if ($thoigian == "28ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(28)->toDateString();
-} else if ($thoigian == "60ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(60)->toDateString();
-} else if ($thoigian == "90ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(90)->toDateString();
-} else if ($thoigian == "180ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(180)->toDateString();
-} else if ($thoigian == "365ngay") {
-    $subdays = Carbon::now("Asia/Ho_Chi_Minh")->subdays(365)->toDateString();
-} else {
-    // Xử lý trường hợp $thoigian không hợp lệ ở đây nếu cần thiết
-}
-
-$now = Carbon::now("Asia/Ho_Chi_Minh")->toDateString();
-$subdays = $subdays.' '.'00:00:00';
-$now = $now.' '.'23:59:59';
-
-
-// $sql = "SELECT * FROM tbl_thongke WHERE ngaydat BETWEEN '$subdays' AND '$now' ORDER BY ngaydat ASC";
 $sql = "SELECT
 DATE(donhang.create_at) AS ngay,
 COUNT(DISTINCT donhang.ma_don) AS tong_don_hang,
@@ -45,7 +30,7 @@ FROM
 donhang
 INNER JOIN
 chitiet_donhang ON donhang.ma_don = chitiet_donhang.ma_don
-WHERE donhang.create_at BETWEEN '$subdays' AND '$now'
+WHERE donhang.create_at BETWEEN '$thoigian' AND '$now'
 AND donhang.trang_thai = 'completed'
 GROUP BY
 ngay
@@ -65,6 +50,15 @@ foreach ($result as $row) {
         'quantity' => $row['tong_so_luong'],
     );
 }
-$ee = [$chart_data,[1,2,3]];
-$ep= json_encode($ee);
+
+$thong_ke_sp_ban_chay = tk_sp_bc($thoigian, $now);
+$rr = [];
+foreach ($thong_ke_sp_ban_chay as $value) {
+    $rr = [$value['TenSanPham'], $value['TongSoLuong']];
+}
+// print_r($rr);
+
+
+$ee = [$chart_data, $rr];
+$ep = json_encode($ee);
 echo $ep;

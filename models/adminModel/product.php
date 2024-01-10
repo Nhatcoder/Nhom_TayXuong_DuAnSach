@@ -52,7 +52,7 @@ function thong_ke_hang_hoa(){
    return pdo_query($sql);
 }
 
-function tk_sp_bc(){
+function tk_sp_bc($subdays, $now){
     $sql="SELECT
     sp.ten_sach AS TenSanPham,
     SUM(c.so_luong) AS TongSoLuong
@@ -60,6 +60,9 @@ FROM
     chitiet_donhang c
 JOIN
     sach sp ON c.ma_sach = sp.ma_sach
+JOIN
+    donhang ON c.ma_don = donhang.ma_don
+WHERE donhang.create_at BETWEEN '$subdays' AND '$now'
 GROUP BY
     c.ma_sach, sp.ten_sach
 ORDER BY
